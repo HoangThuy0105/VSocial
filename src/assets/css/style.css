@@ -1,0 +1,189 @@
+body {
+  user-select: none;
+  font-size: 18px;
+}
+
+#app {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+  }
+
+
+.app-container {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding-top: 60px;
+  }
+  
+  .content-area {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* .feed-area {
+    width: 70%;
+  }  */
+
+  .sidebar {
+    width: 310px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .btn-outline-light:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 310px; 
+    right: 0;
+    background-color: #1d1d1d; 
+    z-index: 1000;
+  }
+
+.badge {
+    font-size: 0.9em;
+    padding: 5px;
+ }
+
+  .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .btn-outline-light:hover {
+    background-color: #fff;
+    color: #000;
+  }
+.frame{
+    border: 1px solid #2f2f2f; 
+    
+}
+.frame-bg{
+  
+  border-radius: 20px;
+}
+.rounded-icon {
+  border: 1px solid #2f2f2f;
+  border-radius: 50%; 
+  width: 50px; 
+  height: 50px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: #495057; 
+}
+
+.frame-border {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 5px; 
+  background-color: #343a40; 
+  border-radius: 50%; 
+}
+
+
+.logo {
+  display: flex;               
+  align-items: center;
+          
+}
+
+.logo img {
+  margin-right: 10px;        
+  height: 50px;  
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;             
+}
+
+.logo h2 {
+  margin: 0;           
+}
+.custom-hr {
+  border: none;
+  height: 1px;
+  background-color: #666363; 
+}
+.content-border{
+  border-radius: 5px;
+}
+.dark-mode body {
+  background-color: #343a40;
+  color: white;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.dark-mode .main-content {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.dark-mode .feed-area {
+  background-color: #232323;
+  color: white;
+}
+
+.dark-mode .sidebar-right {
+  background-color: #292929;
+  color: white;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.light-mode .main-content {
+  background-color: #f8f9fa;
+  color: black;
+}
+
+.light-mode .feed-area {
+  background-color: #ffffff;
+  color: black;
+}
+
+.light-mode .sidebar-right {
+  background-color: #f1f1f1;
+  color: black;
+}
+.img-user{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.friend-name {
+  display: block; 
+}
+
+.friend-status {
+  display: block; 
+  font-size: 0.875rem; 
+  color: gray; 
+}
+.cursor-pointer {
+  cursor: pointer;
+}
