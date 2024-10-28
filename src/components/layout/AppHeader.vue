@@ -1,5 +1,5 @@
 <template>
-   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
     <div
       class="header d-flex justify-content-between p-3"
       :class="isDarkMode ? 'header-dark' : 'header-light'"
@@ -34,13 +34,11 @@
           <i class="fa-solid fa-bell btn"></i>
         </div>
 
-        <img
-          src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg"
-          class="rounded-circle me-2  "
+        <img :src="post.avartar"         
+          class="rounded-circle me-2"
           style="width: 50px; height: 50px; cursor: pointer"
           alt="User"
         />
-        
       </div>
     </div>
   </div>
@@ -50,6 +48,13 @@
 import { mapState } from "vuex";
 
 export default {
+  data(){
+    return{
+      post:{
+        avartar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+      }   
+    }
+  },
   computed: {
     ...mapState({
       isDarkMode: (state) => state.darkMode,
@@ -65,51 +70,49 @@ export default {
 
 <style scoped>
 .dark-mode {
-  background-color: #343a40; 
-  color: white; 
+  background-color: #343a40;
+  color: white;
 }
 
 .light-mode {
-  background-color: #f8f9fa; 
-  color: black; 
+  background-color: #f8f9fa;
+  color: black;
 }
 
 .header-dark {
-  background-color: #343a40; 
-  color: white; 
+  background-color: #343a40;
+  color: white;
 }
 
 .header-light {
-  background-color: #f8f9fa; 
-  color: black; 
+  background-color: #f8f9fa;
+  color: black;
 }
 
 .dark-mode a,
 .dark-mode .nav-link,
 .dark-mode .btn {
-  color: white; 
+  color: white;
 }
 
 .light-mode a,
 .light-mode .nav-link,
 .light-mode .btn {
-  color: black; 
+  color: black;
 }
 
 .frame-border {
-  border: 1px solid currentColor; 
+  border: 1px solid currentColor;
 }
 
 .rounded-icon {
-  border-radius: 50%;  
-  padding: 8px; 
-  background-color: rgba(255, 255, 255, 0.2);  
+  border-radius: 50%;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .rounded-icon:hover {
-  background-color: rgba(255, 255, 255, 0.3);  
+  background-color: rgba(255, 255, 255, 0.3);
 }
 </style>
-<style scoped>
-
-</style>
+<style scoped></style>

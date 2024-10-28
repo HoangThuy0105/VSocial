@@ -1,10 +1,15 @@
 <template>
-  <div class="post-input p-3 ms-5   mb-3 border rounded bg-dark text-light">
+  <div class="post-input p-3 ms-5 mb-3 border rounded bg-dark text-light">
     <div class="d-flex align-items-center mb-2">
-      <img src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" alt="Profile" class="rounded-circle me-2" width="40" height="40" />
-       <input
+      <img
+        :src="post.avartar"
+        class="rounded-circle me-2"
+        style="width: 50px; height: 50px; cursor: pointer"
+        alt="User"
+      />
+      <input
         type="text"
-        class="form-control bg-secondary text-light border-0 cursor-pointer "
+        class="form-control bg-secondary text-light border-0 cursor-pointer"
         placeholder="What's on your mind?"
         v-model="postContent"
         @focus="isModalOpen = true"
@@ -32,16 +37,16 @@
         <button class="btn btn-primary">Post</button>
       </div>
     </div>
-    <PostModal 
-      v-if="isModalOpen" 
-      :isVisible="isModalOpen" 
-      @close="isModalOpen = false" 
+    <PostModal
+      v-if="isModalOpen"
+      :isVisible="isModalOpen"
+      @close="isModalOpen = false"
     />
   </div>
 </template>
 
 <script>
-import PostModal from './PostModal.vue';
+import PostModal from "./PostModal.vue";
 
 export default {
   components: {
@@ -50,7 +55,11 @@ export default {
   data() {
     return {
       postContent: "",
-      isModalOpen: false, 
+      isModalOpen: false,
+      post: {
+        avartar:
+          "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+      },
     };
   },
 };

@@ -1,51 +1,49 @@
-/* responsive.css */
 
 @media (max-width: 768px) {
     .header {
-      flex-direction: column; /* Chuyển hướng flex sang cột cho màn hình nhỏ */
-      align-items: flex-start; /* Căn trái cho các phần tử */
+      flex-direction: column; 
+      align-items: flex-start;
     }
   
     .nav-item {
-      margin: 10px 0; /* Thay đổi khoảng cách giữa các mục nav trong màn hình nhỏ */
+      margin: 10px 0; 
     }
   
     .frame {
-      flex-direction: column; /* Đặt các button thành cột */
-      align-items: flex-start; /* Căn trái cho button */
+      flex-direction: column; 
+      align-items: flex-start; 
     }
   
     .frame-bg {
-      flex-wrap: wrap; /* Cho phép button gói lại trong màn hình nhỏ */
-    }
+      flex-wrap: wrap;     }
   
     .fram-border {
-      margin-bottom: 10px; /* Tạo khoảng cách dưới cho các biểu tượng */
+      margin-bottom: 10px;  
     }
   
     .rounded-icon {
-      padding: 6px; /* Giảm padding cho biểu tượng */
-      width: 40px; /* Đặt kích thước cố định cho biểu tượng */
-      height: 40px; /* Đặt kích thước cố định cho biểu tượng */
+      padding: 6px;  
+      width: 40px; 
+      height: 40px; 
     }
   
     img {
-      width: 40px; /* Giảm kích thước avatar */
-      height: 40px; /* Giảm kích thước avatar */
+      width: 40px;  
+      height: 40px;  
     }
   }
   
   @media (max-width: 576px) {
     .nav-item {
-      font-size: 1.2rem; /* Giảm kích thước font cho mục nav */
+      font-size: 1.2rem;  
     }
   
     .btn {
-      font-size: 1rem; /* Giảm kích thước font cho button */
+      font-size: 1rem; 
     }
   
     .header {
-      padding: 15px; /* Giảm khoảng padding cho header */
+      padding: 15px;  
     }
   }
   
