@@ -7,10 +7,10 @@
       <div class="content-area d-flex">
         <div class="feed-area flex-grow-1 p-5">
           <PostItem />
-          <MainContent />
+          <MainContent /> 
         </div>
 
-        <div class="sidebar-right" style="height: 100vh; overflow-y: auto">
+        <div class="sidebar-right" style="height: auto; overflow-y: auto">
           <TrendingContent />
           <FriendsList />
         </div>

@@ -131,24 +131,67 @@ body {
 
 /* Dark Mode Styles */
 .dark-mode {
-  background-color: #343a40;
-  color: #ffffff;
+  background-color: #333;
+  color: #fff;
 }
 
-.dark-mode .main-content {
-  background-color: #1e1e1e;
-  color: white;
+/* Cụ thể hóa text cho dark mode */
+.dark-mode .card-header h6,
+
+.dark-mode .card-body .card-text,
+.dark-mode .card-footer small,
+.dark-mode .card-footer .like-button{
+  color: #fff !important;
+}
+.dark-mode .card-header small{
+  color: #666363;
 }
 
-.dark-mode .feed-area {
-  background-color: #232323;
-  color: white;
+/* Định nghĩa màu cho placeholder khi chế độ tối */
+.dark-mode .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);  
 }
 
+/* Định nghĩa màu cho placeholder khi chế độ sáng */
+.light-mode .form-control::placeholder {
+  color: rgba(0, 0, 0, 0.7);  
+}
+
+/* Đảm bảo màu xám cho text-muted */
+.dark-mode .text-muted {
+  color: #b0b0b0 !important;
+}
 .dark-mode .sidebar-right {
   background-color: #292929;
   color: white;
 }
+
+
+
+/* dropmenu */
+.dropdown-menu {
+  background-color: white; /* Màu nền cho chế độ sáng */
+  color: black; /* Màu chữ cho chế độ sáng */
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #212529; /* Màu nền cho chế độ tối */
+  color: rgb(228, 219, 219); /* Màu chữ cho chế độ tối */
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0; /* Màu hover cho chế độ sáng */
+}
+
+.dark-mode .dropdown-item:hover {
+  background-color: #444; /* Màu hover cho chế độ tối */
+}
+
 
 /* Light Mode Styles */
 .light-mode {

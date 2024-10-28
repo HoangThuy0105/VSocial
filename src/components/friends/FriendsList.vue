@@ -1,5 +1,5 @@
 <template>
-  <div :class="[isDarkMode ? 'friends-list bg-dark text-white' : 'friends-list bg-light text-dark', 'p-3']">
+  <div :class="[isDarkMode ? 'friends-list bg-dark text-white' : 'friends-list bg-light text-dark', 'p-3 ms-2 content-border']">
     <h6>My friends</h6>
     <ul class="list-group">
       <li v-for="friend in friends" :key="friend.name" :class="['list-group-item', isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark', 'd-flex align-items-start', 'border-0']">
