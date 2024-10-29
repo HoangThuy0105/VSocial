@@ -1,89 +1,98 @@
 <template>
-  <div class="modal" v-if="isVisible">
-    <div class="modal-content">
-      <div class="d-flex justify-content-center">
-        <h1 class="create-post-title">Create Post</h1>
-      </div>
-      <span class="close" @click="closeModal">&times;</span>
-      <div class="modal-header">
-        <img
-          src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg"
-          alt="Profile"
-          class="avatar"
-        />
-        <h3 class="username">User Name</h3>
-      </div>
-      <div class="post-input">
-        <div class="input-container">
-          <textarea
-            v-model="postContent"
-            placeholder="What's on your mind?"
-            class="post-textarea"
-            @focus="showEmojiPicker = true"
-            @blur="hideEmojiPicker"
-          ></textarea>
-          <i class="fas fa-smile emoji-icon" @click="toggleEmojiPicker"></i>
-          <div v-if="showEmojiPicker" class="emoji-picker">
-            <span @click="addEmoji('😀')">😀</span>
-            <span @click="addEmoji('😃')">😃</span>
-            <span @click="addEmoji('😄')">😄</span>
-            <span @click="addEmoji('😁')">😁</span>
-            <span @click="addEmoji('😆')">😆</span>
-            <span @click="addEmoji('😅')">😅</span>
-            <span @click="addEmoji('😂')">😂</span>
-            <span @click="addEmoji('🤣')">🤣</span>
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+    <div class="modal" v-if="isVisible">
+      <div :class="['modal-content', { 'bg-dark text-white': isDarkMode }]">
+        <div class="d-flex justify-content-center">
+          <h1 class="create-post-title">Create Post</h1>
+        </div>
+        <span class="close" @click="closeModal">&times;</span>
+        <div class="modal-header">
+          <img
+            src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg"
+            alt="Profile"
+            class="avatar"
+          />
+          <h3 class="username">User Name</h3>
+        </div>
+        <div class="post-input">
+          <div class="input-container">
+            <textarea
+              v-model="postContent"
+              placeholder="What's on your mind?"
+              class="post-textarea"
+              @focus="showEmojiPicker = true"
+              @blur="hideEmojiPicker"
+            ></textarea>
+            <i class="fas fa-smile emoji-icon" @click="toggleEmojiPicker"></i>
+            <div v-if="showEmojiPicker" class="emoji-picker">
+              <span @click="addEmoji('😀')">😀</span>
+              <span @click="addEmoji('😃')">😃</span>
+              <span @click="addEmoji('😄')">😄</span>
+              <span @click="addEmoji('😁')">😁</span>
+              <span @click="addEmoji('😆')">😆</span>
+              <span @click="addEmoji('😅')">😅</span>
+              <span @click="addEmoji('😂')">😂</span>
+              <span @click="addEmoji('🤣')">🤣</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="dropzone" @dragover.prevent @drop="handleDrop">
-        <div class="image-container">
-          <img
-            v-for="(file, index) in imagePreviews"
-            :key="index"
-            :src="file"
-            alt="Selected"
-            class="preview-image"
+        <div class="dropzone" @dragover.prevent @drop="handleDrop">
+          <div class="image-container">
+            <img
+              v-for="(file, index) in imagePreviews"
+              :key="index"
+              :src="file"
+              alt="Selected"
+              class="preview-image"
+            />
+            <i
+              v-for="(file, index) in imagePreviews"
+              :key="`delete-${index}`"
+              class="fas fa-times delete-image-icon"
+              @click="removeImage(index)"
+            ></i>
+          </div>
+          <div v-if="imagePreviews.length === 0" class="placeholder">
+            <i class="fas fa-image placeholder-icon"></i>
+            <span class="placeholder-text"
+              >Drag and drop your files here or click to select</span
+            >
+          </div>
+
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            @change="handleFileChange"
+            class="file-input"
+            id="file-input"
+            ref="fileInput"
           />
+          <i class="fas fa-plus add-image-icon" @click="triggerFileInput"></i>
+
           <i
-            v-for="(file, index) in imagePreviews"
-            :key="`delete-${index}`"
-            class="fas fa-times delete-image-icon"
-            @click="removeImage(index)"
+            v-if="postContent && selectedFiles.length === 0"
+            class="fas fa-times remove-image"
+            @click="removeImage"
           ></i>
         </div>
-        <div v-if="imagePreviews.length === 0" class="placeholder">
-          <i class="fas fa-image placeholder-icon"></i>
-          <span class="placeholder-text">Drag and drop your files here or click to select</span>
+        <div class="d-flex mt-3">
+          <button
+            class="post-button"
+            :class="{ disabled: !postContent && !selectedFiles.length }"
+            :disabled="!postContent && !selectedFiles.length"
+            @click="submitPost"
+          >
+            Post
+          </button>
         </div>
-
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          @change="handleFileChange"
-          class="file-input"
-          id="file-input"
-          ref="fileInput"
-        />
-        <i class="fas fa-plus add-image-icon" @click="triggerFileInput"></i>
-
-        <i v-if="postContent && selectedFiles.length === 0" class="fas fa-times remove-image" @click="removeImage"></i>
-      </div>
-      <div class="d-flex mt-3 ">
-        <button
-          class="post-button"
-          :class="{ disabled: !postContent && !selectedFiles.length }"
-          :disabled="!postContent && !selectedFiles.length"
-          @click="submitPost"
-        >
-          Post
-        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     isVisible: {
@@ -98,6 +107,11 @@ export default {
       imagePreviews: [],
       showEmojiPicker: false,
     };
+  },
+  computed: {
+    ...mapState({
+      isDarkMode: (state) => state.darkMode,
+    }),
   },
   methods: {
     closeModal() {
@@ -133,8 +147,8 @@ export default {
       reader.readAsDataURL(file);
     },
     removeImage(index) {
-      this.selectedFiles.splice(index, 1); 
-      this.imagePreviews.splice(index, 1); 
+      this.selectedFiles.splice(index, 1);
+      this.imagePreviews.splice(index, 1);
     },
     triggerFileInput() {
       this.$refs.fileInput.click();
@@ -152,6 +166,9 @@ export default {
       this.postContent = "";
       this.selectedFiles = [];
       this.imagePreviews = [];
+    },
+    toggleDarkMode() {
+      this.$store.dispatch("toggleDarkMode");
     },
   },
   mounted() {
@@ -288,7 +305,7 @@ export default {
   color: #888;
   cursor: pointer;
   transition: border-color 0.2s;
-  position: relative; 
+  position: relative;
 }
 
 .dropzone:hover {
@@ -297,13 +314,13 @@ export default {
 }
 
 .file-input {
-  display: none; 
+  display: none;
 }
 
 .image-container {
   display: flex;
   flex-wrap: wrap;
-  position: relative; 
+  position: relative;
 }
 
 .preview-image {
@@ -342,8 +359,8 @@ export default {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  font-size: 24px; 
-  color: #007bff; 
+  font-size: 24px;
+  color: #007bff;
   cursor: pointer;
 }
 
@@ -362,5 +379,27 @@ export default {
 .post-button.disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+/* Dark mode */
+.dark-mode {
+  background-color: #181818;
+  color: #ffffff;
+}
+
+/* Light mode */
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Điều chỉnh modal-content cho dark mode */
+.dark-mode .modal-content {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.light-mode .modal-content {
+  background-color: #ffffff;
+  color: #000000;
 }
 </style>
