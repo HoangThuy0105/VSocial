@@ -25,21 +25,21 @@ export default {
     },
   },
   updated() {
-    this.scrollToBottom(); // Gọi phương thức cuộn khi component được cập nhật
+    this.scrollToBottom();  
   },
   methods: {
     scrollToBottom() {
       this.$nextTick(() => {
         const container = this.$refs.messagesContainer;
-        container.scrollTop = container.scrollHeight; // Cuộn xuống cuối
+        container.scrollTop = container.scrollHeight;  
       });
     },
     sendMessage() {
     if (this.newMessage.trim()) {
-      const timestamp = format(new Date(), 'HH:mm:ss'); // Định dạng thời gian
+      const timestamp = format(new Date(), 'HH:mm:ss');  
       this.$store.dispatch('sendMessage', { text: this.newMessage, timestamp });
-      this.newMessage = ''; // Reset input
-      this.scrollToBottom(); // Cuộn xuống
+      this.newMessage = '';  
+      this.scrollToBottom();  
     }
   },
   },

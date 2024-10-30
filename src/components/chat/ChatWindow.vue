@@ -14,7 +14,7 @@ import ChatMessage from './ChatMessage.vue';
 import ChatInput from './ChatInput.vue';
 import { mapActions, mapGetters } from 'vuex';
 
-export default { // Đặt tên cho component
+export default { 
   components: {
     ChatHeader,
     ChatMessage,

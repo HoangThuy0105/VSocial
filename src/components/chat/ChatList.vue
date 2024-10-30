@@ -47,13 +47,13 @@ export default {
           timestamp,
         });
         this.newMessage = "";
-        this.scrollToBottom(); // Cuộn xuống
+        this.scrollToBottom();  
       }
     },
     scrollToBottom() {
       this.$nextTick(() => {
         const container = this.$refs.messagesContainer;
-        container.scrollTop = container.scrollHeight; // Cuộn xuống cuối
+        container.scrollTop = container.scrollHeight; 
       });
     },
   },
@@ -63,12 +63,12 @@ export default {
 <style scoped>
 .message {
   margin: 5px 0;
-  padding: 10px; /* Thêm khoảng đệm */
-  border-radius: 5px; /* Bo góc cho tin nhắn */
+  padding: 10px;  
+  border-radius: 5px;  
 }
 
 .sent {
-  background-color: #d1e7dd; /* Màu nền cho tin nhắn của người dùng */
-  text-align: right; /* Căn phải cho tin nhắn của người dùng */
+  background-color: #d1e7dd;  
+  text-align: right;  
 }
 </style>

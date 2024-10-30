@@ -4,7 +4,7 @@
     <ChatWindow :messages="currentChat.messages" />
     <ChatInput @send="handleSendMessage" />
   </div>
-  <div v-else class="no-chat-message">
+  <div v-else>
     <p>Please select a conversation.</p>
   </div>
 </template>
@@ -16,7 +16,7 @@ import ChatWindow from "../components/chat/ChatWindow.vue";
 import ChatInput from "../components/chat/ChatInput.vue";
 
 export default {
-  name: "ChatView",
+  name: "ChatView", 
   components: {
     ChatHeader,
     ChatWindow, 
@@ -44,20 +44,8 @@ export default {
   methods: {
     ...mapActions(['selectChat', 'sendMessage']),
     handleSendMessage(messageText) {
-      if (messageText.trim()) {
-        this.sendMessage(messageText);
-      } else {
-        alert("Please enter a message.");
-      }
+      this.sendMessage(messageText);
     },
   },
 };
 </script>
-
-<style scoped>
-.no-chat-message {
-  text-align: center;
-  color: #666;
-  padding: 20px;
-}
-</style>
