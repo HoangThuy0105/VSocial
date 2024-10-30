@@ -7,6 +7,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      friends: [
+        {
+          name: 'Ridwan Beler',
+          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
+        },
+        
+      ],
+    };
+  },
   props: {
     chat: {
       type: Object,

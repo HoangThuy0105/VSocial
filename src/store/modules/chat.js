@@ -3,10 +3,16 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     chats: [
-      { id: 1, name: 'Tuấn Lê', avatar: 'https://example.com/avatar1.jpg', messages: [] },
-      { id: 2, name: 'Hoàng Lương', avatar: 'https://example.com/avatar2.jpg', messages: [] },
+      { id: 1, name: 'Tuấn Lê', avatar: 'https://example.com/avatar1.jpg', messages: [
+        { text: 'Chào bạn!', timestamp: '10:00 AM', isSentByUser: false },
+        { text: 'Bạn khỏe không?', timestamp: '10:01 AM', isSentByUser: false },
+      ] },
+      { id: 2, name: 'Hoàng Lương', avatar: 'https://example.com/avatar2.jpg', messages: [
+        { text: 'Xin chào!', timestamp: '11:00 AM', isSentByUser: false },
+        { text: 'Có cần giúp gì không?', timestamp: '11:01 AM', isSentByUser: false },
+      ] },
     ],
-    currentChat: null, // Cuộc trò chuyện hiện tại
+    currentChat: null, 
   },
   mutations: {
     SET_CURRENT_CHAT(state, chat) {

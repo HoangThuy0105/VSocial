@@ -6,6 +6,7 @@
   </div>
 </template>
 
+
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import ChatHeader from "../components/chat/ChatHeader.vue";
@@ -26,14 +27,15 @@ export default {
     },
   },
   watch: {
-    chatId: {
-      immediate: true,
-      handler(newId) {
-        const chat = this.chats.find((c) => c.id === newId);
-        this.selectChat(chat);
-      },
+  chatId: {
+    immediate: true,
+    handler(newId) {
+      const chat = this.chats.find((c) => c.id === newId);
+      this.selectChat(chat); // Chọn chat
     },
   },
+},
+
   methods: {
     ...mapActions(['selectChat', 'sendMessage']),
     handleSendMessage(messageText) {

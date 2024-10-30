@@ -47,11 +47,10 @@
           </button>
         </div>
         <!-- chat -->
-        <router-link
-          to="/chat"
-          class="frame-border rounded-icon me-2"
-          style="text-decoration: none"
-        >
+        <!-- <div class="frame-border rounded-icon me-2">
+          <i class="fa-solid fa-comment-dots btn"></i>
+        </div> -->
+        <router-link to="/chat" class="frame-border rounded-icon me-2">
           <i class="fa-solid fa-comment-dots btn"></i>
         </router-link>
 
@@ -94,7 +93,7 @@ export default {
       this.$store.dispatch("toggleDarkMode");
     },
     goToChat() {
-      this.$router.push("/chat");
+      this.$router.push('/chat');
     },
   },
 };
