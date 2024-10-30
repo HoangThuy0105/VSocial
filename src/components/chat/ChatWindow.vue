@@ -1,7 +1,9 @@
 <template>
-  <div v-if="currentChat" class="chat-window d-flex flex-column">
+  <div v-if="currentChat" class="chat-window d-flex flex-column"> 
     <ChatHeader :chat="currentChat" />
+     
     <ChatMessage :messages="currentChat.messages" />
+     
     <ChatInput @send="handleSendMessage" />
   </div>
 </template>
@@ -12,20 +14,26 @@ import ChatMessage from './ChatMessage.vue';
 import ChatInput from './ChatInput.vue';
 import { mapActions, mapGetters } from 'vuex';
 
-export default {
+export default { // Đặt tên cho component
   components: {
     ChatHeader,
     ChatMessage,
     ChatInput,
   },
   computed: {
-    ...mapGetters(['currentChat']),
+    ...mapGetters(['currentChat']),  
   },
   methods: {
-    ...mapActions(['sendMessage']),
+    ...mapActions(['sendMessage']),  
     handleSendMessage(messageText) {
       this.sendMessage(messageText);
     },
   },
 };
 </script>
+
+<style scoped>
+.chat-window {
+  min-height: 400px;
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
   <div class="chat-input d-flex align-items-center p-2 border-top">
     <input
+      ref="messageInput"  
       v-model="inputMessage"
       type="text"
       class="form-control me-2"
@@ -25,6 +26,9 @@ export default {
       if (this.inputMessage.trim()) {
         this.$emit("send", this.inputMessage);
         this.inputMessage = "";
+        this.$nextTick(() => {
+          this.$refs.messageInput.focus(); 
+        });
       }
     },
   },

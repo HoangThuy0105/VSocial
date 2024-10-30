@@ -42,6 +42,21 @@ export default {
           status: 'Last active today',
           avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
         },
+        {
+          name: 'Maria Galau',
+          status: 'Last active today',
+          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
+        },
+        {
+          name: 'Maria Galau',
+          status: 'Last active today',
+          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
+        },
+        {
+          name: 'Maria Galau',
+          status: 'Last active today',
+          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
+        },
       ],
     };
   },

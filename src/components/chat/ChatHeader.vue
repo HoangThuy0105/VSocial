@@ -1,28 +1,28 @@
 <template>
   <div class="chat-header p-3 border-bottom d-flex align-items-center">
-    <img :src="chat.avatar" alt="Avatar" class="rounded-circle me-2" width="40" height="40" />
+    <img
+      :src="chat.avatar || defaultAvatar"
+      alt="Avatar"
+      class="rounded-circle me-2"
+      width="40"
+      height="40"
+    />
     <h5 class="mb-0">{{ chat.name }}</h5>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      friends: [
-        {
-          name: 'Ridwan Beler',
-          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
-        },
-        
-      ],
-    };
-  },
   props: {
     chat: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      defaultAvatar: "https://example.com/default-avatar.jpg",
+    };
   },
 };
 </script>
