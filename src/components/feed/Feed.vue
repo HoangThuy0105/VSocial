@@ -18,6 +18,7 @@ import PostInput from "../post/PostInput.vue";
 import PostItem from "../post/PostItem.vue";
 
 export default {
+  name: 'FeedView',
   components: { PostInput, PostItem },
   data() {
     return {

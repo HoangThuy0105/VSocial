@@ -37,10 +37,20 @@
           </button>
           <ul class="dropdown-menu" :class="{ show: post.showOptions }">
             <li>
-              <a class="dropdown-item" @click="reportPost(post)">Report</a>
+              <i
+                class="fa-solid fa-flag dropdown-item me-3"
+                @click="reportPost(post)"
+              >
+                Report
+              </i>
             </li>
             <li>
-              <a class="dropdown-item" @click="hidePost(post)">Hide</a>
+              <i
+                class="fa-solid fa-xmark dropdown-item"
+                @click="hidePost(post)"
+              >
+                Hide
+              </i>
             </li>
           </ul>
         </div>
@@ -379,4 +389,27 @@ export default {
 .dark-mode .liked {
   color: #0033f7;
 }
+.dropdown-menu {
+  background-color: white;
+  color: white;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #111213;
+  color: white;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+  
+.dark-mode .dropdown-item:hover {
+  background-color: #948e8e;
+}
+
 </style>

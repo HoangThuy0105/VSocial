@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
+import router from './router'
 
 // Import Bootstrap CSS and JS
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -12,8 +13,11 @@ import './assets/css/style.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
 
+
 store.dispatch('loadDarkMode');
 
-createApp(App)
-    .use(store)
-    .mount('#app') ;
+const app = createApp(App);
+
+app.use(router); 
+app.use(store);  
+app.mount('#app');

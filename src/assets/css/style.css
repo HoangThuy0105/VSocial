@@ -1,234 +1,228 @@
 body {
-  user-select: none;
-  font-size: 18px;
-}
-
-#app {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+    font-size: 18px;
+  }
+  
+  #app {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      
+    }
+  
+  
+  .app-container {
+      display: flex;
+    }
     
-  }
-
-
-.app-container {
-    display: flex;
-  }
-  
-  .main-content {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    padding-top: 60px;
-  }
-  
-  .content-area {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* .feed-area {
-    width: 70%;
-  }  */
-
-  .sidebar {
-    width: 310px;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-  }
-
-  .btn-outline-light {
-    color: #fff;
-    border-color: #fff;
-  }
-
-  .btn-outline-light:hover {
-    background-color: #fff;
-    color: #000;
-  }
-  .header {
-    position: fixed;
-    top: 0;
-    left: 310px; 
-    right: 0;
-    background-color: #1d1d1d; 
-    z-index: 1000;
-  }
-
-.badge {
-    font-size: 0.9em;
-    padding: 5px;
- }
-
-  .btn-outline-light {
-    color: #fff;
-    border-color: #fff;
-  }
-
-  .btn-outline-light:hover {
-    background-color: #fff;
-    color: #000;
-  }
-.frame{
-    border: 1px solid #2f2f2f; 
+    .main-content {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      padding-top: 60px;
+    }
     
-}
-.frame-bg{
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    /* .feed-area {
+      width: 70%;
+    }  */
   
-  border-radius: 20px;
-}
-.rounded-icon {
-  border: 1px solid #2f2f2f;
-  border-radius: 50%; 
-  width: 50px; 
-  height: 50px; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  background-color: #495057; 
-}
+    .sidebar {
+      width: 310px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+  
+    .btn-outline-light {
+      color: #fff;
+      border-color: #fff;
+    }
+  
+    .btn-outline-light:hover {
+      background-color: #fff;
+      color: #000;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      left: 310px; 
+      right: 0;
+      background-color: #1d1d1d; 
+      z-index: 1000;
+    }
+  
+  .badge {
+      font-size: 0.9em;
+      padding: 5px;
+   }
+  
+    .btn-outline-light {
+      color: #fff;
+      border-color: #fff;
+    }
+  
+    .btn-outline-light:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  .frame{
+      border: 1px solid #2f2f2f; 
+      
+  }
+  .frame-bg{
+    
+    border-radius: 20px;
+  }
+  .rounded-icon {
+    border: 1px solid #2f2f2f;
+    border-radius: 50%; 
+    width: 50px; 
+    height: 50px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #495057; 
+  }
+  
+  .frame-border {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 5px; 
+    background-color: #343a40; 
+    border-radius: 50%; 
+  }
+  
+  
+  .logo {
+    display: flex;               
+    align-items: center;
+            
+  }
+  
+  .logo img {
+    margin-right: 10px;        
+    height: 50px;  
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;             
+  }
+  
+  .logo h2 {
+    margin: 0;           
+  }
+  .custom-hr {
+    border: none;
+    height: 1px;
+    background-color: #666363; 
+  }
+  .content-border{
+    border-radius: 5px;
+  }
+  .dark-mode body {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  /* Dark Mode Styles */
+  .dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  /* Cụ thể hóa text cho dark mode */
+  .dark-mode .card-header h6,
+  
+  .dark-mode .card-body .card-text,
+  .dark-mode .card-footer small,
+  .dark-mode .card-footer .like-button{
+    color: #fff !important;
+  }
+  .dark-mode .card-header small{
+    color: #666363;
+  }
+  
+  /* Định nghĩa màu cho placeholder khi chế độ tối */
+  .dark-mode .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);  
+  }
+  
+  /* Định nghĩa màu cho placeholder khi chế độ sáng */
+  .light-mode .form-control::placeholder {
+    color: rgba(0, 0, 0, 0.7);  
+  }
+  
+  /* Đảm bảo màu xám cho text-muted */
+  .dark-mode .text-muted {
+    color: #b0b0b0 !important;
+  }
 
-.frame-border {
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  padding: 5px; 
-  background-color: #343a40; 
-  border-radius: 50%; 
-}
-
-
-.logo {
-  display: flex;               
-  align-items: center;
-          
-}
-
-.logo img {
-  margin-right: 10px;        
-  height: 50px;  
-  width: 50px;
-  border-radius: 50%;
-  object-fit: cover;             
-}
-
-.logo h2 {
-  margin: 0;           
-}
-.custom-hr {
-  border: none;
-  height: 1px;
-  background-color: #666363; 
-}
-.content-border{
-  border-radius: 5px;
-}
-.dark-mode body {
-  background-color: #343a40;
-  color: white;
-}
-
-/* Dark Mode Styles */
-.dark-mode {
-  background-color: #333;
-  color: #fff;
-}
-
-/* Cụ thể hóa text cho dark mode */
-.dark-mode .card-header h6,
-
-.dark-mode .card-body .card-text,
-.dark-mode .card-footer small,
-.dark-mode .card-footer .like-button{
-  color: #fff !important;
-}
-.dark-mode .card-header small{
-  color: #666363;
-}
-
-/* Định nghĩa màu cho placeholder khi chế độ tối */
-.dark-mode .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.7);  
-}
-
-/* Định nghĩa màu cho placeholder khi chế độ sáng */
-.light-mode .form-control::placeholder {
-  color: rgba(0, 0, 0, 0.7);  
-}
-
-/* Đảm bảo màu xám cho text-muted */
-.dark-mode .text-muted {
-  color: #b0b0b0 !important;
-}
-.dark-mode .sidebar-right {
-  background-color: #292929;
-  color: white;
-}
-
-
-
-/* dropmenu */
-.dropdown-menu {
-  background-color: white; /* Màu nền cho chế độ sáng */
-  color: black; /* Màu chữ cho chế độ sáng */
-}
-
-.dark-mode .dropdown-menu {
-  background-color: #212529; /* Màu nền cho chế độ tối */
-  color: rgb(228, 219, 219); /* Màu chữ cho chế độ tối */
-}
-
-.dropdown-item {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.dropdown-item:hover {
-  background-color: #f0f0f0; /* Màu hover cho chế độ sáng */
-}
-
-.dark-mode .dropdown-item:hover {
-  background-color: #444; /* Màu hover cho chế độ tối */
-}
-
-
-/* Light Mode Styles */
-.light-mode {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-.light-mode .main-content {
-  background-color: #f8f9fa;
-  color: black;
-}
-
-.light-mode .feed-area {
-  background-color: #ffffff;
-  color: black;
-}
-
-.light-mode .sidebar-right {
-  background-color: #f1f1f1;
-  color: black;
-}
-.img-user{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.friend-name {
-  display: block; 
-}
-
-.friend-status {
-  display: block; 
-  font-size: 0.875rem; 
-  color: gray; 
-}
-.cursor-pointer {
-  cursor: pointer;
-}
-
-
+  
+  /* dropmenu */
+  .dropdown-menu {
+    background-color: white; 
+    color: black;  
+  }
+  
+  .dark-mode .dropdown-menu {
+    background-color: #212529; 
+    color: rgb(228, 219, 219);  
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f0f0f0;  
+  }
+  
+  .dark-mode .dropdown-item:hover {
+    background-color: #444; 
+  }
+  
+  
+  /* Light Mode Styles */
+  .light-mode {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .light-mode .main-content {
+    background-color: #f8f9fa;
+    color: black;
+  }
+  
+  .light-mode .feed-area {
+    background-color: #ffffff;
+    color: black;
+  }
+  
+  .light-mode .sidebar-right {
+    background-color: #f1f1f1;
+    color: black;
+  }
+  .img-user{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .friend-name {
+    display: block; 
+  }
+  
+  .friend-status {
+    display: block; 
+    font-size: 0.875rem; 
+    color: gray; 
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  

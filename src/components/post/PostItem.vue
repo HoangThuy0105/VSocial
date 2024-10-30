@@ -6,7 +6,7 @@
           ? 'bg-dark text-white border-0'
           : 'bg-light text-dark border',
         'post-input p-3 ms-5 mb-3 rounded',
-      ]"
+      ]" :style="{ maxWidth: '1180px' }"
     >
       <div class="d-flex align-items-center mb-2">
         <img

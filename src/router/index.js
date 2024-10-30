@@ -1,18 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue'; 
-import MainContent from '../components/content/MainContent.vue';  
+import ChatView from '../views/ChatView.vue';
+import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
-    path: '/',  
-    name: 'Home',
-    component: Home,
+    path: "/",
+    name: "Home",
+    component: HomeView,
   },
+  // {
+  //   path: '/chat/:id',
+  //   name: 'ChatView',
+  //   component: ChatView,
+  //   props: true,
+  // },
   {
-    path: '/main',  
-    name: 'MainContent',
-    component: MainContent,
+    path: '/chat',              
+    name: 'ChatView',
+    component: ChatView,
   },
+
 ];
 
 const router = createRouter({

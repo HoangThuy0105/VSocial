@@ -1,5 +1,6 @@
 <template>
-  <div :class="[isDarkMode ? 'friends-list bg-dark text-white' : 'friends-list bg-light text-dark', 'p-3 ms-2 content-border']">
+ <div :class="[isDarkMode ? 'friends-list bg-dark text-white border border-dark' : 'friends-list bg-light text-dark border ', 'p-4 mb-4 content-border']">
+
     <h6>My friends</h6>
     <ul class="list-group">
       <li v-for="friend in friends" :key="friend.name" :class="['list-group-item', isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark', 'd-flex align-items-start', 'border-0']">
@@ -21,6 +22,16 @@ export default {
   data() {
     return {
       friends: [
+        {
+          name: 'Ridwan Beler',
+          status: 'Last active recently',
+          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
+        },
+        {
+          name: 'Maria Galau',
+          status: 'Last active today',
+          avatar: 'https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg',
+        },
         {
           name: 'Ridwan Beler',
           status: 'Last active recently',

@@ -78,12 +78,16 @@
       <div class="my-community mt-4">
         <h6 :class="isDarkMode ? 'text-white' : 'text-dark'">My community</h6>
         <ul class="list-group">
-          <li
-            class="list-group-item border-0"
-            :class="isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'"
-          >
-            Indonesia UI Designer
-          </li>
+          <ul class="list-group">
+            <li
+              class="list-group-item border-0"
+              :class="isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'"
+            >
+              <!-- <img :src="sidebar.img" alt="img" class="img-user" /> -->
+              Indonesia UI Designer
+            </li>
+          </ul>
+
           <li
             class="list-group-item border-0"
             :class="isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'"
@@ -114,6 +118,20 @@
 import { mapState } from "vuex";
 
 export default {
+  data() {
+    return {
+      sidebar: [
+        {
+          name: "Ridwan Beler",
+          img: "https://photo.znews.vn/w660/Uploaded/ygtmvd/2024_01_09/DSC_8457.jpg",
+        },
+        {
+          name: "Maria Galau",
+          img: "https://photo.znews.vn/w660/Uploaded/ygtmvd/2024_01_09/DSC_8457.jpg",
+        },
+      ],
+    };
+  },
   computed: {
     ...mapState({
       isDarkMode: (state) => state.darkMode,
