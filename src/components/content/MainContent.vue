@@ -258,7 +258,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
+    ...mapState("mode",{
       isDarkMode: (state) => state.darkMode,
     }),
   },

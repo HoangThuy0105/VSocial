@@ -1,7 +1,7 @@
 <template>
   <div class="chat-header p-3 border-bottom d-flex align-items-center">
     <img
-      :src="chat.avatar || defaultAvatar"
+      :src="chat.avatar"
       alt="Avatar"
       class="rounded-circle me-2"
       width="40"
@@ -21,7 +21,10 @@ export default {
   },
   data() {
     return {
-      defaultAvatar: "https://example.com/default-avatar.jpg",
+      post: {
+        avatar:
+          "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+      },
     };
   },
 };

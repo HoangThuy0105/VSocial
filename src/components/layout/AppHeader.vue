@@ -84,16 +84,17 @@ export default {
     };
   },
   computed: {
-    ...mapState({
+    ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
   },
   methods: {
     toggleDarkMode() {
-      this.$store.dispatch("toggleDarkMode");
+      this.$store.dispatch("mode/toggleDarkMode");
+
     },
     goToChat() {
-      this.$router.push('/chat');
+      this.$router.push("/chat");
     },
   },
 };

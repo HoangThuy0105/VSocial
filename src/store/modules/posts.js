@@ -10,7 +10,6 @@ const state = {
   
   const actions = {
     fetchPosts({ commit }) {
-      // Gọi API và commit dữ liệu
       PostService.getPosts().then(posts => {
         commit('setPosts', posts);
       });

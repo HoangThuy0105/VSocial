@@ -1,27 +1,24 @@
 <template>
-  <div v-if="currentChat" class="chat-window d-flex flex-column"> 
-    <ChatHeader :chat="currentChat" />
+  <div v-if="chats" class="chat-window d-flex flex-column"> 
      
-    <ChatMessage :messages="currentChat.messages" />
+    <ChatMessage :messages="chats.messages" />
      
-    <ChatInput @send="handleSendMessage" />
   </div>
 </template>
 
 <script>
-import ChatHeader from './ChatHeader.vue';
 import ChatMessage from './ChatMessage.vue';
-import ChatInput from './ChatInput.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default { 
   components: {
-    ChatHeader,
     ChatMessage,
-    ChatInput,
   },
-  computed: {
-    ...mapGetters(['currentChat']),  
+  props: {
+    chats: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
     ...mapActions(['sendMessage']),  

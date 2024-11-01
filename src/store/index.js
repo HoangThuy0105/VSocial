@@ -1,21 +1,11 @@
 import { createStore } from 'vuex';
+import chat from './modules/chat';
+import mode from './modules/mode';
+
 
 export default createStore({
-  
-  state: {
-    darkMode: false, 
+  modules: {
+    chat, 
+    mode,
   },
-  mutations: {
-    setDarkMode(state, isDarkMode) {
-      state.darkMode = isDarkMode; 
-    },
-  },
-  actions: {
-    toggleDarkMode({ commit, state }) {
-      commit('setDarkMode', !state.darkMode); 
-    },
-  },
-  getters: {
-    isDarkMode: state => state.darkMode, 
-  }
 });

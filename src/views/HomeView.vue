@@ -44,7 +44,7 @@ export default {
     MainContent,
   },
   computed: {
-    ...mapState({
+    ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
   },

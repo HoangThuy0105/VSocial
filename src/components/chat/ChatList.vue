@@ -20,7 +20,7 @@
         class="form-control"
         placeholder="Send..."
       />
-      <button @click="sendMessage" class="btn btn-primary">Gửi</button>
+      <button @click="sendMessage" class="btn btn-primary">Send</button>
     </div>
   </div>
 </template>

@@ -1,21 +1,23 @@
 <template>
-  <div class="chat-message flex-grow-1 p-3 overflow-auto" ref="messagesContainer">
+  <div
+    class="chat-message flex-grow-1 p-3 overflow-auto"
+    ref="messagesContainer"
+  >
     <div
       v-for="(message, index) in messages"
       :key="index"
       :class="['message', message.isSentByUser ? 'sent' : 'received']"
     >
       <p class="message-content">{{ message.text }}</p>
-      <span class="timestamp">{{ message.timestamp }}</span>
+      <div class="d-flex justify-content-center">
+        <span class="timestamp">{{ message.timestamp }}</span>
+      </div>
     </div>
   </div>
 </template>
 
-
 <script>
-import { format } from 'date-fns';
-
-
+import { format } from "date-fns";
 
 export default {
   props: {
@@ -25,27 +27,29 @@ export default {
     },
   },
   updated() {
-    this.scrollToBottom();  
+    this.scrollToBottom();
   },
   methods: {
     scrollToBottom() {
       this.$nextTick(() => {
         const container = this.$refs.messagesContainer;
-        container.scrollTop = container.scrollHeight;  
+        container.scrollTop = container.scrollHeight;
       });
     },
     sendMessage() {
-    if (this.newMessage.trim()) {
-      const timestamp = format(new Date(), 'HH:mm:ss');  
-      this.$store.dispatch('sendMessage', { text: this.newMessage, timestamp });
-      this.newMessage = '';  
-      this.scrollToBottom();  
-    }
-  },
+      if (this.newMessage.trim()) {
+        const timestamp = format(new Date(), "HH:mm:ss");
+        this.$store.dispatch("sendMessage", {
+          text: this.newMessage,
+          timestamp,
+        });
+        this.newMessage = "";
+        this.scrollToBottom();
+      }
+    },
   },
 };
 </script>
-
 
 <style scoped>
 .chat-message {

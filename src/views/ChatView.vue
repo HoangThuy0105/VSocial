@@ -1,12 +1,13 @@
 <template>
-  <div v-if="currentChat" class="chat-view">
+  <div class="chat-view">
+  <!-- <div v-if="currentChat" class="chat-view"> -->
     <ChatHeader :chat="currentChat" />
-    <ChatWindow :messages="currentChat.messages" />
+    <ChatWindow :chats="chats" />
     <ChatInput @send="handleSendMessage" />
   </div>
-  <div v-else>
+  <!-- <div v-else>
     <p>Please select a conversation.</p>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -23,24 +24,25 @@ export default {
     ChatInput,
   },
   computed: {
-    ...mapGetters(['chats', 'currentChat']),
-    chatId() {
-      return parseInt(this.$route.params.id); 
-    },
+    ...mapGetters('chat', ['chats', 'currentChat']),
   },
-  watch: {
-    chatId: {
-      immediate: true,
-      handler(newId) {
-        const chat = this.chats.find((c) => c.id === newId);
-        if (chat) {
-          this.selectChat(chat);
-        } else {
-          console.error('Chat not found for ID:', newId);
-        }
-      },
-    },
-  },
+  
+  // watch: {
+  //   chatId: {
+  //     immediate: true,
+  //     handler(newId) {
+  //       console.log('Current chat ID:', newId);  
+  //       const chat = this.chats.find(c => c.id === newId);
+  //       console.log('Found chat:', chat);  
+  //       if (chat) {
+  //         this.selectChat(chat);
+  //       } else {
+  //         console.error('Chat not found for ID:', newId);
+  //       }
+  //     },
+  //   },
+  // },
+
   methods: {
     ...mapActions(['selectChat', 'sendMessage']),
     handleSendMessage(messageText) {

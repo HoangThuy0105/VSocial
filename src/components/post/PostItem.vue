@@ -93,14 +93,14 @@ export default {
     PostModal,
   },
   computed: {
-    ...mapState({
+    ...mapState("mode",{
       isDarkMode: (state) => state.darkMode,
     }),
   },
   methods: {
-    toggleDarkMode() {
-      this.$store.dispatch("toggleDarkMode");
-    },
+    // toggleDarkMode() {
+    //   this.$store.dispatch("toggleDarkMode");
+    // },
   },
   data() {
     return {

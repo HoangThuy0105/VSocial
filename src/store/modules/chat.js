@@ -1,48 +1,59 @@
-import { createStore } from 'vuex';
-
-export default createStore({
-  state: {
-    chats: [
-      { id: 1, name: 'user1', avatar: 'https://example.com/avatar1.jpg', messages: [
-        { text: 'Chào bạn!', timestamp: '10:00 AM', isSentByUser: false },
-        { text: 'Bạn khỏe không?', timestamp: '10:01 AM', isSentByUser: false },
-      ] },
-      { id: 2, name: 'user2', avatar: 'https://example.com/avatar2.jpg', messages: [
-        { text: 'Xin chào!', timestamp: '11:00 AM', isSentByUser: false },
-        { text: 'Có cần giúp gì không?', timestamp: '11:01 AM', isSentByUser: false },
-      ] },
-    ],
-    currentChat: null, 
-  },
-  mutations: {
-    SET_CURRENT_CHAT(state, chat) {
-      state.currentChat = chat;
+const chat = {
+  namespaced: true,
+  state: () => ({
+    chats: {
+      messages: [
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+      ]
     },
-    ADD_MESSAGE(state, { chatId, message }) {
-      const chat = state.chats.find((c) => c.id === chatId);
-      if (chat) {
-        chat.messages.push(message);
-      }
+    currentChat: {
+      name: "hello",
+      avatar: "https://nuoccat.vn/wp-content/uploads/2023/05/thien-nhien-la-gi-2-482x400.jpeg"
     },
-  },
-  
-  actions: {
-    selectChat({ commit }, chat) {
-      commit('SET_CURRENT_CHAT', chat);
-    },
-    sendMessage({ commit, state }, messageText) {
-      if (state.currentChat) {
-        const newMessage = {
-          text: messageText,
-          timestamp: new Date().toLocaleTimeString(),
-          isSentByUser: true,
-        };
-        commit('ADD_MESSAGE', { chatId: state.currentChat.id, message: newMessage });
-      }
-    },
-  },
+  }),
   getters: {
-    currentChat: (state) => state.currentChat,
     chats: (state) => state.chats,
+    currentChat: (state) => state.currentChat,
   },
-});
+};
+
+export default chat;
