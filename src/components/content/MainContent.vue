@@ -208,7 +208,7 @@ export default {
             "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
             "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
+            
           ],
           likes: "1.7",
           shares: 12,
@@ -252,7 +252,6 @@ export default {
           showOptions: false,
         },
 
-        // Thêm các bài viết khác nếu cần
       ],
       isSharePostVisible: false,
     };

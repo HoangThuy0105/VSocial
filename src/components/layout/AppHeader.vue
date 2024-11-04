@@ -5,9 +5,15 @@
       :class="isDarkMode ? 'header-dark' : 'header-light'"
     >
       <div class="d-flex align-items-center mb-2 mb-lg-0">
-        <li class="nav-item d-flex align-items-center ms-3 me-3">
+        <!-- <li class="nav-item d-flex align-items-center ms-3 me-3">
           <i class="fa-solid fa-house me-2 btn"></i>
           <a href="#" class="nav-link fs-5">Home</a>
+        </li> -->
+        <li class="nav-item d-flex align-items-center ms-3 me-3">
+          <router-link to="/" class="nav-link fs-5 d-flex align-items-center">
+            <i class="fa-solid fa-house me-2"></i>
+            Home
+          </router-link>
         </li>
 
         <div class="d-flex justify-content-center align-items-center p-2">
@@ -47,9 +53,6 @@
           </button>
         </div>
         <!-- chat -->
-        <!-- <div class="frame-border rounded-icon me-2">
-          <i class="fa-solid fa-comment-dots btn"></i>
-        </div> -->
         <router-link to="/chat" class="frame-border rounded-icon me-2">
           <i class="fa-solid fa-comment-dots btn"></i>
         </router-link>
@@ -74,6 +77,7 @@
 import { mapState } from "vuex";
 
 export default {
+  name: "HomeView",
   data() {
     return {
       post: {
@@ -91,11 +95,10 @@ export default {
   methods: {
     toggleDarkMode() {
       this.$store.dispatch("mode/toggleDarkMode");
-
     },
     goToChat() {
       this.$router.push("/chat");
-    },
+    },  
   },
 };
 </script>
