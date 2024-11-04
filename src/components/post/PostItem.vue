@@ -15,11 +15,7 @@
           style="width: 50px; height: 50px; cursor: pointer"
           alt="User"
         />
-        <input
-          type="text"
-          :class="[
-            'form-control',
-            isDarkMode
+        <input type="text" :class="[ 'form-control', isDarkMode
               ? 'bg-dark text-white border border-secondary'
               : 'bg-light border',
           ]"

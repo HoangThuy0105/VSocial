@@ -1,24 +1,47 @@
-  <template>
-  <div class="chat-input d-flex align-items-center p-2 border-top">
-    <input
-      ref="messageInput"
-      v-model="inputMessage"
-      type="text"
-      class="form-control me-2"
-      placeholder="Enter message..."
-      @keyup.enter="sendMessage"
-    />
-    <button class="btn btn-primary" @click="sendMessage">
-      <i class="fas fa-paper-plane"></i>
-    </button>
+<template>
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+    <div
+      class="chat-input d-flex align-items-center p-2 "
+      :class="isDarkMode ? 'header-dark' : 'header-light'"
+    >
+      <input
+        ref="messageInput"
+        :class="[
+          'form-control',
+          isDarkMode
+            ? 'bg-dark text-white border border-secondary'
+            : 'bg-light border',
+        ]"
+        v-model="inputMessage"
+        type="text"
+        class="form-control me-2"
+        placeholder="Enter message..."
+        @keyup.enter="sendMessage"
+      />
+      <button class="btn btn-primary" @click="sendMessage">
+        <i
+          :class="
+            isDarkMode
+              ? 'fas fa-paper-plane text-white'
+              : 'fas fa-paper-plane text-dark'
+          "
+        ></i>
+      </button>
+    </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       inputMessage: "",
     };
+  },
+  computed: {
+    ...mapState("mode", {
+      isDarkMode: (state) => state.darkMode,
+    }),
   },
   methods: {
     sendMessage() {

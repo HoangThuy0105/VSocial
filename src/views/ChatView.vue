@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    <AppHeader />
+    <!-- <AppHeader /> -->
     <div class="chat-container">
       <!-- ChatList bên trái -->
       <div class="chat-list">
@@ -14,7 +14,7 @@
         <div class="chat-window">
           <ChatWindow :chats="chats" />
         </div>
-        <ChatInput @send="handleSendMessage" />
+         <!-- <ChatInput @send="handleSendMessage" /> -->
       </div>
     </div>
   </div>
@@ -24,18 +24,18 @@
 import { mapActions, mapGetters } from "vuex";
 import ChatHeader from "../components/chat/ChatHeader.vue";
 import ChatWindow from "../components/chat/ChatWindow.vue";
-import ChatInput from "../components/chat/ChatInput.vue";
+//import ChatInput from "../components/chat/ChatInput.vue";
 import ChatList from "../components/chat/ChatList.vue";
-import AppHeader from "../components/layout/AppHeader.vue";
+// import AppHeader from "../components/layout/AppHeader.vue";
 
 export default {
   name: "ChatView",
   components: {
     ChatHeader,
     ChatWindow,
-    ChatInput,
+    //ChatInput,
     ChatList,
-    AppHeader,
+    // AppHeader,
   },
   computed: {
     ...mapGetters("chat", ["chats", "currentChat"]),

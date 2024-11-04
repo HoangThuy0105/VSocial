@@ -43,6 +43,18 @@ const chat = {
           text: "heloo",
           timestamp: "15175122"
         },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
+        {
+          text: "heloo",
+          timestamp: "15175122"
+        },
       ]
     },
     currentChat: {
