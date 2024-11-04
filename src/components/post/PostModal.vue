@@ -182,205 +182,8 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-.modal {
-  display: flex;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background-color: #ffffff;
-  margin: auto;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: #aaa;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.avatar {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-
-.username {
-  font-size: 18px;
-  font-weight: bold;
-  color: #1c1e21;
-}
-
-.create-post-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1c1e21;
-}
-
-.post-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.input-container {
-  position: relative;
-  width: 100%;
-}
-
-.post-textarea {
-  flex-grow: 1;
-  height: 100px;
-  border: none;
-  background: transparent;
-  padding: 10px;
-  resize: none;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.post-textarea:focus {
-  outline: none;
-}
-
-.emoji-icon {
-  font-size: 24px;
-  color: #6d6f72;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  cursor: pointer;
-}
-
-.emoji-picker {
-  position: absolute;
-  bottom: 100%;
-  right: 0;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  z-index: 1000;
-}
-
-.emoji-picker span {
-  font-size: 20px;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.dropzone {
-  margin-top: 10px;
-  padding: 20px;
-  border: 2px dashed #ccc;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 14px;
-  color: #888;
-  cursor: pointer;
-  transition: border-color 0.2s;
-  position: relative;
-}
-
-.dropzone:hover {
-  border-color: #6d6f72;
-  background-color: #f0f8ff;
-}
-
-.file-input {
-  display: none;
-}
-
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.preview-image {
-  max-width: 100px;
-  max-height: 100px;
-  margin: 5px;
-  border-radius: 5px;
-}
-
-.delete-image-icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: red;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.placeholder-icon {
-  font-size: 48px;
-  color: #007bff;
-}
-
-.placeholder-text {
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-.add-image-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 24px;
-  color: #007bff;
-  cursor: pointer;
-}
-
-.post-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  color: #ffffff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.post-button.disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-/* Dark mode */
+ 
 .dark-mode {
   background-color: #181818;
   color: #ffffff;
@@ -392,14 +195,67 @@ export default {
   color: #000000;
 }
 
-/* Điều chỉnh modal-content cho dark mode */
+/* Adjust modal content for dark mode */
 .dark-mode .modal-content {
   background-color: #333333;
   color: #ffffff;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
 }
 
 .light-mode .modal-content {
   background-color: #ffffff;
   color: #000000;
+}
+
+/* Dark mode adjustments for specific elements */
+.dark-mode .close {
+  color: #ffffff;
+}
+
+.dark-mode .username, 
+.dark-mode .create-post-title {
+  color: #ffffff;
+}
+
+.dark-mode .post-textarea {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.dark-mode .emoji-icon {
+  color: #bbbbbb;
+}
+
+.dark-mode .dropzone {
+  border-color: #555555;
+  background-color: #2a2a2a;
+}
+
+.dark-mode .placeholder-icon,
+.dark-mode .placeholder-text {
+  color: #bbbbbb;
+}
+
+.dark-mode .post-button {
+  background-color: #1e90ff;
+}
+
+.dark-mode .post-button.disabled {
+  background-color: #555555;
+}
+
+/* Dark mode for emoji picker */
+.dark-mode .emoji-picker {
+  background: #2a2a2a;
+  border-color: #444444;
+}
+
+.dark-mode .emoji-picker span {
+  color: #ffffff;
+}
+
+/* Dark mode for delete icon */
+.dark-mode .delete-image-icon {
+  color: #ff4d4d;
 }
 </style>

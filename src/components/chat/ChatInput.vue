@@ -1,7 +1,7 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
     <div
-      class="chat-input d-flex align-items-center p-2 "
+      class="chat-input d-flex align-items-center p-2"
       :class="isDarkMode ? 'header-dark' : 'header-light'"
     >
       <input
@@ -18,15 +18,15 @@
         placeholder="Enter message..."
         @keyup.enter="sendMessage"
       />
-      <button class="btn btn-primary" @click="sendMessage">
+      <span class="btn no-outline" @click="sendMessage"  style="cursor: pointer; border: none; outline: none;">
         <i
           :class="
             isDarkMode
-              ? 'fas fa-paper-plane text-white'
-              : 'fas fa-paper-plane text-dark'
+              ? 'fas fa-paper-plane text-white custom-icon '
+              : 'fas fa-paper-plane text-dark custom-icon'
           "
         ></i>
-      </button>
+      </span>
     </div>
   </div>
 </template>
@@ -69,4 +69,11 @@ export default {
 .chat-input button {
   padding: 5px 10px;
 }
+.custom-icon{
+  font-size: 1.5rem;
+}
+.no-outline{
+  outline: none;
+}
+
 </style>

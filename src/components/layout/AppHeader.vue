@@ -56,7 +56,7 @@
         <router-link
           to="/chat"
           class="frame-border rounded-icon me-2"
-          style="text-decoration: none"
+          style="text-decoration: none ; "
         >
           <i class="fa-solid fa-comment-dots btn"></i>
         </router-link>
