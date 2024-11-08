@@ -1,5 +1,4 @@
-<template>
-<div class="mt-4">
+<template> 
   <div class="register">
     <h2>Đăng Ký</h2>
     <form @submit.prevent="handleRegister">
@@ -16,6 +15,46 @@
         />
       </div>
 
+      
+      
+
+      <!-- Email -->
+      <!-- <div class="mb-3">
+        <label for="email">Email</label>
+        <input 
+          v-model="email" 
+          type="email" 
+          id="email" 
+          required 
+          placeholder="Email của bạn"
+          class="form-control"
+        />
+      </div> -->
+
+
+      <div class="mb-3">
+        <label for="phone">Số điện thoại</label>
+        <input 
+          v-model="phone" 
+          type="tel" 
+          id="phone" 
+          required 
+          placeholder="Số điện thoại"
+          class="form-control"
+        />
+      </div>
+
+
+      <div class="mb-3">
+        <label for="dob">Ngày tháng năm sinh</label>
+        <input 
+          v-model="dob" 
+          type="date" 
+          id="dob" 
+          required 
+          class="form-control"
+        />
+      </div>
       <!-- Mật khẩu -->
       <div class="mb-3">
         <label for="password">Mật khẩu</label>
@@ -57,62 +96,24 @@
           </button>
         </div>
       </div>
-
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="email">Email</label>
-        <input 
-          v-model="email" 
-          type="email" 
-          id="email" 
-          required 
-          placeholder="Email của bạn"
-          class="form-control"
-        />
-      </div>
-
-      <!-- Số điện thoại -->
-      <div class="mb-3">
-        <label for="phone">Số điện thoại</label>
-        <input 
-          v-model="phone" 
-          type="tel" 
-          id="phone" 
-          required 
-          placeholder="Số điện thoại"
-          class="form-control"
-        />
-      </div>
-
-      <!-- Ngày tháng năm sinh -->
-      <div class="mb-3">
-        <label for="dob">Ngày tháng năm sinh</label>
-        <input 
-          v-model="dob" 
-          type="date" 
-          id="dob" 
-          required 
-          class="form-control"
-        />
-      </div>
-
-      <!-- Đăng ký và lỗi thông báo -->
+      
       <button type="submit" class="btn btn-primary w-100 py-2">Đăng Ký</button>
       <p v-if="authError" class="error text-danger mt-2">{{ authError }}</p>
 
-      <!-- Đăng nhập bằng Google -->
-      <div class="text-center mt-3">
+
+      <!-- <div class="text-center mt-3">
         <button class="btn btn-danger w-100 py-2" @click="handleGoogleLogin">
           Đăng nhập bằng Google
         </button>
-      </div>
+      </div> -->
+      
     </form>
 
     <div class="text-center mt-3">
       <p class="text-muted">Bạn đã có tài khoản? <a href="/login" class="text-primary text-decoration-none">Đăng nhập ngay</a></p>
     </div>
   </div>
-  </div>
+ 
 </template>
 
 <script>
@@ -125,9 +126,9 @@ export default {
       username: '',
       password: '',
       confirmPassword: '',
-      email: '',
+      // email: '',
       phone: '',
-      dob: '',
+      dob: '', //ngày tháng năm sinh
       showPassword: false,
       showConfirmPassword: false
     };
@@ -145,7 +146,7 @@ export default {
       this.register({
         username: this.username,
         password: this.password,
-        email: this.email,
+        // email: this.email,
         phone: this.phone,
         dob: this.dob
       });
@@ -156,22 +157,21 @@ export default {
     toggleConfirmPasswordVisibility() {
       this.showConfirmPassword = !this.showConfirmPassword;
     },
-    handleGoogleLogin() {
+    // handleGoogleLogin() {
        
-      console.log('Đăng nhập bằng Google');
-    }
+    //   console.log('Đăng nhập bằng Google');
+    // }
   }
 };
 </script>
 
 <style scoped>
-/* Thêm các style cần thiết */
 .register {
   max-width: 400px;
   margin: 0 auto;
   
   padding: 20px;
-  background-color: #f2f4f7;
+  
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

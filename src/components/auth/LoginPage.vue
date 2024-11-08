@@ -84,7 +84,6 @@ html, body {
 
 .login {
   background-color: #f2f4f7;
-  
 }
 
 .card {
