@@ -13,7 +13,7 @@
           :src="post.avatar"
           class="rounded-circle me-2"
           style="width: 50px; height: 50px; cursor: pointer"
-          alt="User Avatar"
+          alt="User Avatar" 
         />
         <div class="me-auto">
           <h6 class="mb-0 cursor-pointer">{{ post.userName }}</h6>
