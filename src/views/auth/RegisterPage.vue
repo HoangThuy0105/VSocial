@@ -1,0 +1,277 @@
+<template>
+  <div class="register-container">
+    <div class="register-content shadow-lg"> 
+      <div class="register-form">
+        <h1 class="text-center mb-4 text-primary fw-bold">Rgister</h1>
+        <form @submit.prevent="handleRegister">
+          <!-- Tên đăng nhập -->
+          <div class="mb-3">
+            <label for="username"  class="form-label">User name:</label>
+            <input
+              v-model="username"
+              type="text"
+              id="username"
+              required
+              class="form-control"
+            />
+          </div>
+
+          <!-- Số điện thoại -->  
+          <div class="mb-3">
+            <label for="phone"  class="form-label">Phone number:</label>
+            <input
+              v-model="phone"
+              type="tel"
+              id="phone"
+              required
+              class="form-control"
+            />
+          </div>
+
+          <!-- Ngày sinh -->
+          <div class="mb-3">
+            <label for="dob "  class="form-label">Date of Birth:</label>
+            <input
+              v-model="dob"
+              type="date"
+              id="dob"
+              required
+              class="form-control"
+            />
+          </div>
+
+          <!-- Mật khẩu -->
+          <div class="mb-3">
+            <label for="password"  class="form-label">Password:</label>
+            <div class="input-group">
+              <input
+                v-model="password"
+                :type="showPassword ? 'text' : 'password'"
+                id="password"
+                required
+                class="form-control"
+              />
+              <button
+                type="button"
+                class="btn-transparent position-absolute top-50 end-0 translate-middle-y"
+                @click="togglePasswordVisibility"
+              >
+                <i
+                  :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'"
+                  class="fs-5"
+                ></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Nhắc lại mật khẩu -->
+          <div class="mb-3">
+            <label for="confirmPassword"  class="form-label">Confirm Password:</label>
+            <div class="input-group">
+              <input
+                v-model="confirmPassword"
+                :type="showConfirmPassword ? 'text' : 'password'"
+                id="confirmPassword"
+                required
+                class="form-control"
+              />
+              <button
+                type="button"
+                class="btn-transparent position-absolute top-50 end-0 translate-middle-y"
+                @click="toggleConfirmPasswordVisibility"
+              >
+                <i
+                  :class="
+                    showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'
+                  "
+                  class="fs-5"
+                ></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2 form-label" >
+            Sign Up
+          </button>
+          <p v-if="authError" class="error text-danger mt-2">{{ authError }}</p>
+        </form>
+
+        <div class="text-center mt-3">
+          <p class="text-muted">
+            Already have an account?
+            <a href="/login" class="text-primary text-decoration-none"
+              >Log in now</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <div class="register-image text-center">
+        
+        <h1 class="display-4 text-dark mb-3 fw-bold mt-3">VSocial</h1>
+        <p class="slogan">
+          Connect with friends and the world around you on VSocial
+        </p>
+        <img src="https://hevalia.com/wp-content/uploads/2024/03/social-media-2314696_640.jpg" alt="VSocial Logo" class="logo" />
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import { mapActions, mapGetters } from "vuex";
+
+export default {
+  name: "AuthRegister",
+  data() {
+    return {
+      username: "",
+      password: "",
+      confirmPassword: "",
+      // email: '',
+      phone: "",
+      dob: "", //ngày tháng năm sinh
+      showPassword: false,
+      showConfirmPassword: false,
+    };
+  },
+  computed: {
+    ...mapGetters("auth", ["authError"]),
+  },
+  methods: {
+    ...mapActions("auth", ["register"]),
+    handleRegister() {
+      if (this.password !== this.confirmPassword) {
+        this.authError = "Mật khẩu và nhắc lại mật khẩu không khớp.";
+        return;
+      }
+      this.register({
+        username: this.username,
+        password: this.password,
+        phone: this.phone,
+        dob: this.dob,
+      });
+    },
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+    },
+    toggleConfirmPasswordVisibility() {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    },
+  },
+};
+</script>
+<style scoped>
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.register-content {
+  display: flex;
+  max-width: 800px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.register-form {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.register-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.register-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #007bff;
+  text-align: center;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.error {
+  color: red;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 10px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+}
+
+.text-danger {
+  font-size: 0.9rem;
+  color: red;
+}
+.register-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+ 
+  
+
+.register-image .slogan {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-top: 10px;
+  text-align: center;
+}
+
+</style>
