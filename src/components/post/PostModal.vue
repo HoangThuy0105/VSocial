@@ -1,87 +1,68 @@
 <template>
-  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div class="modal" v-if="isVisible">
-      <div :class="['modal-content', { 'bg-dark text-white': isDarkMode }]">
-        <div class="d-flex justify-content-center">
-          <h1 class="create-post-title">Create Post</h1>
-        </div>
-        <span class="close" @click="closeModal">&times;</span>
+ <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+  <div
+    :class="[
+      isDarkMode ? 'bg-dark text-white border-0' : 'bg-light text-dark border', 
+      'modal-container'
+    ]">
+    <div v-if="isVisible" class="modal-overlay" @click.self="closeModal">
+      <div class="modal-content">
         <div class="modal-header">
           <img
             src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg"
-            alt="Profile"
+            alt="Avatar"
             class="avatar"
           />
-          <h3 class="username">User Name</h3>
+          <h5 class="modal-title ms-3">{{ post.name }}</h5>
         </div>
-        <div class="post-input">
-          <div class="input-container">
-            <textarea
-              v-model="postContent"
-              placeholder="What's on your mind?"
-              class="post-textarea"
-              @focus="showEmojiPicker = true"
-              @blur="hideEmojiPicker"
-            ></textarea>
-            <i class="fas fa-smile emoji-icon" @click="toggleEmojiPicker"></i>
-            <div v-if="showEmojiPicker" class="emoji-picker">
-              <span @click="addEmoji('😀')">😀</span>
-              <span @click="addEmoji('😃')">😃</span>
-              <span @click="addEmoji('😄')">😄</span>
-              <span @click="addEmoji('😁')">😁</span>
-              <span @click="addEmoji('😆')">😆</span>
-              <span @click="addEmoji('😅')">😅</span>
-              <span @click="addEmoji('😂')">😂</span>
-              <span @click="addEmoji('🤣')">🤣</span>
-            </div>
-          </div>
-        </div>
-        <div class="dropzone" @dragover.prevent @drop="handleDrop">
-          <div class="image-container">
-            <img
-              v-for="(file, index) in imagePreviews"
-              :key="index"
-              :src="file"
-              alt="Selected"
-              class="preview-image"
+
+        <!-- Trường nhập nội dung bài viết -->
+        <textarea
+          v-model="content"
+          class="form-control my-3"
+          rows="4"
+          placeholder="What's on your mind?"
+        ></textarea>
+
+        <!-- Các mục tùy chọn (Nút ảnh và emoji) -->
+        <div class="modal-options">
+          <div v-show="modalType === 'image'" class="modal-option">
+            <label for="file-upload" class="btn btn-light">Ảnh/Video</label>
+            <input
+              type="file"
+              id="file-upload"
+              @change="handleFileUpload"
+              class="d-none"
             />
-            <i
-              v-for="(file, index) in imagePreviews"
-              :key="`delete-${index}`"
-              class="fas fa-times delete-image-icon"
-              @click="removeImage(index)"
-            ></i>
           </div>
-          <div v-if="imagePreviews.length === 0" class="placeholder">
-            <i class="fas fa-image placeholder-icon"></i>
-            <span class="placeholder-text"
-              >Drag and drop your files here or click to select</span
-            >
-          </div>
-
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            @change="handleFileChange"
-            class="file-input"
-            id="file-input"
-            ref="fileInput"
-          />
-          <i class="fas fa-plus add-image-icon" @click="triggerFileInput"></i>
-
-          <i
-            v-if="postContent && selectedFiles.length === 0"
-            class="fas fa-times remove-image"
-            @click="removeImage"
-          ></i>
+          <div v-show="modalType === 'emoji'" class="modal-option">
+            <button class="btn btn-light">Thêm cảm xúc</button>
+          </div>  
         </div>
-        <div class="d-flex mt-3">
+
+        <!-- Các nút điều khiển (Nút ảnh và emoji ngay dưới trường nhập liệu) -->
+        <div class="action-buttons">
           <button
-            class="post-button"
-            :class="{ disabled: !postContent && !selectedFiles.length }"
-            :disabled="!postContent && !selectedFiles.length"
-            @click="submitPost"
+            @click="openModal('image')"
+            class="btn btn-light action-button"
+          >
+            <i class="fa fa-image"></i>  
+          </button>
+          <button
+            @click="openModal('emoji')"
+            class="btn btn-light action-button"
+          > 
+            <i class="fa fa-smile"></i>  
+          </button>
+        </div>
+
+        <!-- Các nút điều khiển (Nút Hủy và Đăng) -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary " @click="closeModal">Cancle</button>
+          <button
+            class="btn btn-primary ms-2"
+            @click="postContent"
+            :disabled="!content.trim()"
           >
             Post
           </button>
@@ -89,173 +70,171 @@
       </div>
     </div>
   </div>
+ </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 export default {
   props: {
-    isVisible: {
-      type: Boolean,
-      required: true,
-    },
+    isVisible: Boolean,
+    modalType: String,
   },
   data() {
     return {
-      postContent: "",
-      selectedFiles: [],
-      imagePreviews: [],
-      showEmojiPicker: false,
+      content: "",
+      file: null, 
+      post: {
+        name: "user",
+      }
     };
   },
   computed: {
-    ...mapState("mode",{
+     ...mapState("mode",{
       isDarkMode: (state) => state.darkMode,
     }),
+    
   },
   methods: {
     closeModal() {
       this.$emit("close");
-      this.resetPost();
     },
-    submitPost() {
-      console.log(this.postContent);
-      console.log(this.selectedFiles);
+    postContent() {
+      console.log("Post content:", this.content);
+      if (this.file) {
+        console.log("Post file:", this.file);
+      }
       this.closeModal();
     },
-    handleDrop(event) {
-      const files = Array.from(event.dataTransfer.files);
-      this.addFiles(files);
-    },
-    handleFileChange(event) {
-      const files = Array.from(event.target.files);
-      this.addFiles(files);
-    },
-    addFiles(files) {
-      files.forEach((file) => {
-        if (file && file.type.startsWith("image/")) {
-          this.selectedFiles.push(file);
-          this.createImagePreview(file);
-        }
-      });
-    },
-    createImagePreview(file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.imagePreviews.push(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    },
-    removeImage(index) {
-      this.selectedFiles.splice(index, 1);
-      this.imagePreviews.splice(index, 1);
-    },
-    triggerFileInput() {
-      this.$refs.fileInput.click();
-    },
-    toggleEmojiPicker() {
-      this.showEmojiPicker = !this.showEmojiPicker;
-    },
-    addEmoji(emoji) {
-      this.postContent += emoji;
-    },
-    hideEmojiPicker() {
-      this.showEmojiPicker = false;
-    },
-    resetPost() {
-      this.postContent = "";
-      this.selectedFiles = [];
-      this.imagePreviews = [];
-    },
-    toggleDarkMode() {
-      this.$store.dispatch("toggleDarkMode");
-    },
-  },
-  mounted() {
-    document.addEventListener("click", (event) => {
-      const target = event.target;
-      const inputContainer = this.$el.querySelector(".input-container");
-      if (!inputContainer.contains(target)) {
-        this.showEmojiPicker = false;
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.file = file;
+        console.log("File uploaded:", file);
       }
-    });
+    },
+    openModal(type) {
+      this.$emit("show-modal", type); // Emit sự kiện để mở modal
+    },
   },
 };
 </script>
+
 <style scoped>
- 
-.dark-mode {
-  background-color: #181818;
-  color: #ffffff;
+/* Căn chỉnh modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Light mode */
-.light-mode {
-  background-color: #ffffff;
-  color: #000000;
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-/* Adjust modal content for dark mode */
-.dark-mode .modal-content {
-  background-color: #333333;
-  color: #ffffff;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+/* Các style cho phần modal */
+.modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.light-mode .modal-content {
-  background-color: #ffffff;
-  color: #000000;
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
-/* Dark mode adjustments for specific elements */
-.dark-mode .close {
-  color: #ffffff;
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
-.dark-mode .username, 
-.dark-mode .create-post-title {
-  color: #ffffff;
+textarea {
+  resize: none;
 }
 
-.dark-mode .post-textarea {
-  background-color: #2a2a2a;
-  color: #ffffff;
+.modal-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.dark-mode .emoji-icon {
-  color: #bbbbbb;
+.modal-option button,
+.modal-option label {
+  font-size: 14px;
+  color: #1877f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-.dark-mode .dropzone {
-  border-color: #555555;
-  background-color: #2a2a2a;
+.modal-option button:hover,
+.modal-option label:hover {
+  background-color: #f0f0f0;
 }
 
-.dark-mode .placeholder-icon,
-.dark-mode .placeholder-text {
-  color: #bbbbbb;
+/* Điều chỉnh vị trí action-buttons (Nút ảnh và emoji) */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px; /* Đặt cách phần trên 1 chút */
+  margin-bottom: 20px;
 }
 
-.dark-mode .post-button {
-  background-color: #1e90ff;
+.action-button {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 20px;
+  color: #1877f2;
+  border: 1px solid #ddd;
+  cursor: pointer;
 }
 
-.dark-mode .post-button.disabled {
-  background-color: #555555;
+.action-button i {
+  margin-right: 5px;
 }
 
-/* Dark mode for emoji picker */
-.dark-mode .emoji-picker {
-  background: #2a2a2a;
-  border-color: #444444;
+.action-button:hover {
+  background-color: #f0f0f0;
 }
 
-.dark-mode .emoji-picker span {
-  color: #ffffff;
+/* Các style cho nút footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
-/* Dark mode for delete icon */
-.dark-mode .delete-image-icon {
-  color: #ff4d4d;
+.modal-footer button {
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.modal-footer .btn-primary {
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+
+.modal-footer .btn-primary:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
 }
 </style>

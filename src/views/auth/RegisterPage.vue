@@ -1,6 +1,6 @@
 <template>
   <div class="register-container">
-    <div class="row register-content shadow-lg"> 
+    <div class="row register-content shadow-lg">
       <!-- Register Form Section -->
       <div class="col-12 col-md-6 register-form">
         <h1 class="text-center mb-4 text-primary fw-bold">Register</h1>
@@ -8,40 +8,85 @@
           <!-- Username -->
           <div class="mb-3">
             <label for="username" class="form-label">User name:</label>
-            <input v-model="username" type="text" id="username" required class="form-control" />
+            <input
+              v-model="username"
+              type="text"
+              id="username"
+              required
+              class="form-control"
+            />
           </div>
 
           <!-- Phone Number -->
           <div class="mb-3">
             <label for="phone" class="form-label">Phone number:</label>
-            <input v-model="phone" type="tel" id="phone" required class="form-control" />
+            <input
+              v-model="phone"
+              type="tel"
+              id="phone"
+              required
+              class="form-control"
+            />
           </div>
 
           <!-- Date of Birth -->
           <div class="mb-3">
             <label for="dob" class="form-label">Date of Birth:</label>
-            <input v-model="dob" type="date" id="dob" required class="form-control" />
+            <input
+              v-model="dob"
+              type="date"
+              id="dob"
+              required
+              class="form-control"
+            />
           </div>
 
           <!-- Password -->
           <div class="mb-3">
             <label for="password" class="form-label">Password:</label>
             <div class="input-group">
-              <input v-model="password" :type="showPassword ? 'text' : 'password'" id="password" required class="form-control" />
-              <button type="button" class="btn-transparent position-absolute top-50 end-0 translate-middle-y" @click="togglePasswordVisibility">
-                <i :class="showPassword ?  'bi bi-eye' : 'bi bi-eye-slash'" class="fs-5  p-2
- p-2"></i>
+              <input
+                v-model="password"
+                :type="showPassword ? 'text' : 'password'"
+                id="password"
+                required
+                class="form-control"
+              />
+              <button
+                type="button"
+                class="btn-transparent position-absolute top-50 end-0 translate-middle-y"
+                @click="togglePasswordVisibility"
+              >
+                <i
+                  :class="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"
+                  class="fs-5 p-2 p-2"
+                ></i>
               </button>
             </div>
           </div>
 
           <!-- Confirm Password -->
           <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirm Password:</label>
+            <label for="confirmPassword" class="form-label"
+              >Confirm Password:</label
+            >
             <div class="input-group">
-              <input v-model="confirmPassword" :type="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" required class="form-control" />
-              <button type="button" class="btn-transparent position-absolute top-50 end-0 translate-middle-y" @click="toggleConfirmPasswordVisibility">
-                <i :class="showConfirmPassword ?  'bi bi-eye' : 'bi bi-eye-slash'" class="fs-5 p-2"></i>
+              <input
+                v-model="confirmPassword"
+                :type="showConfirmPassword ? 'text' : 'password'"
+                id="confirmPassword"
+                required
+                class="form-control"
+              />
+              <button
+                type="button"
+                class="btn-transparent position-absolute top-50 end-0 translate-middle-y"
+                @click="toggleConfirmPasswordVisibility"
+              >
+                <i
+                  :class="showConfirmPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"
+                  class="fs-5 p-2"
+                ></i>
               </button>
             </div>
           </div>
@@ -55,7 +100,9 @@
         <div class="text-center mt-3">
           <p class="text-muted">
             Already have an account?
-            <a href="/login" class="text-primary text-decoration-none">Log in now</a>
+            <a href="/login" class="text-primary text-decoration-none"
+              >Log in now</a
+            >
           </p>
         </div>
       </div>
@@ -66,7 +113,11 @@
         <p class="slogan">
           Connect with friends and the world around you on VSocial
         </p>
-        <img src="https://hevalia.com/wp-content/uploads/2024/03/social-media-2314696_640.jpg" alt="VSocial Logo" class="logo" />
+        <img
+          src="https://hevalia.com/wp-content/uploads/2024/03/social-media-2314696_640.jpg"
+          alt="VSocial Logo"
+          class="logo"
+        />
       </div>
     </div>
   </div>
