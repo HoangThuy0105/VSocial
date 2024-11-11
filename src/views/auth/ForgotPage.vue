@@ -20,6 +20,7 @@
       </div>
       
       <button type="submit" class="btn btn-primary w-100">Submit</button>
+      
       <div class="text-center mt-3">
            <p><a href="/login" class="text-primary text-decoration-none">Back to Sign In</a></p>
         </div>
