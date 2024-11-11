@@ -29,7 +29,8 @@
             <div class="input-group">
               <input v-model="password" :type="showPassword ? 'text' : 'password'" id="password" required class="form-control" />
               <button type="button" class="btn-transparent position-absolute top-50 end-0 translate-middle-y" @click="togglePasswordVisibility">
-                <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'" class="fs-5"></i>
+                <i :class="showPassword ?  'bi bi-eye' : 'bi bi-eye-slash'" class="fs-5  p-2
+ p-2"></i>
               </button>
             </div>
           </div>
@@ -40,7 +41,7 @@
             <div class="input-group">
               <input v-model="confirmPassword" :type="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" required class="form-control" />
               <button type="button" class="btn-transparent position-absolute top-50 end-0 translate-middle-y" @click="toggleConfirmPasswordVisibility">
-                <i :class="showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'" class="fs-5"></i>
+                <i :class="showConfirmPassword ?  'bi bi-eye' : 'bi bi-eye-slash'" class="fs-5 p-2"></i>
               </button>
             </div>
           </div>
