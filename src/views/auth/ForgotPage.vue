@@ -1,8 +1,8 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card p-4 shadow-sm" style="max-width: 550px; width: 100%;">
-    <h2 class="text-primary    mb-3">Find Your Account</h2>
-    <p class="text-muted   mb-4">
+  <div class="card p-4 shadow-sm shadow-lg" style="max-width: 550px; width: 100%;">
+    <h2 class="text-primary mb-3">Find Your Account</h2>
+    <p class="text-muted mb-4">
       Please enter your phone number to search for your account.
     </p>
     

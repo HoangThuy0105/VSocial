@@ -1,96 +1,51 @@
 <template>
   <div class="register-container">
-    <div class="register-content shadow-lg"> 
-      <div class="register-form">
-        <h1 class="text-center mb-4 text-primary fw-bold">Rgister</h1>
+    <div class="row register-content shadow-lg"> 
+      <!-- Register Form Section -->
+      <div class="col-12 col-md-6 register-form">
+        <h1 class="text-center mb-4 text-primary fw-bold">Register</h1>
         <form @submit.prevent="handleRegister">
-          <!-- Tên đăng nhập -->
+          <!-- Username -->
           <div class="mb-3">
-            <label for="username"  class="form-label">User name:</label>
-            <input
-              v-model="username"
-              type="text"
-              id="username"
-              required
-              class="form-control"
-            />
+            <label for="username" class="form-label">User name:</label>
+            <input v-model="username" type="text" id="username" required class="form-control" />
           </div>
 
-          <!-- Số điện thoại -->  
+          <!-- Phone Number -->
           <div class="mb-3">
-            <label for="phone"  class="form-label">Phone number:</label>
-            <input
-              v-model="phone"
-              type="tel"
-              id="phone"
-              required
-              class="form-control"
-            />
+            <label for="phone" class="form-label">Phone number:</label>
+            <input v-model="phone" type="tel" id="phone" required class="form-control" />
           </div>
 
-          <!-- Ngày sinh -->
+          <!-- Date of Birth -->
           <div class="mb-3">
-            <label for="dob "  class="form-label">Date of Birth:</label>
-            <input
-              v-model="dob"
-              type="date"
-              id="dob"
-              required
-              class="form-control"
-            />
+            <label for="dob" class="form-label">Date of Birth:</label>
+            <input v-model="dob" type="date" id="dob" required class="form-control" />
           </div>
 
-          <!-- Mật khẩu -->
+          <!-- Password -->
           <div class="mb-3">
-            <label for="password"  class="form-label">Password:</label>
+            <label for="password" class="form-label">Password:</label>
             <div class="input-group">
-              <input
-                v-model="password"
-                :type="showPassword ? 'text' : 'password'"
-                id="password"
-                required
-                class="form-control"
-              />
-              <button
-                type="button"
-                class="btn-transparent position-absolute top-50 end-0 translate-middle-y"
-                @click="togglePasswordVisibility"
-              >
-                <i
-                  :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'"
-                  class="fs-5"
-                ></i>
+              <input v-model="password" :type="showPassword ? 'text' : 'password'" id="password" required class="form-control" />
+              <button type="button" class="btn-transparent position-absolute top-50 end-0 translate-middle-y" @click="togglePasswordVisibility">
+                <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'" class="fs-5"></i>
               </button>
             </div>
           </div>
 
-          <!-- Nhắc lại mật khẩu -->
+          <!-- Confirm Password -->
           <div class="mb-3">
-            <label for="confirmPassword"  class="form-label">Confirm Password:</label>
+            <label for="confirmPassword" class="form-label">Confirm Password:</label>
             <div class="input-group">
-              <input
-                v-model="confirmPassword"
-                :type="showConfirmPassword ? 'text' : 'password'"
-                id="confirmPassword"
-                required
-                class="form-control"
-              />
-              <button
-                type="button"
-                class="btn-transparent position-absolute top-50 end-0 translate-middle-y"
-                @click="toggleConfirmPasswordVisibility"
-              >
-                <i
-                  :class="
-                    showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'
-                  "
-                  class="fs-5"
-                ></i>
+              <input v-model="confirmPassword" :type="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" required class="form-control" />
+              <button type="button" class="btn-transparent position-absolute top-50 end-0 translate-middle-y" @click="toggleConfirmPasswordVisibility">
+                <i :class="showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye p-2'" class="fs-5"></i>
               </button>
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary w-100 py-2 form-label" >
+          <button type="submit" class="btn btn-primary w-100 py-2 form-label">
             Sign Up
           </button>
           <p v-if="authError" class="error text-danger mt-2">{{ authError }}</p>
@@ -99,15 +54,13 @@
         <div class="text-center mt-3">
           <p class="text-muted">
             Already have an account?
-            <a href="/login" class="text-primary text-decoration-none"
-              >Log in now</a
-            >
+            <a href="/login" class="text-primary text-decoration-none">Log in now</a>
           </p>
         </div>
       </div>
 
-      <div class="register-image text-center">
-        
+      <!-- Register Image Section -->
+      <div class="col-md-6 d-none d-md-flex register-image text-center">
         <h1 class="display-4 text-dark mb-3 fw-bold mt-3">VSocial</h1>
         <p class="slogan">
           Connect with friends and the world around you on VSocial
@@ -117,6 +70,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters } from "vuex";
 
@@ -127,9 +81,8 @@ export default {
       username: "",
       password: "",
       confirmPassword: "",
-      // email: '',
       phone: "",
-      dob: "", //ngày tháng năm sinh
+      dob: "",
       showPassword: false,
       showConfirmPassword: false,
     };
@@ -160,7 +113,14 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
 .register-container {
   display: flex;
   justify-content: center;
@@ -178,18 +138,16 @@ export default {
 }
 
 .register-form {
-  flex: 1;
   padding: 20px;
   background-color: #f8f9fa;
 }
 
 .register-image {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  border-radius: 0 8px 8px 0;
 }
 
 .register-image img {
@@ -202,10 +160,6 @@ h2 {
   font-size: 1.8rem;
   color: #007bff;
   text-align: center;
-}
-
-.mb-3 {
-  margin-bottom: 1rem;
 }
 
 .form-control {
@@ -256,16 +210,6 @@ h2 {
   font-size: 0.9rem;
   color: red;
 }
-.register-image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
- 
-  
 
 .register-image .slogan {
   font-size: 1.1rem;
@@ -273,5 +217,4 @@ h2 {
   margin-top: 10px;
   text-align: center;
 }
-
 </style>
