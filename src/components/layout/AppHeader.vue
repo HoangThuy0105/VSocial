@@ -48,11 +48,12 @@
             <i class="fa-solid" :class="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
           </button>
         </div>
+
         <!-- chat -->
         <router-link
           to="/chat"
           class="frame-border rounded-icon me-2"
-          style="text-decoration: none ; "
+          style="text-decoration: none"
         >
           <i class="fa-solid fa-comment-dots btn"></i>
         </router-link>
@@ -62,12 +63,36 @@
           <i class="fa-solid fa-bell btn"></i>
         </div>
 
-        <img
-          :src="post.avatar"
-          class="rounded-circle me-2"
-          style="width: 50px; height: 50px; cursor: pointer"
-          alt="User Avatar"
-        />
+        <!-- avatar -->
+        <div class="dropdown" style="position: relative">
+          <!-- Hình ảnh avatar -->
+          <img
+            :src="post.avatar"
+            class="rounded-circle me-2"
+            style="width: 50px; height: 50px; cursor: pointer"
+            alt="User Avatar"
+            @click="toggleDropdown"
+          />
+
+          <!-- Dropdown menu -->
+          <ul
+            v-if="isDropdownVisible"
+            ref="dropdownMenu"
+            class="dropdown-menu"
+            aria-labelledby="userDropdown"
+          >
+            <li>
+              <a class="dropdown-item" href="/profile">
+                <i class="bi bi-person-circle me-2"></i> Profile
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/login" @click="logout">
+                <i class="bi bi-box-arrow-right me-2"></i> Log out
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -85,6 +110,7 @@ export default {
           "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
       },
       activeTab: "explore",
+      isDropdownVisible: false,
     };
   },
   computed: {
@@ -96,9 +122,27 @@ export default {
     toggleDarkMode() {
       this.$store.dispatch("mode/toggleDarkMode");
     },
-    goToChat() {
-      this.$router.push("/chat");
+    toggleDropdown(event) {
+      event.stopPropagation();
+      this.isDropdownVisible = !this.isDropdownVisible;
     },
+    logout() {
+      console.log("Đăng xuất");
+    },
+    closeDropdown(event) {
+      if (
+        this.$refs.dropdownMenu &&
+        !this.$refs.dropdownMenu.contains(event.target)
+      ) {
+        this.isDropdownVisible = false;
+      }
+    },
+  },
+  mounted() {
+    document.addEventListener("click", this.closeDropdown);
+  },
+  beforeUnmount() {
+    document.removeEventListener("click", this.closeDropdown);
   },
 };
 </script>
@@ -172,7 +216,7 @@ export default {
 .rounded-icon:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-/* Loại bỏ viền focus mặc định */
+
 button:focus,
 button:focus-visible,
 .btn:focus,
@@ -182,6 +226,76 @@ button:focus-visible,
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 55px;  
+  left: -100px;  
+  z-index: 1050;
+  display: block;
+  background-color: #f8f9fa;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -10px;  
+  left: 110px;  
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent rgb(75, 68, 68) transparent; 
+  z-index: 1060;  
+}
+/* Mũi tên cho chế độ tối */
+.dark-mode .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -9px; 
+  left: 110px;  
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent rgb(75, 68, 68) transparent; 
+  z-index: 1060;
+}
+ 
+.dark-mode .dropdown-menu::after {
+  content: "";
+  position: absolute;
+  top: -11px;  
+  left: 108px;  
+  border-width: 0 11px 11px 11px;  
+  border-style: solid;
+  border-color: transparent transparent #000000 transparent;  
+  z-index: 1059;  
+}
+ 
+.light-mode .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 110px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;  
+  z-index: 1060;
+}
+ 
+.light-mode .dropdown-menu::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 108px;
+  border-width: 0 11px 11px 11px;
+  border-style: solid;
+  border-color: transparent transparent #ddd transparent;  
+   
+}
+
+
+.rounded-circle {
+  cursor: pointer;
 }
 
 @media (max-width: 576px) {
