@@ -127,7 +127,7 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "AuthRegister",
+ 
   data() {
     return {
       username: "",

@@ -4,6 +4,7 @@ import ChatView from "../views/ChatView.vue";
 import LoginPage from "../views/auth/LoginPage.vue";
 import RegisterPage from "../views/auth/RegisterPage.vue";
 import ForgotPage from "../views/auth/ForgotPage.vue";
+import ProfileView from "../views/ProfileView.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/forgot",
     name: "forgot",
     component: ForgotPage,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: ProfileView,
   },
 ];
 

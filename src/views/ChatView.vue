@@ -7,7 +7,7 @@
         <ChatList />
       </div>
 
-      <!-- ChatContent bên phải -->
+     
       <div class="chat-content">
         <!-- Đặt ChatHeader ở đây, dưới AppHeader -->
         <ChatHeader :chat="currentChat" />

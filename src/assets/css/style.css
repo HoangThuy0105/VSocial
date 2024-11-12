@@ -20,16 +20,7 @@ body {
       width: calc(100% - 250px);
       padding-top: 60px;
     }
-    
-    .content-area {
-      display: flex;
-      justify-content: space-between;
-    }
-    
-    /* .feed-area {
-      width: 70%;
-    }  */
-  
+
     .sidebar {
       width: 310px;
       height: 100vh;
@@ -226,3 +217,233 @@ body {
     cursor: pointer;
   }
   
+
+/* appheader */
+  .header-light {
+    background-color: #f8f9fa;
+    color: black;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .header-dark {
+    background-color: #212529;
+    color: white;
+    border-bottom: none;
+  }
+  
+  .dark-mode a,
+  .dark-mode .nav-link,
+  .dark-mode .btn {
+    color: white;
+  }
+  
+  .light-mode a,
+  .light-mode .nav-link,
+  .light-mode .btn {
+    color: black;
+  }
+  
+  .frame-bg {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+  }
+  
+  .button-frame {
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+  }
+  
+  .button-frame:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .dark-mode .button-frame:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .button-frame.active {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  .dark-mode .button-frame.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .badge {
+    font-size: 0.85em;
+    padding: 0.3em 0.6em;
+  }
+  
+  .rounded-icon {
+    border-radius: 50%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .rounded-icon:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  button:focus,
+  button:focus-visible,
+  .btn:focus,
+  .btn:focus-visible,
+  .rounded-icon:focus,
+  .rounded-icon:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 55px;  
+    left: -100px;  
+    z-index: 1050;
+    display: block;
+    background-color: #f8f9fa;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -10px;  
+    left: 110px;  
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent rgb(75, 68, 68) transparent; 
+    z-index: 1060;  
+  }
+  /* Mũi tên cho chế độ tối */
+  .dark-mode .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -9px; 
+    left: 110px;  
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent rgb(75, 68, 68) transparent; 
+    z-index: 1060;
+  }
+   
+  .dark-mode .dropdown-menu::after {
+    content: "";
+    position: absolute;
+    top: -11px;  
+    left: 108px;  
+    border-width: 0 11px 11px 11px;  
+    border-style: solid;
+    border-color: transparent transparent #000000 transparent;  
+    z-index: 1059;  
+  }
+   
+  .light-mode .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 110px;
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;  
+    z-index: 1060;
+  }
+   
+  .light-mode .dropdown-menu::after {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: 108px;
+    border-width: 0 11px 11px 11px;
+    border-style: solid;
+    border-color: transparent transparent #ddd transparent;  
+     
+  }
+  
+  .rounded-circle {
+    cursor: pointer;
+  }
+  
+  @media (max-width: 576px) {
+    .fs-5 {
+      font-size: 1rem;
+    }
+    .header {
+      padding: 1rem;
+    }
+    .rounded-icon {
+      padding: 6px;
+    }
+  }
+/* maincontent */
+.card {
+  max-width: 1180px;
+  margin: auto;
+}
+
+.image-container-single img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.image-container-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.image-container-gallery {
+  display: flex;
+  gap: 8px;
+  position: relative;
+}
+
+.image-container-gallery img {
+  width: 33%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.more-images-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 33%;
+  height: 100%;
+}
+
+.like-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  outline: none;
+  color: gray;
+  transition: color 0.3s;
+}
+
+.liked {
+  color: #0033f7;
+}
+
+.dark-mode .like-button {
+  color: lightgray;
+}
+
+.dark-mode .liked {
+  color: #0033f7;
+}
+

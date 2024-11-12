@@ -3,17 +3,14 @@
     <div
       v-for="(post, index) in posts"
       :key="index"
-      :class="[
-        isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
-        'card mt-4 ms-5 mb-3',
-      ]"
+      :class="[isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark', 'card mt-4 ms-5 mb-3']"
     >
       <div class="card-header d-flex align-items-center">
         <img
           :src="post.avatar"
           class="rounded-circle me-2"
           style="width: 50px; height: 50px; cursor: pointer"
-          alt="User Avatar" 
+          alt="User Avatar"
         />
         <div class="me-auto">
           <h6 class="mb-0 cursor-pointer">{{ post.userName }}</h6>
@@ -35,22 +32,21 @@
           <button class="btn btn-link p-0" @click="toggleOptions(index)">
             <i class="fa-solid fa-ellipsis text-secondary"></i>
           </button>
-          <ul class="dropdown-menu" :class="{ show: post.showOptions }">
+          <ul
+            v-if="post.showOptions"
+            ref="dropdownMenu"
+            class="dropdown-menu"
+            aria-labelledby="userDropdown"
+          >
             <li>
-              <i
-                class="fa-solid fa-flag dropdown-item me-3"
-                @click="reportPost(post)"
-              >
-                Report
-              </i>
+              <a class="dropdown-item" href="/ ">
+                <i class="fa-solid fa-flag me-2"></i> Report
+              </a>
             </li>
             <li>
-              <i
-                class="fa-solid fa-xmark dropdown-item"
-                @click="hidePost(post)"
-              >
-                Hide
-              </i>
+              <a class="dropdown-item" href="/ " @click="logout">
+                <i class="fa-solid fa-circle-minus me-2"></i> Hide
+              </a>
             </li>
           </ul>
         </div>
@@ -62,11 +58,7 @@
 
         <!-- Image Display Logic -->
         <div v-if="post.images.length === 1" class="image-container-single">
-          <img
-            :src="post.images[0]"
-            alt="Content Image"
-            class="content-image"
-          />
+          <img :src="post.images[0]" alt="Content Image" class="content-image" />
         </div>
 
         <div v-else-if="post.images.length === 4" class="image-container-grid">
@@ -87,19 +79,14 @@
             alt="Content Image"
             class="content-image cursor-pointer"
           />
-          <div
-            v-if="post.images.length > 3"
-            class="more-images-overlay cursor-pointer"
-          >
+          <div v-if="post.images.length > 3" class="more-images-overlay cursor-pointer">
             +{{ post.images.length - 3 }}
           </div>
         </div>
       </div>
 
       <!-- Reactions -->
-      <div
-        class="card-footer d-flex justify-content-between align-items-center"
-      >
+      <div class="card-footer d-flex justify-content-between align-items-center">
         <div>
           <button
             class="btn btn-link me-2 p-0 like-button"
@@ -140,8 +127,7 @@ export default {
     return {
       posts: [
         {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+          avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
           userName: "user",
           time: "12 minutes ago",
           role: "3D Stock Contributor",
@@ -149,149 +135,32 @@ export default {
           images: [
             "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
             "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
           ],
           likes: "1.7",
           shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
+          comments: [{ userName: "Aditya Cah Tegal", text: "People getting this type of rejection for AI images...", replies: 12 }],
           liked: false,
           saved: false,
           showOptions: false,
         },
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-
+        // Additional posts go here...
       ],
       isSharePostVisible: false,
     };
   },
   computed: {
-    ...mapState("mode",{
+    ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
   },
-
   methods: {
     toggleOptions(index) {
+      
       this.posts.forEach((post, i) => {
         post.showOptions = i === index ? !post.showOptions : false;
       });
     },
-    closeDropdowns() {
-      this.posts.forEach((post) => {
-        post.showOptions = false;
-      });
-    },
-    handleClickOutside(event) {
-      const dropdowns = this.$el.querySelectorAll(".dropdown-menu");
-      dropdowns.forEach((dropdown) => {
-        if (
-          !dropdown.contains(event.target) &&
-          dropdown.style.display === "block"
-        ) {
-          this.closeDropdowns();
-        }
-      });
-    },
-    reportPost(post) {
-      console.log("Report post:", post);
-      this.closeDropdowns();
-    },
-    hidePost(post) {
-      console.log("Hide post:", post);
-      this.closeDropdowns();
-    },
+    
     toggleSave(index) {
       const post = this.posts[index];
       post.saved = !post.saved;
@@ -313,102 +182,12 @@ export default {
     },
   },
   mounted() {
-    document.addEventListener("click", this.handleClickOutside);
+    document.addEventListener("click", this.closeDropdown);
   },
   beforeUnmount() {
-    document.removeEventListener("click", this.handleClickOutside);
+    document.removeEventListener("click", this.closeDropdown);
   },
 };
 </script>
 
-<style>
-.card {
-  max-width: 1180px;
-  margin: auto;
-}
-
-.image-container-single img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.image-container-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.image-container-gallery {
-  display: flex;
-  gap: 8px;
-  position: relative;
-}
-
-.image-container-gallery img {
-  width: 33%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.more-images-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  border-radius: 4px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 33%;
-  height: 100%;
-}
-
-.like-button {
-  border: none;
-  background: transparent;
-  padding: 0;
-  outline: none;
-  color: gray;
-  transition: color 0.3s;
-}
-
-.liked {
-  color: #0033f7;
-}
-
-.dark-mode .like-button {
-  color: lightgray;
-}
-
-.dark-mode .liked {
-  color: #0033f7;
-}
-.dropdown-menu {
-  background-color: white;
-  color: white;
-}
-
-.dark-mode .dropdown-menu {
-  background-color: #111213;
-  color: white;
-}
-
-.dropdown-item {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.dropdown-item:hover {
-  background-color: #f0f0f0;
-}
-  
-.dark-mode .dropdown-item:hover {
-  background-color: #948e8e;
-}
-
-</style>
+<style src="@/assets/css/style.css"></style>
