@@ -5,6 +5,7 @@ import LoginPage from "../views/auth/LoginPage.vue";
 import RegisterPage from "../views/auth/RegisterPage.vue";
 import ForgotPage from "../views/auth/ForgotPage.vue";
 import ProfileView from "../views/ProfileView.vue";
+// import PostShare from "../components/post/PostShare.vue";
 
 const routes = [
   {
@@ -37,6 +38,12 @@ const routes = [
     name: "profile",
     component: ProfileView,
   },
+  // {
+  //   path: "/postshare",
+  //   name: "postshare",
+  //   component: PostShare,
+  // },
+   
 ];
 
 const router = createRouter({

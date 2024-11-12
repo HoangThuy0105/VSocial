@@ -128,7 +128,7 @@
 
 <script>
 import { mapState } from "vuex";
-import PostShare from "../post/PostShare.vue";
+import PostShare  from '../post/PostShare.vue';
 
 export default {
   name: "UserPost",
@@ -269,11 +269,11 @@ export default {
     toggleDropdown(event) {
       event.stopPropagation();
       this.isDropdownVisible = !this.isDropdownVisible;
-    }, 
+    },
     closeDropdown(event) {
       const dropdownMenu = this.$refs.dropdownMenu
         ? this.$refs.dropdownMenu.$el
-        : null;  
+        : null;
       if (dropdownMenu && !dropdownMenu.contains(event.target)) {
         this.isDropdownVisible = false;
       }
@@ -299,12 +299,17 @@ export default {
     },
     openSharePost() {
       this.isSharePostVisible = true;
+      console.log("Share Post opened", this.isSharePostVisible);
     },
+
     closeSharePost() {
       this.isSharePostVisible = false;
     },
     toggleDarkMode() {
       this.$store.dispatch("toggleDarkMode");
+    },
+    close() {
+      this.$emit("close");
     },
   },
   mounted() {
@@ -315,3 +320,5 @@ export default {
   },
 };
 </script>
+
+<style src="@/assets/css/style.css"></style>

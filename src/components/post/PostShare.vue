@@ -1,17 +1,23 @@
 <template>
-  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="shareModalLabel">Chia sẻ</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+    <div
+      :class="[
+        isDarkMode
+          ? 'bg-dark text-white border-0'
+          : 'bg-light text-dark border',
+        'post-input p-3 ms-5 mb-3 rounded',
+      ]" :style="{ maxWidth: '600px' }"
+    >
+        <div class="modal-body"> 
           <!-- User Information Section -->
           <div class="d-flex align-items-center mb-3">
-            <img src="https://via.placeholder.com/40" alt="User" class="rounded-circle me-2" />
+            <img
+              src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg"
+              alt="User" style="width: 50px; height: 50px; cursor: pointer"
+              class="rounded-circle me-2"
+            />
             <div>
-              <h6 class="mb-0">Hoàng Thùy</h6>
+              <h6 class="mb-0">User</h6>
               <select class="form-select form-select-sm w-auto">
                 <option>Bảng feed</option>
                 <option>Chỉ mình tôi</option>
@@ -21,7 +27,11 @@
           </div>
 
           <!-- Textarea -->
-          <textarea class="form-control mb-3" rows="3" placeholder="Hãy nói gì đó về nội dung này..."></textarea>
+          <textarea
+            class="form-control mb-3"
+            rows="3"
+            placeholder="Hãy nói gì đó về nội dung này..."
+          ></textarea>
 
           <!-- Share Button -->
           <button class="btn btn-primary w-100 mb-3">Chia sẻ ngay</button>
@@ -30,8 +40,18 @@
           <div class="mb-3">
             <h6>Gửi bằng Messenger</h6>
             <div class="d-flex">
-              <div v-for="(user, index) in messengerUsers" :key="index" class="text-center me-2">
-                <img :src="user.avatar" alt="User" class="rounded-circle" width="50" height="50" />
+              <div
+                v-for="(user, index) in messengerUsers"
+                :key="index"
+                class="text-center me-2 ms-4"
+              >
+                <img
+                  :src="user.avatar"
+                  alt="User"
+                  class="rounded-circle"
+                  width="50"
+                  height="50"
+                />
                 <p class="small">{{ user.name }}</p>
               </div>
             </div>
@@ -40,36 +60,52 @@
           <!-- Share Options Section -->
           <div>
             <h6>Chia sẻ lên</h6>
-            <div class="d-flex justify-content-around">
-              <i class="bi bi-messenger fs-3"></i>
-              <i class="bi bi-whatsapp fs-3"></i>
-              <i class="bi bi-journal-bookmark fs-3"></i>
-              <i class="bi bi-link fs-3"></i>
-              <i class="bi bi-people fs-3"></i>
-              <i class="bi bi-shop fs-3"></i>
+            <div class="d-flex justify-content-around " >
+              <i class="bi bi-messenger fs-3" style=" cursor: pointer;"></i>
+              <i class="bi bi-whatsapp fs-3" style=" cursor: pointer;"></i>
+              <i class="bi bi-journal-bookmark fs-3 " style=" cursor: pointer;"></i>
+              <i class="bi bi-link fs-3" style=" cursor: pointer;"></i>
+              <i class="bi bi-people fs-3" style=" cursor: pointer;"></i>
+              <i class="bi bi-shop fs-3" style=" cursor: pointer;"></i>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-name: "PostShare",
+  name: "PostShare",
   data() {
     return {
       messengerUsers: [
-        { name: '20SE4', avatar: 'https://via.placeholder.com/50' },
-        { name: 'Tuấn Lê', avatar: 'https://via.placeholder.com/50' },
-        { name: 'Chị Ba', avatar: 'https://via.placeholder.com/50' },
-        { name: 'Phượng', avatar: 'https://via.placeholder.com/50' },
-        { name: 'Hoàng và Gấm', avatar: 'https://via.placeholder.com/50' },
-        { name: 'Trần Công Phúc', avatar: 'https://via.placeholder.com/50' },
-      ]
+        { name: "user1", avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" },
+        { name: "user1", avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" },
+        { name: "user1", avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" },
+        { name: "user1", avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" },
+        { name: "user1", avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" },
+        { name: "user1", avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" },
+      ],
+       isSharePostVisible: false
     };
-  }
+  },
+  watch: {
+    isSharePostVisible(newVal) {
+      if (newVal) {
+        const shareModal = new window.bootstrap.Modal(
+          document.getElementById("shareModal")
+        );
+        shareModal.show();
+      }
+    },
+  },
+  methods: {
+    closeSharePost() {
+      this.isSharePostVisible = false;
+    },
+  },
+   
 };
 </script>
 
