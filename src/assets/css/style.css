@@ -521,7 +521,7 @@ textarea {
 .action-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px; /* Đặt cách phần trên 1 chút */
+  margin-top: 10px;  
   margin-bottom: 20px;
 }
 

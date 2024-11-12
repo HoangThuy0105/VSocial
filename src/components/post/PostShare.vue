@@ -90,16 +90,16 @@ export default {
        isSharePostVisible: false
     };
   },
-  watch: {
-    isSharePostVisible(newVal) {
-      if (newVal) {
-        const shareModal = new window.bootstrap.Modal(
-          document.getElementById("shareModal")
-        );
-        shareModal.show();
-      }
-    },
-  },
+  // watch: {
+  //   isSharePostVisible(newVal) {
+  //     if (newVal) {
+  //       const shareModal = new window.bootstrap.Modal(
+  //         document.getElementById("shareModal")
+  //       );
+  //       shareModal.show();
+  //     }
+  //   },
+  // },
   methods: {
     closeSharePost() {
       this.isSharePostVisible = false;

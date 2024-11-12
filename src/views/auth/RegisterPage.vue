@@ -29,13 +29,13 @@
             />
           </div>
 
-          <!-- Date of Birth -->
+          <!-- email -->
           <div class="mb-3">
-            <label for="dob" class="form-label">Date of Birth:</label>
+            <label for="phone" class="form-label">Email:</label>
             <input
-              v-model="dob"
-              type="date"
-              id="dob"
+              v-model="phone"
+              type="tel"
+              id="phone"
               required
               class="form-control"
             />
@@ -134,7 +134,7 @@ export default {
       password: "",
       confirmPassword: "",
       phone: "",
-      dob: "",
+      email: "",
       showPassword: false,
       showConfirmPassword: false,
     };
@@ -146,14 +146,14 @@ export default {
     ...mapActions("auth", ["register"]),
     handleRegister() {
       if (this.password !== this.confirmPassword) {
-        this.authError = "Mật khẩu và nhắc lại mật khẩu không khớp.";
+        this.authError = "Mật khẩu không khớp.";
         return;
       }
       this.register({
         username: this.username,
         password: this.password,
         phone: this.phone,
-        dob: this.dob,
+        email: this.email,
       });
     },
     togglePasswordVisibility() {

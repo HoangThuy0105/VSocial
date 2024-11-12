@@ -3,12 +3,12 @@
   <div class="card p-4 shadow-sm shadow-lg" style="max-width: 550px; width: 100%;">
     <h2 class="text-primary fw-bold mb-3">Find Your Account</h2>
     <p class="text-muted mb-4">
-      Please enter your phone number to search for your account.
+      Please enter your email to search for your account.
     </p>
     
     <form @submit.prevent="handleFindAccount">
       <div class="mb-3">
-        <label for="contactInfo" class="form-label">Phone number:</label>
+        <label for="contactInfo" class="form-label">Email:</label>
         <input 
           v-model="contactInfo" 
           type="text" 
