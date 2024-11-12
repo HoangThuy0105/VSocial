@@ -3,7 +3,10 @@
     <div
       v-for="(post, index) in posts"
       :key="index"
-      :class="[isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark', 'card mt-4 ms-5 mb-3']"
+      :class="[
+        isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
+        'card mt-4 ms-5 mb-3',
+      ]"
     >
       <div class="card-header d-flex align-items-center">
         <img
@@ -58,7 +61,11 @@
 
         <!-- Image Display Logic -->
         <div v-if="post.images.length === 1" class="image-container-single">
-          <img :src="post.images[0]" alt="Content Image" class="content-image" />
+          <img
+            :src="post.images[0]"
+            alt="Content Image"
+            class="content-image"
+          />
         </div>
 
         <div v-else-if="post.images.length === 4" class="image-container-grid">
@@ -79,14 +86,19 @@
             alt="Content Image"
             class="content-image cursor-pointer"
           />
-          <div v-if="post.images.length > 3" class="more-images-overlay cursor-pointer">
+          <div
+            v-if="post.images.length > 3"
+            class="more-images-overlay cursor-pointer"
+          >
             +{{ post.images.length - 3 }}
           </div>
         </div>
       </div>
 
       <!-- Reactions -->
-      <div class="card-footer d-flex justify-content-between align-items-center">
+      <div
+        class="card-footer d-flex justify-content-between align-items-center"
+      >
         <div>
           <button
             class="btn btn-link me-2 p-0 like-button"
@@ -127,7 +139,8 @@ export default {
     return {
       posts: [
         {
-          avatar: "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+          avatar:
+            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
           userName: "user",
           time: "12 minutes ago",
           role: "3D Stock Contributor",
@@ -135,17 +148,110 @@ export default {
           images: [
             "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
             "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
+            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
+            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://via.placeholder.com/200x300",
+            "https://via.placeholder.com/200x300",
           ],
           likes: "1.7",
           shares: 12,
-          comments: [{ userName: "Aditya Cah Tegal", text: "People getting this type of rejection for AI images...", replies: 12 }],
+          comments: [
+            {
+              userName: "Aditya Cah Tegal",
+              text: "People getting this type of rejection for AI images...",
+              replies: 12,
+            },
+          ],
           liked: false,
           saved: false,
           showOptions: false,
         },
-        // Additional posts go here...
+        {
+          avatar:
+            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+          userName: "user",
+          time: "12 minutes ago",
+          role: "3D Stock Contributor",
+          content: "There is a big river running through my province...",
+          images: [
+            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
+            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
+            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
+            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://via.placeholder.com/200x300",
+            "https://via.placeholder.com/200x300",
+          ],
+          likes: "1.7",
+          shares: 12,
+          comments: [
+            {
+              userName: "Aditya Cah Tegal",
+              text: "People getting this type of rejection for AI images...",
+              replies: 12,
+            },
+          ],
+          liked: false,
+          saved: false,
+          showOptions: false,
+        },
+        {
+          avatar:
+            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+          userName: "user",
+          time: "12 minutes ago",
+          role: "3D Stock Contributor",
+          content: "There is a big river running through my province...",
+          images: [
+            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
+            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
+            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
+            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://via.placeholder.com/200x300",
+          ],
+          likes: "1.7",
+          shares: 12,
+          comments: [
+            {
+              userName: "Aditya Cah Tegal",
+              text: "People getting this type of rejection for AI images...",
+              replies: 12,
+            },
+          ],
+          liked: false,
+          saved: false,
+          showOptions: false,
+        },
+        {
+          avatar:
+            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
+          userName: "user",
+          time: "12 minutes ago",
+          role: "3D Stock Contributor",
+          content: "There is a big river running through my province...",
+          images: [
+            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
+            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
+            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
+            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://via.placeholder.com/200x300",
+            "https://via.placeholder.com/200x300",
+          ],
+          likes: "1.7",
+          shares: 12,
+          comments: [
+            {
+              userName: "Aditya Cah Tegal",
+              text: "People getting this type of rejection for AI images...",
+              replies: 12,
+            },
+          ],
+          liked: false,
+          saved: false,
+          showOptions: false,
+        },
       ],
       isSharePostVisible: false,
+      isDropdownVisible: false,
     };
   },
   computed: {
@@ -153,14 +259,34 @@ export default {
       isDarkMode: (state) => state.darkMode,
     }),
   },
+
   methods: {
     toggleOptions(index) {
-      
       this.posts.forEach((post, i) => {
         post.showOptions = i === index ? !post.showOptions : false;
       });
     },
-    
+    toggleDropdown(event) {
+      event.stopPropagation();
+      this.isDropdownVisible = !this.isDropdownVisible;
+    }, 
+    closeDropdown(event) {
+      const dropdownMenu = this.$refs.dropdownMenu
+        ? this.$refs.dropdownMenu.$el
+        : null;  
+      if (dropdownMenu && !dropdownMenu.contains(event.target)) {
+        this.isDropdownVisible = false;
+      }
+    },
+
+    reportPost(post) {
+      console.log("Report post:", post);
+      this.closeDropdowns();
+    },
+    hidePost(post) {
+      console.log("Hide post:", post);
+      this.closeDropdowns();
+    },
     toggleSave(index) {
       const post = this.posts[index];
       post.saved = !post.saved;
@@ -189,5 +315,3 @@ export default {
   },
 };
 </script>
-
-<style src="@/assets/css/style.css"></style>
