@@ -22,7 +22,7 @@
     </div>
 
     <!-- Navigation Menu -->
-    <div class="nav-menu bg-white p-2 d-flex justify-content-around rounded shadow-lg ">
+    <div class="nav-menu bg-white p-2 d-flex justify-content-around border rounded ">
       <div class="menu-item text-center">
         <i class="bi bi-file-earmark-text cursor-pointer"></i>
         <p class="mb-0">Post</p>
