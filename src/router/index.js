@@ -43,7 +43,6 @@ const routes = [
   //   name: "postshare",
   //   component: PostShare,
   // },
-   
 ];
 
 const router = createRouter({

@@ -6,7 +6,8 @@
           ? 'bg-dark text-white border-0'
           : 'bg-light text-dark border',
         'post-input p-3 ms-5 mb-3 rounded',
-      ]" :style="{ maxWidth: '1180px' }"
+      ]"
+      :style="{ maxWidth: '1180px' }"
     >
       <div class="d-flex align-items-center mb-2">
         <img
@@ -15,7 +16,11 @@
           style="width: 50px; height: 50px; cursor: pointer"
           alt="User"
         />
-        <input type="text" :class="[ 'form-control', isDarkMode
+        <input
+          type="text"
+          :class="[
+            'form-control',
+            isDarkMode
               ? 'bg-dark text-white border border-secondary'
               : 'bg-light border',
           ]"
@@ -89,7 +94,7 @@ export default {
     PostModal,
   },
   computed: {
-    ...mapState("mode",{
+    ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
   },

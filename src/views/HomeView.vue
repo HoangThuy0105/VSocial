@@ -4,7 +4,7 @@
     <AppSidebar :isDarkMode="isDarkMode" />
 
     <div class="main-content">
-      <div class="   d-flex">
+      <div class="  d-flex">
         <div class="flex-grow-1 p-5">
           <PostItem :isDarkMode="isDarkMode" />
           <MainContent :isDarkMode="isDarkMode" />
