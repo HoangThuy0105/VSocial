@@ -32,7 +32,7 @@
       </div>
 
       <ul class="nav flex-column">
-        <li class="nav-item d-flex align-items-center">
+        <li class="nav-item d-flex align-items-center hover">
           <i class="fa-solid fa-house"></i>
           <a
             href="#"
@@ -41,8 +41,8 @@
             >Home</a
           >
         </li>
-
-        <li class="nav-item d-flex align-items-center">
+      
+        <li class="nav-item d-flex align-items-center hover">
           <i class="fa-solid fa-person-military-to-person"></i>
           <a
             href="#"
@@ -51,8 +51,8 @@
             >Community</a
           >
         </li>
-
-        <li class="nav-item d-flex align-items-center">
+      
+        <li class="nav-item d-flex align-items-center hover">
           <i class="fa-solid fa-bag-shopping"></i>
           <a
             href="#"
@@ -61,8 +61,8 @@
             >Marketplace</a
           >
         </li>
-
-        <li class="nav-item d-flex align-items-center">
+      
+        <li class="nav-item d-flex align-items-center hover">
           <i class="fa-solid fa-calendar-days"></i>
           <a
             href="#"
@@ -72,6 +72,7 @@
           >
         </li>
       </ul>
+      
 
       <hr class="custom-hr" />
 

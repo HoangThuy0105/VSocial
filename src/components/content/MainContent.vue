@@ -189,6 +189,16 @@ export default {
               text: "People getting this type of rejection for AI images...",
               replies: 12,
             },
+            {
+              userName: "Aditya Cah Tegal",
+              text: "People getting this type of rejection for AI images...",
+              replies: 12,
+            },
+            {
+              userName: "Aditya Cah Tegal",
+              text: "People getting this type of rejection for AI images...",
+              replies: 12,
+            },
           ],
           liked: false,
           saved: false,

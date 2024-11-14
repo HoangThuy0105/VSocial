@@ -13,8 +13,8 @@
 
 <script>
 import { mapState } from "vuex";
-import AppHeader from "../components/layout/AppHeader.vue";
-import AppSidebar from "../components/layout/AppSidebar.vue";
+import AppHeader from "@/components/layout/AppHeader.vue";
+import AppSidebar from "@/components/layout/AppSidebar.vue";
 import ProfileHeader from "@/components/profiles/ProfileHeader.vue";
 import ProfileContent from "@/components/profiles/ProfileContent.vue";
 

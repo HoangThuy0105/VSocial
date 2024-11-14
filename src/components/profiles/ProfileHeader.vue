@@ -9,7 +9,7 @@
       ]"
     >
       <!-- Cover Image -->
-      <div class="cover-image position-relative rounded">
+      <div class="cover-image position-relative  ">
         <img
           :src="coverImage"
           alt="Cover"
@@ -33,7 +33,7 @@
 
       <!-- Navigation Menu -->
       <div
-        class="nav-menu bg-white p-2 d-flex justify-content-around border rounded"
+        class="nav-menu bg-white p-2 d-flex justify-content-around rounded"
       >
         <div class="menu-item text-center">
           <i class="bi bi-file-earmark-text cursor-pointer"></i>

@@ -16,9 +16,30 @@
       </div>
 
       <!-- Home icon button -->
-      <button class="btn btn-link" @click="goHome">
-        <i :class="isDarkMode ? 'fa-solid fa-house text-white' : 'fa-solid fa-house text-dark'" class="fs-4">  </i>
-      </button>
+      <div class="d-flex">
+        <button class="btn btn-link" @click="goHome">
+          <i
+            :class="
+              isDarkMode
+                ? 'fa-solid fa-house text-white'
+                : 'fa-solid fa-house text-dark '
+            "
+            class="fs-4"
+          >
+          </i>
+        </button>
+        <button class="btn btn-link" @click="goCall">
+          <i
+            :class="
+              isDarkMode
+                ? ' fa-solid fa-phone  text-white'
+                : 'fa-solid fa-phone text-dark'
+            "
+            class="fs-4"
+          >
+          </i>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -39,8 +60,11 @@ export default {
   },
   methods: {
     goHome() {
-      this.$router.push({ path: "/" });  
+      this.$router.push({ path: "/" });
     },
+    goCall(){
+      this.$router.push({ path: "/call"});
+    }
   },
 };
 </script>

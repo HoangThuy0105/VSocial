@@ -61,8 +61,7 @@ export default {
   border-right: 1px solid #ddd;
   overflow-y: auto;
 }
-
-/* ChatContent bên phải */
+ 
 .chat-content {
   flex: 1;
   display: flex;

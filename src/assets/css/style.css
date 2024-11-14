@@ -516,8 +516,7 @@ textarea {
 .modal-option label:hover {
   background-color: #f0f0f0;
 }
-
-/* Điều chỉnh vị trí action-buttons (Nút ảnh và emoji) */
+ 
 .action-buttons {
   display: flex;
   justify-content: space-between;
@@ -565,4 +564,12 @@ textarea {
   background-color: #ccc;
   border-color: #ccc;
 }
+ 
+ 
+.nav-item:hover {
+  background-color: #ccc;   
+  border: 2px;  
+  
+}
+
  
