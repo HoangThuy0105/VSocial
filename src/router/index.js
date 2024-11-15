@@ -6,6 +6,7 @@ import RegisterPage from "../views/auth/RegisterPage.vue";
 import ForgotPage from "../views/auth/ForgotPage.vue";
 import ProfileView from "../views/ProfileView.vue";
 import CallView from "@/views/CallView.vue"; 
+import FriendView from "@/views/FriendView.vue";
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: "/call",
     name: "call",
     component: CallView,
+  },
+  {
+    path: "/friend",
+    name: "friend",
+    component: FriendView,
   },
 ];
 

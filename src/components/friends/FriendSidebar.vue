@@ -1,5 +1,5 @@
 <template>
-    <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
     <div
       :class="[
         'sidebar',
@@ -8,6 +8,7 @@
         'frame',
       ]"
     >
+      <!-- Facebook logo and search bar -->
       <div class="logo mb-4">
         <!-- <img src="../../assets/img/logo.png" alt="Logo" /> -->
         <img
@@ -15,101 +16,38 @@
           alt=""
         />
         <h2>VSocial</h2>
-      </div>
-      <div class="d-flex">
-        <input
-          type="text"
-          :class="[
-            'form-control',
-            'w-2',
-            'mb-3',
-            isDarkMode
-              ? 'bg-dark text-white border border-secondary'
-              : 'bg-light border',
-          ]"
-          placeholder="Search..."
-        />
-      </div>
+      </div> 
 
-      <ul class="nav flex-column">
-        <li class="nav-item d-flex align-items-center hover">
-          <i class="fa-solid fa-house"></i>
-          <a
-            href="#"
-            class="nav-link"
-            :class="{ 'text-white': isDarkMode, 'text-dark': !isDarkMode }"
-            >Home</a
-          >
-        </li>
-      
-        <li class="nav-item d-flex align-items-center hover">
-          <i class="fa-solid fa-person-military-to-person"></i>
-          <a
-            href="/friend"
-            class="nav-link"
-            :class="{ 'text-white': isDarkMode, 'text-dark': !isDarkMode }"
-            >Friends</a
-          >
-        </li>
-      
-        <li class="nav-item d-flex align-items-center hover">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <a
-            href="#"
-            class="nav-link"
-            :class="{ 'text-white': isDarkMode, 'text-dark': !isDarkMode }"
-            >Marketplace</a
-          >
-        </li>
-      
-        <li class="nav-item d-flex align-items-center hover">
-          <i class="fa-solid fa-calendar-days"></i>
-          <a
-            href="#"
-            class="nav-link"
-            :class="{ 'text-white': isDarkMode, 'text-dark': !isDarkMode }"
-            >Events</a
-          >
-        </li>
-      </ul>
-      
+      <!-- Sidebar items -->
+      <div>
+        <h3>Friend</h3>
 
-      <hr class="custom-hr" />
-
-      <div class="my-community mt-4">
-        <h6 :class="isDarkMode ? 'text-white' : 'text-dark'">My community</h6>
-        <ul class="list-group">
-          <ul class="list-group">
-            <li
-              class="list-group-item border-0"
-              :class="isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'"
+        <ul class="nav flex-column">
+          <!-- home -->
+          <li class="d-flex align-items-center sidebar-item ">
+            <!-- Thêm mb-2 để giảm khoảng cách -->
+            <i class="fa-solid fa-user-group "></i>
+            <a
+              href="#"
+              class="nav-link"
+              :class="{ 'text-white': isDarkMode, 'text-dark': !isDarkMode }"
+              >Home</a
             >
-              <!-- <img :src="sidebar.img" alt="img" class="img-user" /> -->
-              Indonesia UI Designer
-            </li>
-          </ul>
-
-          <li
-            class="list-group-item border-0"
-            :class="isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'"
-          >
-            Frontend Developer
           </li>
         </ul>
-      </div>
 
-      <hr class="custom-hr" />
-
-      <div class="upcoming-events mt-4">
-        <h6 :class="isDarkMode ? 'text-white' : 'text-dark'">Upcoming event</h6>
-        <ul class="list-group">
-          <li
-            class="list-group-item border-0"
-            :class="isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'"
-          >
-            Product Designer Meetup
-          </li>
-        </ul>
+        <!-- Other sidebar items from data -->
+        <div
+          v-for="item in sidebarItems"
+          :key="item.label"
+          class="d-flex justify-content-between align-items-center sidebar-item"
+        >
+          <div class="d-flex align-items-center">
+            <i :class="item.icon + ' me-3'"></i>
+            <span>{{ item.label }}</span>
+          </div>
+          <i class="bi bi-chevron-right"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -117,24 +55,20 @@
 
 <script>
 import { mapState } from "vuex";
-
 export default {
+  name: "FriendSidebar",
   data() {
     return {
-      sidebar: [
-        {
-          name: "Ridwan Beler",
-          img: "https://photo.znews.vn/w660/Uploaded/ygtmvd/2024_01_09/DSC_8457.jpg",
-        },
-        {
-          name: "Maria Galau",
-          img: "https://photo.znews.vn/w660/Uploaded/ygtmvd/2024_01_09/DSC_8457.jpg",
-        },
+      sidebarItems: [
+        { label: "Friend Request", icon: "fas fa-user-plus" },
+        { label: "Suggest", icon: "fas fa-user-friends" },
+        { label: "All Friend", icon: "fas fa-users" },
+        { label: "Custom lists", icon: "fas fa-list" },
       ],
     };
   },
   computed: {
-    ...mapState("mode",{
+    ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
   },
