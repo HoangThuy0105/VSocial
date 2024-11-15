@@ -3,8 +3,9 @@
     <AppHeader :isDarkMode="isDarkMode" />
     <FriendSidebar :isDarkMode="isDarkMode" />
     <div class="main-content">
-      <div class="d-flex p-5">
-        <FriendContent :isDarkMode="isDarkMode" />
+      <div class="d-flex p-5"> 
+        <FriendContent v-if="isContentActive" :isDarkMode="isDarkMode" />
+        <FriendAll v-else :isDarkMode="isDarkMode" />
       </div>
     </div>
   </div>
@@ -15,6 +16,7 @@ import { mapState } from "vuex";
 import FriendContent from "@/components/friends/FriendContent.vue";
 import FriendSidebar from "@/components/friends/FriendSidebar.vue";
 import AppHeader from "@/components/layout/AppHeader.vue";
+import FriendAll from "@/components/friends/FriendAll.vue";
 
 export default {
   name: "FriendView",
@@ -22,6 +24,12 @@ export default {
     FriendSidebar,
     AppHeader,
     FriendContent,
+    FriendAll,
+  },
+  data() {
+    return {
+      isContentActive: true,  
+    };
   },
   computed: {
     ...mapState("mode", {

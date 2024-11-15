@@ -7,6 +7,7 @@ import ForgotPage from "../views/auth/ForgotPage.vue";
 import ProfileView from "../views/ProfileView.vue";
 import CallView from "@/views/CallView.vue"; 
 import FriendView from "@/views/FriendView.vue";
+import FriendAll from "@/components/friends/FriendAll.vue";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: "/friend",
     name: "friend",
     component: FriendView,
+  },
+  {
+    path: "/allfriend",
+    name: "allfriend",
+    component: FriendAll,
   },
 ];
 

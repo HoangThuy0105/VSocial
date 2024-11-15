@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <h3 class="mb-3">Friend request</h3>
+    <h3 class="mb-3">All Friend</h3>
     <div class="row">
       <div
         class="col-6 col-md-4 col-lg-3 mb-4"
@@ -17,31 +17,19 @@
           <div class="card-body text-center">
             <h5 class="card-title">{{ friend.name }}</h5>
             <p class="card-text">
-              <i class="fas fa-user-friends"></i>
-              {{ friend.mutualFriends }} mutual friend
+              <i class="fas fa-user-friends"></i> {{ friend.mutualFriends }} bạn
+              chung
             </p>
-            <button class="btn btn-primary btn-sm me-2">Comfirm</button>
-            <button class="btn btn-secondary btn-sm">Delete</button>
+            <button class="btn btn-primary btn-sm me-2">Xác nhận</button>
+            <button class="btn btn-secondary btn-sm">Xóa</button>
           </div>
         </div>
       </div>
     </div>
     <div class="text-center mt-3">
-      <div class="text-center mt-3">
-        <button
-          class="btn btn-link fs-5 text-decoration-none text-primary"
-          style=""
-        >
-          See more
-          <span style="font-size: 1.6em; vertical-align: middle">&#9662;</span>
-        </button>
-      </div>
+      <button class="btn btn-link fs-5">Xem thêm</button>
     </div>
   </div>
-  
-  <hr class="custom-hr" />
-  
-    
 </template>
 
 <script>
@@ -169,4 +157,18 @@ export default {
 };
 </script>
 
-<style src="../../assets/css/style.css"></style>
+<style scoped>
+.placeholder-avatar {
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: cover;
+}
+</style>
