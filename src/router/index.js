@@ -12,6 +12,11 @@ import FriendAll from "@/components/friends/FriendAll.vue";
 const routes = [
   {
     path: "/",
+    name: "login",
+    component: LoginPage,  
+  },
+  {
+    path: "/home",
     name: "Home",
     component: HomeView,
   },
@@ -19,11 +24,6 @@ const routes = [
     path: "/chat",
     name: "Chat",
     component: ChatView,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: LoginPage,
   },
   {
     path: "/register",

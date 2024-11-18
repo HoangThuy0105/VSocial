@@ -6,7 +6,7 @@
     >
       <div class="d-flex align-items-center mb-2 mb-lg-0">
         <li class="nav-item d-flex align-items-center ms-3 me-3">
-          <router-link to="/" class="nav-link fs-5 d-flex align-items-center">
+          <router-link to="/home" class="nav-link fs-5 d-flex align-items-center">
             <i class="fa-solid fa-house me-2"></i>
             Home
           </router-link>
