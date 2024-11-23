@@ -52,7 +52,7 @@ export default {
       type: Object,
       required: true,
     },
-  },
+  },  
   computed: {
     ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
