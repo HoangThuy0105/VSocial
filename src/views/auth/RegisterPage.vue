@@ -18,7 +18,7 @@
           </div>
 
           <!-- Phone Number -->
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="phone" class="form-label">Phone number:</label>
             <input
               v-model="phone"
@@ -27,15 +27,15 @@
               required
               class="form-control"
             />
-          </div>
+          </div> -->
 
           <!-- email -->
           <div class="mb-3">
-            <label for="phone" class="form-label">Email:</label>
+            <label for="email" class="form-label">Email:</label>
             <input
               v-model="email"
               type="tel"
-              id="phone"
+              id="email"
               required
               class="form-control"
             />
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import authService from "@/service/authService";
+import { register } from "@/service/authService";
 
 export default {
   data() {
@@ -143,31 +143,21 @@ export default {
         this.authError = "Passwords do not match!";
         return;
       }
-
       try {
-        const response = await authService.register({
+        const response = await register({
           username: this.username,
           password: this.password,
-          phone: this.phone,
           email: this.email,
         });
-        console.log("Đăng ký thành công", response.data);
 
+        console.log("Đăng ký thành công", response.data);
         this.$router.push("/");
-        // } catch (error) {
-        //   console.error("Registration failed", error.response?.data || error.message);
-        //   this.authError = error.response?.data?.message || "Có lỗi xảy ra.";
-        // }
       } catch (error) {
-        if (error.response) {
-          this.authError =
-            error.response.data?.message || "Có lỗi xảy ra từ server.";
-        } else if (error.request) {
-          this.authError =
-            "Không thể kết nối đến server. Vui lòng kiểm tra mạng.";
-        } else {
-          this.authError = `Lỗi không xác định: ${error.message}`;
-        }
+        console.error(
+          "Registration failed",
+          error.response?.data || error.message
+        );
+        this.authError = error.response?.data?.message || error;
       }
     },
     togglePasswordVisibility() {
