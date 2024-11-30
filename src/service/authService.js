@@ -31,6 +31,6 @@ export const login = async (credentials, router) => {
 };
 
 const logout = () => {
-  return axios.post('https://localhost:44363/api/Account/logout');
+  return axios.post('http://localhost:8888/api/Account/logout');
 };
 export { logout };

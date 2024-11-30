@@ -33,7 +33,7 @@
           <div class="mb-3">
             <label for="phone" class="form-label">Email:</label>
             <input
-              v-model="phone"
+              v-model="email"
               type="tel"
               id="phone"
               required
@@ -100,9 +100,7 @@
         <div class="text-center mt-3">
           <p class="text-muted">
             Already have an account?
-            <a href="/login" class="text-primary text-decoration-none"
-              >Log in now</a
-            >
+            <a href="/" class="text-primary text-decoration-none">Log in now</a>
           </p>
         </div>
       </div>
@@ -124,10 +122,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import authService from "@/service/authService";
 
 export default {
- 
   data() {
     return {
       username: "",
@@ -137,24 +134,41 @@ export default {
       email: "",
       showPassword: false,
       showConfirmPassword: false,
+      authError: null,
     };
   },
-  computed: {
-    ...mapGetters("auth", ["authError"]),
-  },
   methods: {
-    ...mapActions("auth", ["register"]),
-    handleRegister() {
+    async handleRegister() {
       if (this.password !== this.confirmPassword) {
-        this.authError = "Mật khẩu không khớp.";
+        this.authError = "Passwords do not match!";
         return;
       }
-      this.register({
-        username: this.username,
-        password: this.password,
-        phone: this.phone,
-        email: this.email,
-      });
+
+      try {
+        const response = await authService.register({
+          username: this.username,
+          password: this.password,
+          phone: this.phone,
+          email: this.email,
+        });
+        console.log("Đăng ký thành công", response.data);
+
+        this.$router.push("/");
+        // } catch (error) {
+        //   console.error("Registration failed", error.response?.data || error.message);
+        //   this.authError = error.response?.data?.message || "Có lỗi xảy ra.";
+        // }
+      } catch (error) {
+        if (error.response) {
+          this.authError =
+            error.response.data?.message || "Có lỗi xảy ra từ server.";
+        } else if (error.request) {
+          this.authError =
+            "Không thể kết nối đến server. Vui lòng kiểm tra mạng.";
+        } else {
+          this.authError = `Lỗi không xác định: ${error.message}`;
+        }
+      }
     },
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
