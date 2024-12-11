@@ -1,11 +1,8 @@
 <template>
-  <div
-    class="container d-flex justify-content-center align-items-center min-vh-100"
-  >
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="d-flex rounded shadow-lg overflow-hidden auth-container">
-      <div
-        class="d-none d-md-flex flex-column justify-content-center align-items-center text-white auth-image-section"
-      >
+      <!-- Image Section -->
+      <div class="d-none d-md-flex flex-column justify-content-center align-items-center text-white auth-image-section">
         <h1 class="display-4 text-dark mb-3 fw-bold">VSocial</h1>
         <p class="lead text-dark px-3">
           Connect with friends and the world around you on VSocial.
@@ -18,16 +15,10 @@
         />
       </div>
 
-      <!-- form login -->
-      <div
-        class="d-flex flex-column justify-content-center align-items-center bg-light p-4 auth-form-section"
-      >
+      <!-- Login Form Section -->
+      <div class="d-flex flex-column justify-content-center align-items-center bg-light p-4 auth-form-section">
         <h1 class="text-center mb-4 text-primary fw-bold">Login</h1>
-        <form
-          @submit.prevent="handleLogin"
-          class="w-100"
-          style="max-width: 400px"
-        >
+        <form @submit.prevent="handleLogin" class="w-100" style="max-width: 400px">
           <div class="mb-3">
             <label for="username" class="form-label">User name:</label>
             <input
@@ -45,8 +36,8 @@
                 v-model="password"
                 :type="showPassword ? 'text' : 'password'"
                 id="password"
-                required
                 class="form-control"
+                required
               />
               <button
                 type="button"
@@ -61,9 +52,7 @@
               </button>
             </div>
             <div class="text-end mt-1">
-              <a href="/forgot" class="text-primary text-decoration-none"
-                >Forgotten password?</a
-              >
+              <a href="/forgot" class="text-primary text-decoration-none">Forgotten password?</a>
             </div>
           </div>
           <button type="submit" class="btn btn-primary w-100 py-2">
@@ -76,9 +65,7 @@
         <div class="text-center mt-3">
           <p class="text-muted">
             Don't have an account?
-            <a href="/register" class="text-primary text-decoration-none"
-              >Register Now</a
-            >
+            <a href="/register" class="text-primary text-decoration-none">Register Now</a>
           </p>
         </div>
       </div>
@@ -86,8 +73,10 @@
   </div>
 </template>
 
+
 <script>
 import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "AuthLogin",
   data() {
@@ -102,8 +91,22 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["login"]),
-    handleLogin() {
-      this.login({ username: this.username, password: this.password });
+    async handleLogin() {
+      try {
+        const user = await this.login({
+          username: this.username,
+          password: this.password,
+        });
+
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          this.$router.push("/home");
+        } else {
+          throw new Error("Invalid response from server");
+        }
+      } catch (error) {
+        console.error("Login failed:", error.message);
+      }
     },
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
@@ -111,6 +114,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 html,
@@ -146,21 +150,6 @@ body {
   justify-content: center;
 }
 
-.card {
-  padding: 30px;
-  border-radius: 12px;
-}
-
-h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #007bff;
-}
-
-.error {
-  color: red;
-}
-
 .input-group button {
   background: transparent;
   border: none;
@@ -191,9 +180,14 @@ h2 {
   text-decoration: underline;
 }
 
+.error {
+  color: red;
+}
+
 @media (max-width: 768px) {
   .auth-image-section {
     display: none;
   }
 }
 </style>
+

@@ -149,8 +149,6 @@ export default {
       });
 
       console.log("Đăng ký thành công", response.data);
-      
-      // Hiển thị thông báo thành công
       this.authError = null;
       this.successMessage = "Registration successful! Redirecting to login page...";
       
@@ -197,7 +195,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.text-success {
+.success-message {
   color: green;
   font-size: 0.9rem;
 }
