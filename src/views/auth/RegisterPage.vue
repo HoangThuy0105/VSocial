@@ -32,13 +32,7 @@
           <!-- email -->
           <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
-            <input
-              v-model="email"
-              type="tel"
-              id="email"
-              required
-              class="form-control"
-            />
+            <input v-model="email" type="tel" id="email" required class="form-control" />
           </div>
 
           <!-- Password -->
@@ -67,9 +61,7 @@
 
           <!-- Confirm Password -->
           <div class="mb-3">
-            <label for="confirmPassword" class="form-label"
-              >Confirm Password:</label
-            >
+            <label for="confirmPassword" class="form-label">Confirm Password:</label>
             <div class="input-group">
               <input
                 v-model="confirmPassword"
@@ -103,14 +95,20 @@
             <a href="/" class="text-primary text-decoration-none">Log in now</a>
           </p>
         </div>
+
+        <div v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <div v-if="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+        
       </div>
 
       <!-- Register Image Section -->
       <div class="col-md-6 d-none d-md-flex register-image text-center">
         <h1 class="display-4 text-dark mb-3 fw-bold mt-3">VSocial</h1>
-        <p class="slogan">
-          Connect with friends and the world around you on VSocial
-        </p>
+        <p class="slogan">Connect with friends and the world around you on VSocial</p>
         <img
           src="https://hevalia.com/wp-content/uploads/2024/03/social-media-2314696_640.jpg"
           alt="VSocial Logo"
@@ -138,35 +136,42 @@ export default {
     };
   },
   methods: {
-    async handleRegister() {
-      if (this.password !== this.confirmPassword) {
-        this.authError = "Passwords do not match!";
-        return;
-      }
-      try {
-        const response = await register({
-          username: this.username,
-          password: this.password,
-          email: this.email,
-        });
+  async handleRegister() {
+    if (this.password !== this.confirmPassword) {
+      this.authError = "Passwords do not match!";
+      return;
+    }
+    try {
+      const response = await register({
+        username: this.username,
+        password: this.password,
+        email: this.email,
+      });
 
-        console.log("Đăng ký thành công", response.data);
+      console.log("Đăng ký thành công", response.data);
+      
+      // Hiển thị thông báo thành công
+      this.authError = null;
+      this.successMessage = "Registration successful! Redirecting to login page...";
+      
+      // Chuyển trang sau 3 giây
+      setTimeout(() => {
         this.$router.push("/");
-      } catch (error) {
-        console.error(
-          "Registration failed",
-          error.response?.data || error.message
-        );
-        this.authError = error.response?.data?.message || error;
-      }
-    },
-    togglePasswordVisibility() {
+      }, 3000);
+    } catch (error) {
+      console.error("Registration failed", error.response?.data || error.message);
+      this.authError = error.response?.data?.message || error;
+      this.successMessage = null;
+    }
+  },
+  togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
     },
     toggleConfirmPasswordVisibility() {
       this.showConfirmPassword = !this.showConfirmPassword;
-    },
-  },
+    },  
+}
+
 };
 </script>
 
@@ -191,6 +196,10 @@ body {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.text-success {
+  color: green;
+  font-size: 0.9rem;
 }
 
 .register-form {
