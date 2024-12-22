@@ -130,7 +130,7 @@ export default {
           name: this.post.name,
           text: this.content,
         });
-        this.content = "";
+        this.content = "";  
         this.closeModal();
       }
     },
