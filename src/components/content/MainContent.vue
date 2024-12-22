@@ -110,9 +110,11 @@
           <small class="text-muted">{{ post.likes }}K</small>
         </div>
         <div>
-          <span class="me-3 cursor-pointer">
-            <i class="fas fa-comment"></i> {{ post.comments.length }} Comment
+          <span class="me-3 cursor-pointer" @click="openCommentModal(post)">
+            <i class="fas fa-comment"></i>
+            {{ post.comments.length }} Comment
           </span>
+
           <span class="cursor-pointer" @click="openSharePost">
             <i class="fas fa-share"></i>
             {{ post.shares }} Share
@@ -122,21 +124,29 @@
           <PostShare v-if="isSharePostVisible" @close="closeSharePost" />
         </div>
       </div>
+      <PostComment
+        v-if="isModalOpen"
+        :isVisible="isModalOpen"
+        @close="isModalOpen = false"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import PostShare  from '../post/PostShare.vue';
+import PostShare from "../post/PostShare.vue";
+import PostComment from "../post/PostComment.vue";
 
 export default {
   name: "UserPost",
   components: {
     PostShare,
+    PostComment,
   },
   data() {
     return {
+      isModalOpen: false,
       posts: [
         {
           avatar:
@@ -266,7 +276,7 @@ export default {
   },
   computed: {
     ...mapState("mode", {
-      isDarkMode: (state) => state.darkMode,
+      isDarkMode: (state) => state.isDarkMode,
     }),
   },
 
@@ -306,6 +316,14 @@ export default {
       post.likes = post.liked
         ? (parseFloat(post.likes) + 0.1).toFixed(1)
         : (parseFloat(post.likes) - 0.1).toFixed(1);
+
+      if (post.likes < 0) {
+        post.likes = "0.0";
+      }
+    },
+    openCommentModal(post) {
+      this.selectedPost = post;
+      this.isModalOpen = true;
     },
     openSharePost() {
       this.isSharePostVisible = true;
