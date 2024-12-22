@@ -66,7 +66,8 @@
             <textarea
               v-model="content"
               class="form-control my-3"
-              rows="4"
+              style="border: none"
+              rows="2"
               placeholder="What's on your mind?"
             ></textarea>
 
@@ -102,7 +103,7 @@
           <!-- Các nút điều khiển -->
           <div class="action-buttons">
             <label for="file-upload" class="btn btn-light action-button me-3">
-              <i class="fa fa-image icon"></i>  
+              <i class="fa fa-image icon"></i>
             </label>
             <input
               type="file"
@@ -115,19 +116,19 @@
               @click="openModal('emoji')"
               class="btn btn-light action-button me-3"
             >
-              <i class="fas fa-paperclip icon"></i> 
+              <i class="fas fa-paperclip icon"></i>
             </button>
             <button
               @click="openModal('emoji')"
               class="btn btn-light action-button me-3"
             >
-              <i class="fas fa-map-marker-alt icon"></i> 
+              <i class="fas fa-map-marker-alt icon"></i>
             </button>
             <button
               @click="openModal('emoji')"
               class="btn btn-light action-button me-3"
             >
-              <i class="fa fa-smile icon"></i> 
+              <i class="fa fa-smile icon"></i>
             </button>
           </div>
 
@@ -149,6 +150,8 @@
 
 <script>
 import { mapState } from "vuex";
+ 
+
 export default {
   props: {
     isVisible: Boolean,
@@ -186,7 +189,15 @@ export default {
       if (this.files.length) {
         console.log("Post files:", this.files);
       }
+      this.$toast.success("Your post has been posted successfully!"); // Hiển thị thông báo thành công
       this.closeModal();
+
+      // Giả sử AI phát hiện vi phạm cộng đồng
+      if (this.content.includes("vi phạm")) {
+        this.$toast.error(
+          "Your post has violated the community, please fix it!"
+        ); // Hiển thị thông báo vi phạm
+      }
     },
     handleFileUpload(event) {
       const selectedFiles = Array.from(event.target.files);
@@ -226,10 +237,17 @@ export default {
 </script>
 
 <style>
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .image-preview {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .image-container {
