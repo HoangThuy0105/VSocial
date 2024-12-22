@@ -274,9 +274,10 @@ export default {
       isDropdownVisible: false,
     };
   },
+
   computed: {
     ...mapState("mode", {
-      isDarkMode: (state) => state.isDarkMode,
+      isDarkMode: (state) => state.darkMode,
     }),
   },
 
