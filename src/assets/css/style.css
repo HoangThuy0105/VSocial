@@ -490,11 +490,7 @@ body {
   margin-bottom: 15px;
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
+
 
 .modal-title {
   font-size: 1.25rem;
@@ -529,7 +525,7 @@ textarea {
  
 .action-buttons {
   display: flex;
-  justify-content: space-between;
+ 
   margin-top: 10px;  
   margin-bottom: 20px;
 }
@@ -632,8 +628,8 @@ textarea {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-right: 10px;
 }

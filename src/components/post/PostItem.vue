@@ -99,9 +99,9 @@ export default {
     }),
   },
   methods: {
-    // toggleDarkMode() {
-    //   this.$store.dispatch("toggleDarkMode");
-    // },
+    toggleDarkMode() {
+      this.$store.dispatch("toggleDarkMode");
+    },
   },
   data() {
     return {

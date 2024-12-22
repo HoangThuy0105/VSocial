@@ -11,7 +11,7 @@
           <!-- Header -->
           <div class="modal-header">
             <div class="d-flex">
-              <h5 class="modal-title justify-content-center fs-4">
+              <h5 class="modal-title justify-content-between  fs-4">
                 Article by {{ post.username }}
               </h5>
             </div>
