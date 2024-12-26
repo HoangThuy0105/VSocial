@@ -1,33 +1,34 @@
-  <!-- <template>
-    <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-      <div
-        :class="[
-          'sidebar',
-          isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
-          'p-3',
-          'frame',
-        ]"
+<template>
+  <div>
+    <h3>Danh sách cuộc trò chuyện</h3>
+    <ul>
+      <li
+        v-for="chat in chatList"
+        :key="chat.id"
+        @click="selectChat(chat)"
+        :class="{ active: chat.id === currentChat?.id }"
       >
-        <div class="post-list">
-          <PostItem v-for="(post, index) in posts" :key="index" :post="post" />
-        </div>
-      </div>
-    </div>
-  </template>
+        <img :src="chat.avatar" alt="Avatar" />
+        <div>{{ chat.name }}</div>
+        <small>{{ chat.lastMessage }}</small>
+      </li>
+    </ul>
+  </div>
+</template>
 
-  <script>
-  import PostItem from../content/PostItem.vueem.vueue";
+<script>
+import { mapActions, mapGetters } from "vuex";
 
-  export default {
-    props: ["posts"],
-    components: {
-      PostItem,
-    },
-  };
-  </script>
-
-  <style scoped>
-  .post-list {
-    width: 100%;
-  }
-  </style> -->
+export default {
+  name: "ChatList",
+  computed: {
+    ...mapGetters("chat", ["chatList", "currentChat"]),
+  },
+  methods: {
+    ...mapActions("chat", ["fetchChatList", "selectChat"]),
+  },
+  mounted() {
+    this.fetchChatList(); 
+  },
+};
+</script>

@@ -1,8 +1,12 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div
+    class="container d-flex justify-content-center align-items-center min-vh-100"
+  >
     <div class="d-flex rounded shadow-lg overflow-hidden auth-container">
       <!-- Image Section -->
-      <div class="d-none d-md-flex flex-column justify-content-center align-items-center text-white auth-image-section">
+      <div
+        class="d-none d-md-flex flex-column justify-content-center align-items-center text-white auth-image-section"
+      >
         <h1 class="display-4 text-dark mb-3 fw-bold">VSocial</h1>
         <p class="lead text-dark px-3">
           Connect with friends and the world around you on VSocial.
@@ -16,14 +20,20 @@
       </div>
 
       <!-- Login Form Section -->
-      <div class="d-flex flex-column justify-content-center align-items-center bg-light p-4 auth-form-section">
+      <div
+        class="d-flex flex-column justify-content-center align-items-center bg-light p-4 auth-form-section"
+      >
         <h1 class="text-center mb-4 text-primary fw-bold">Login</h1>
-        <form @submit.prevent="handleLogin" class="w-100" style="max-width: 400px">
+        <form
+          @submit.prevent="handleLogin"
+          class="w-100"
+          style="max-width: 400px"
+        >
           <div class="mb-3">
-            <label for="username" class="form-label">User name:</label>
+            <label for="email" class="form-label">User name:</label>
             <input
-              v-model="username"
-              id="username"
+              v-model="email"
+              id="email"
               type="text"
               class="form-control"
               required
@@ -51,71 +61,73 @@
                 ></i>
               </button>
             </div>
-            <div class="text-end mt-1">
-              <a href="/forgot" class="text-primary text-decoration-none">Forgotten password?</a>
-            </div>
           </div>
+          <p v-if="loginError" class="error mt-2 text-danger">
+            {{ loginError }}
+          </p>
           <button type="submit" class="btn btn-primary w-100 py-2">
             Login
           </button>
-          <p v-if="authError" class="error mt-2 text-center text-danger">
-            {{ authError }}
-          </p>
         </form>
         <div class="text-center mt-3">
           <p class="text-muted">
             Don't have an account?
-            <a href="/register" class="text-primary text-decoration-none">Register Now</a>
+            <a href="/register" class="text-primary text-decoration-none"
+              >Register Now</a
+            >
           </p>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { login } from "@/service/authService";
 
 export default {
   name: "AuthLogin",
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
       showPassword: false,
+      loginError: "",
     };
   },
-  computed: {
-    ...mapGetters("auth", ["authError"]),
-  },
   methods: {
-    ...mapActions("auth", ["login"]),
     async handleLogin() {
+      this.loginError = "";
+
+      if (!this.email || !this.password) {
+        this.loginError = "Please fill in all fields!";
+        return;
+      }
+
       try {
-        const user = await this.login({
-          username: this.username,
+        const user = await login({
+          email: this.email.trim(),
           password: this.password,
         });
 
         if (user) {
+          // Lưu token vào localStorage
           localStorage.setItem("user", JSON.stringify(user));
           this.$router.push("/home");
         } else {
-          throw new Error("Invalid response from server");
+          this.loginError = "Incorrect username or password.";
         }
       } catch (error) {
+        this.loginError = "Incorrect username or password.";
         console.error("Login failed:", error.message);
       }
     },
+
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
     },
   },
 };
 </script>
-
-
 <style scoped>
 html,
 body {
@@ -182,6 +194,7 @@ body {
 
 .error {
   color: red;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
@@ -190,4 +203,3 @@ body {
   }
 }
 </style>
-

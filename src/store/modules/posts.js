@@ -1,25 +1,21 @@
-const state = {
-    items: [],  
-  };
-  
-  const mutations = {
-    setPosts(state, posts) {
-      state.items = posts;
+ 
+export default {
+  namespaced: true,
+  state: {
+    profilePosts: [],
+    homePosts: [],
+  },
+  mutations: {
+    ADD_POST(state, post) {
+      state.profilePosts.unshift(post); // để hiện lên trang cá nhân ng đó
+      state.homePosts.unshift(post); // hiện thị trên trang chủ
     },
-  };
-  
-  const actions = {
-    fetchPosts({ commit }) {
-      PostService.getPosts().then(posts => {
-        commit('setPosts', posts);
-      });
+  },
+  actions: {
+    addPost({ commit }, post) {
+      commit("ADD_POST", post);
     },
-  };
-  
-  export default {
-    namespaced: true,
-    state,
-    mutations,
-    actions,
-  };
+  },
+};
+
   

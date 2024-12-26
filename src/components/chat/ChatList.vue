@@ -9,7 +9,7 @@
           @click="selectChat(chat)"
           :class="['chat-list-item', { active: chat.id === currentChat?.id }]"
         >
-          <div class="chat-name">{{ chat.name }}</div>
+          <div class="chat-name">{{ chats.uername }}</div>
           <div class="chat-last-message">{{ chat.lastMessage }}</div>
         </li>
       </ul>
@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style scoped>
-/* Default light mode styling */
 .chat-list {
   width: 100vh;
   background-color: #f5f5f5;

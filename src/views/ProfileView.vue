@@ -30,6 +30,8 @@ export default {
     ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
+    ...mapState("posts", ["profilePosts"]), // hiện thị bài đăng
+
   },
   created() {
     this.$store.commit("setDarkMode", true);

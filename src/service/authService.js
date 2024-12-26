@@ -13,7 +13,6 @@ export const register = async (userData) => {
 export const login = async (credentials) => {
   try {
     const response = await axiosInstance.post("v1/auth/login", credentials);
-    // console.log("Login response from server:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error in login:", error.response || error.message);
