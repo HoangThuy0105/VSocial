@@ -30,7 +30,7 @@
           style="max-width: 400px"
         >
           <div class="mb-3">
-            <label for="email" class="form-label">User name:</label>
+            <label for="email" class="form-label">Email:</label>
             <input
               v-model="email"
               id="email"

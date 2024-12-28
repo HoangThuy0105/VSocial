@@ -87,7 +87,7 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/login" @click="logout">
+              <a class="dropdown-item" href="/" @click="logout">
                 <i class="bi bi-box-arrow-right me-2"></i> Log out
               </a>
             </li>

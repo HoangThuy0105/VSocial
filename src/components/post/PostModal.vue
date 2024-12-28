@@ -12,11 +12,7 @@
         <div class="modal-content">
           <!-- Header -->
           <div class="modal-header">
-            <div class="d-flex">
-              <h5 class="modal-title justify-content-between fs-2">
-                Create article
-              </h5>
-            </div>
+            <h5 class="modal-title fs-2">Create article</h5>
             <button class="btn-close" @click="closeModal"></button>
           </div>
 
@@ -54,6 +50,15 @@
                       <a
                         class="dropdown-item"
                         href="#"
+                        @click="setVisibility('friend')"
+                      >
+                        <i class="fa-solid fa-user-group"></i> Friends
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
                         @click="setVisibility('Only me')"
                       >
                         <i class="fa-solid fa-lock"></i> Only me
@@ -63,6 +68,8 @@
                 </div>
               </div>
             </div>
+
+            <!-- Content Input -->
             <textarea
               v-model="content"
               class="form-control my-3"
@@ -71,7 +78,7 @@
               placeholder="What's on your mind?"
             ></textarea>
 
-            <!-- Hiển thị hình ảnh đã chọn -->
+            <!-- Image Preview -->
             <div v-if="files.length" class="image-preview my-3">
               <div class="image-container">
                 <div
@@ -92,7 +99,6 @@
                     <i class="fa fa-times"></i>
                   </button>
                 </div>
-                <!-- Hiển thị số lượng ảnh còn lại -->
                 <div v-if="files.length > 3" class="more-images">
                   +{{ files.length - 3 }} more
                 </div>
@@ -100,7 +106,7 @@
             </div>
           </div>
 
-          <!-- Các nút điều khiển -->
+          <!-- Action Buttons -->
           <div class="action-buttons">
             <label for="file-upload" class="btn btn-light action-button me-3">
               <i class="fa fa-image icon"></i>
@@ -150,7 +156,7 @@
 
 <script>
 import { mapState } from "vuex";
- 
+import { ArticleService } from "@/service/ArticleService";
 
 export default {
   props: {
@@ -173,39 +179,56 @@ export default {
       isDarkMode: (state) => state.darkMode,
     }),
     visibilityIcon() {
-      return this.visibility === "Public" ? "fa fa-globe" : "fa fa-lock";
+      if (this.visibility === "Public") {
+        return "fa-solid fa-globe";
+      } else if (this.visibility === "friend") {
+        return "fa-solid fa-user-group";
+      } else {
+        return "fa-solid fa-lock";
+      }
     },
     displayedFiles() {
-      return this.files.slice(0, 4); // Hiển thị tối đa 3 ảnh đầu tiên
+      return this.files.slice(0, 4);
     },
   },
   methods: {
     closeModal() {
       this.$emit("close");
     },
-    postContent() {
-      console.log("Post content:", this.content);
-      console.log("Visibility:", this.visibility);
-      if (this.files.length) {
-        console.log("Post files:", this.files);
+    async postContent() {
+      if (!this.content.trim() && !this.files.length) {
+        return;
       }
-      this.$toast.success("Your post has been posted successfully!"); // Hiển thị thông báo thành công
-      this.closeModal();
+      try {
+        const formData = new FormData();
+        formData.append("content", this.content);
+        formData.append("audience", this.visibility);
+        this.files.forEach((file, index) => {
+          formData.append(`images_${index}`, file);
+        });
 
-      // Giả sử AI phát hiện vi phạm cộng đồng
-      if (this.content.includes("vi phạm")) {
-        this.$toast.error(
-          "Your post has violated the community, please fix it!"
-        ); // Hiển thị thông báo vi phạm
+        console.log("Sending request to create article...");
+        const response = await ArticleService.createArticle(formData);
+
+        // Kiểm tra nếu response hợp lệ và có status
+        if (response && response.status === 200) {
+          this.$toast.success("Your post has been posted successfully!");
+          this.closeModal();
+        } else {
+          this.$toast.error("Failed to post your article. Please try again.");
+        }
+      } catch (error) {
+        // Kiểm tra lỗi trong quá trình gửi yêu cầu
+        console.error("Error posting content:", error);
+        this.$toast.error("An error occurred while posting your article.");
       }
     },
     handleFileUpload(event) {
       const selectedFiles = Array.from(event.target.files);
       selectedFiles.forEach((file) => {
-        file.preview = URL.createObjectURL(file); // Tạo URL hình ảnh
+        file.preview = URL.createObjectURL(file);
         this.files.push(file);
       });
-      console.log("Files uploaded:", this.files);
     },
     openModal(type) {
       this.$emit("show-modal", type);
@@ -226,6 +249,7 @@ export default {
       }
     },
   },
+
   mounted() {
     document.addEventListener("click", this.handleClickOutside);
   },
@@ -236,7 +260,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+/* CSS tùy chỉnh cho modal */
 .post-content {
   display: flex;
   flex-direction: column;
