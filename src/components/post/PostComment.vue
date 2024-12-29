@@ -1,11 +1,9 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div
-      :class="[
-        isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
-        'modal-container',
-      ]"
-    >
+    <div :class="[
+      isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
+      'modal-container',
+    ]">
       <div v-if="isVisible" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content">
           <!-- Header -->
@@ -23,9 +21,7 @@
             <div class="post-meta">
               <img
                 src="https://imgs.search.brave.com/ZvgaT0jU7k3opm1MVLsHrBRjgqS5YOxHY127rRfjWx8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTAz/MTQzMDIxNC9waG90/by95b3VuZy13b21h/bi1rYXlha2luZy10/aHJvdWdoLXRoZS1i/YWNrd2F0ZXJzLW9m/LW1vbnJvZS1pc2xh/bmQuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWtidjJzMWtr/bk16SmdrOE5kLVcy/Vk5JZjBBRng0OFl0/Q3F5Z3RJM1Bwb3M9"
-                alt="Avatar"
-                class="avatar"
-              />
+                alt="Avatar" class="avatar" />
               <div class="d-flex flex-column">
                 <span class="post-author">{{ post.username }}</span>
                 <span class="post-time">{{ post.time }}</span>
@@ -36,24 +32,14 @@
             </p>
             <img
               src="https://imgs.search.brave.com/uaH-PDSxfp-JVO2Ett8dR6Fh8XPwymJatTv29nsE698/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnJhbmRmb2xkZXIu/aW8vUlY3SzgzMDgv/YXQvY3QzaG1na3J0/eHZjY2dzbjNmdDdu/dzJ0L3N0ZW1faG9t/ZXBhZ2Uud2VicA"
-              alt="Post Image"
-              class="post-image"
-            />
+              alt="Post Image" class="post-image" />
           </div>
 
           <!-- Comments Section -->
           <div class="comments-section mb-3">
             <h6>Comments</h6>
-            <div
-              v-for="(comment, index) in comments"
-              :key="index"
-              class="comment"
-            >
-              <img
-                src="https://m.yodycdn.com/blog/anh-chan-dung-dep-yodyvn3.jpg"
-                alt="Avatar"
-                class="comment-avatar"
-              />
+            <div v-for="(comment, index) in comments" :key="index" class="comment">
+              <img src="https://m.yodycdn.com/blog/anh-chan-dung-dep-yodyvn3.jpg" alt="Avatar" class="comment-avatar" />
               <div class="comment-content">
                 <span class="comment-author">{{ comment.name }}</span>
                 <p class="comment-text">{{ comment.text }}</p>
@@ -63,40 +49,23 @@
 
           <!-- Add Comment Section -->
           <div class="comment-input">
-            <img
-              src="https://m.yodycdn.com/blog/anh-chan-dung-dep-yodyvn2.jpg"
-              alt="Avatar"
-              class="comment-avatar"
-            />
-            <input
-              ref="commentInput"
-              :class="[
-                'form-control',
-                isDarkMode
-                  ? 'bg-dark text-white border border-secondary'
-                  : 'bg-light border',
-              ]"
-              v-model="commentText"
-              class="form-control"
-              type="text"
-              placeholder="Write a comment..."
-              @keydown.enter="addComment"
-            />
+            <img src="https://m.yodycdn.com/blog/anh-chan-dung-dep-yodyvn2.jpg" alt="Avatar" class="comment-avatar" />
+            <input ref="commentInput" :class="[
+              'form-control',
+              isDarkMode
+                ? 'bg-dark text-white border border-secondary'
+                : 'bg-light border',
+            ]" v-model="commentText" class="form-control" type="text" placeholder="Write a comment..."
+              @keydown.enter="addComment" />
           </div>
- 
+
           <!-- Footer -->
           <div class="modal-footer">
             <button class="btn btn-secondary" @click="closeModal">
               Cancel
             </button>
-            <button
-              class="btn ms-2"
-              :class="
-                commentText.trim() ? 'btn-post-active' : 'btn-post-disabled'
-              "
-              @click="addComment"
-              :disabled="!commentText.trim()"
-            >
+            <button class="btn ms-2" :class="commentText.trim() ? 'btn-post-active' : 'btn-post-disabled'
+              " @click="addComment" :disabled="!commentText.trim()">
               Post
             </button>
           </div>

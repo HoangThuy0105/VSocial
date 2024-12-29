@@ -23,7 +23,7 @@ const app = createApp(App);
 
 app.use(Toast, {
     position: POSITION.TOP_RIGHT,  
-  });
+});
 app.use(router); 
 app.use(store);  
 app.mount('#app');

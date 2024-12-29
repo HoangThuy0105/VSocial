@@ -1,66 +1,46 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div
-      :class="[
-        isDarkMode
-          ? 'bg-dark text-white border-0'
-          : 'bg-light text-dark border',
-        'modal-container',
-      ]"
-    >
+    <div :class="[
+      isDarkMode
+        ? 'bg-dark text-white border-0'
+        : 'bg-light text-dark border',
+      'modal-container',
+    ]">
       <div v-if="isVisible" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content">
           <!-- Header -->
           <div class="modal-header">
-            <h5 class="modal-title fs-2">Create article</h5>
+            <h5 class="modal-title fs-4 ms-0">Create article</h5>
             <button class="btn-close" @click="closeModal"></button>
           </div>
 
           <!-- Post Content -->
           <div class="post-content">
             <div class="post-meta">
-              <img
-                src="https://www.chapter3d.com/wp-content/uploads/2020/06/anh-chan-dung-dep.jpg"
-                alt="Avatar"
-                class="avatar"
-              />
+              <img src="https://www.chapter3d.com/wp-content/uploads/2020/06/anh-chan-dung-dep.jpg" alt="Avatar"
+                class="avatar" />
               <div class="d-flex flex-column">
-                <span class="post-author fs">{{ post.username }}</span>
+                <span class="post-author fs-5">{{ post.username }}</span>
                 <!-- Dropdown for visibility (Private/Public) -->
                 <div class="dropdown" ref="dropdown">
-                  <button
-                    class="btn btn-light dropdown-toggle"
-                    type="button"
-                    @click="toggleDropdown"
-                    aria-expanded="false"
-                  >
-                    <i :class="visibilityIcon"></i> {{ visibility }}
+                  <button class="btn btn-light dropdown-toggle" type="button" @click="toggleDropdown"
+                    aria-expanded="false">
+                    <i :class="visibilityIcon"></i> {{ visibility == 1 ? "Public" : visibility == 2 ? "Friends" :
+                      "Only me" }}
                   </button>
                   <ul v-show="isDropdownVisible" class="dropdown-menu">
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility('Public')"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(1)">
                         <i class="fa-solid fa-globe"></i> Public
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility('friend')"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(2)">
                         <i class="fa-solid fa-user-group"></i> Friends
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility('Only me')"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(0)">
                         <i class="fa-solid fa-lock"></i> Only me
                       </a>
                     </li>
@@ -70,32 +50,15 @@
             </div>
 
             <!-- Content Input -->
-            <textarea
-              v-model="content"
-              class="form-control my-3"
-              style="border: none"
-              rows="2"
-              placeholder="What's on your mind?"
-            ></textarea>
+            <textarea v-model="content" class="form-control my-3" style="border: none" rows="2"
+              placeholder="What's on your mind?"></textarea>
 
             <!-- Image Preview -->
             <div v-if="files.length" class="image-preview my-3">
               <div class="image-container">
-                <div
-                  v-for="(file, index) in displayedFiles"
-                  :key="index"
-                  class="image-item"
-                >
-                  <img
-                    :src="file.preview"
-                    alt="Selected Image"
-                    class="img-fluid"
-                  />
-                  <button
-                    class="delete-btn"
-                    @click="removeFile(index)"
-                    aria-label="Delete image"
-                  >
+                <div v-for="(file, index) in displayedFiles" :key="index" class="image-item">
+                  <img :src="file.preview" alt="Selected Image" class="img-fluid" />
+                  <button class="delete-btn" @click="removeFile(index)" aria-label="Delete image">
                     <i class="fa fa-times"></i>
                   </button>
                 </div>
@@ -111,40 +74,21 @@
             <label for="file-upload" class="btn btn-light action-button me-3">
               <i class="fa fa-image icon"></i>
             </label>
-            <input
-              type="file"
-              id="file-upload"
-              @change="handleFileUpload"
-              class="d-none"
-              multiple
-            />
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <input type="file" id="file-upload" @change="handleFileUpload" class="d-none" multiple />
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fas fa-paperclip icon"></i>
             </button>
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fas fa-map-marker-alt icon"></i>
             </button>
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fa fa-smile icon"></i>
             </button>
           </div>
 
           <!-- Footer -->
-          <div class="modal-footer">
-            <button
-              class="btn btn-primary w-100"
-              @click="postContent"
-              :disabled="!content.trim() && !files.length"
-            >
+          <div class="modal-footer mt-0">
+            <button class="btn btn-primary w-100" @click="postContent" :disabled="!content.trim() && !files.length">
               To post
             </button>
           </div>
@@ -156,12 +100,14 @@
 
 <script>
 import { mapState } from "vuex";
-import { ArticleService } from "@/service/ArticleService";
+import { createArticle } from "@/service/ArticleService"
+import { useToast } from 'vue-toastification'
+const toast = useToast()
 
 export default {
   props: {
     isVisible: Boolean,
-    modalType: String,
+    modalType: String
   },
   data() {
     return {
@@ -170,7 +116,7 @@ export default {
       post: {
         username: "Thuy",
       },
-      visibility: "Public",
+      visibility: 1,
       isDropdownVisible: false,
     };
   },
@@ -179,9 +125,9 @@ export default {
       isDarkMode: (state) => state.darkMode,
     }),
     visibilityIcon() {
-      if (this.visibility === "Public") {
+      if (this.visibility === 1) {
         return "fa-solid fa-globe";
-      } else if (this.visibility === "friend") {
+      } else if (this.visibility === 2) {
         return "fa-solid fa-user-group";
       } else {
         return "fa-solid fa-lock";
@@ -199,28 +145,23 @@ export default {
       if (!this.content.trim() && !this.files.length) {
         return;
       }
-      try {
-        const formData = new FormData();
-        formData.append("content", this.content);
-        formData.append("audience", this.visibility);
-        this.files.forEach((file, index) => {
-          formData.append(`images_${index}`, file);
-        });
 
-        console.log("Sending request to create article...");
-        const response = await ArticleService.createArticle(formData);
+      const formData = new FormData();
+      formData.append("content", this.content);
+      formData.append("audience", 1);
+      this.files.forEach((file) => {
+        formData.append(`images`, file);
+      });
+      formData.append("accountId", JSON.parse(localStorage.getItem("idx")));
 
-        // Kiểm tra nếu response hợp lệ và có status
-        if (response && response.status === 200) {
-          this.$toast.success("Your post has been posted successfully!");
-          this.closeModal();
-        } else {
-          this.$toast.error("Failed to post your article. Please try again.");
-        }
-      } catch (error) {
-        // Kiểm tra lỗi trong quá trình gửi yêu cầu
-        console.error("Error posting content:", error);
-        this.$toast.error("An error occurred while posting your article.");
+      console.log("Sending request to create article...");
+      const response = await createArticle(formData);
+      console.log(response.status)
+      if (response && response.status === 200) {
+        toast.success('Tạo bài viết thành công')
+        this.closeModal();
+      } else {
+        toast.error('Tạo bài viết thất bại')
       }
     },
     handleFileUpload(event) {
