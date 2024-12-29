@@ -162,6 +162,7 @@ export default {
   props: {
     isVisible: Boolean,
     modalType: String,
+    
   },
   data() {
     return {
@@ -203,8 +204,8 @@ export default {
         const formData = new FormData();
         formData.append("content", this.content);
         formData.append("audience", this.visibility);
-        this.files.forEach((file, index) => {
-          formData.append(`images_${index}`, file);
+        this.files.forEach((file) => {
+          formData.append(`images`, file);
         });
 
         console.log("Sending request to create article...");
@@ -261,7 +262,6 @@ export default {
 </script>
 
 <style scoped>
-/* CSS tùy chỉnh cho modal */
 .post-content {
   display: flex;
   flex-direction: column;

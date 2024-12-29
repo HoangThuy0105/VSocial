@@ -1,11 +1,14 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+    <!-- Lặp qua các bài viết -->
     <div
+      v-for="(post, index) in posts"
+      :key="post.id"
       :class="[
         isDarkMode
           ? 'bg-dark text-white border-0'
           : 'bg-light text-dark border',
-        'post-container mt-2 mx-auto bg-white p-3 ms-4 border rounded',
+        'post-container mt-2 mx-auto p-3 ms-4 border rounded',
       ]"
     >
       <!-- Header  -->
@@ -18,8 +21,8 @@
         <div class="ms-2">
           <h6 class="mb-0">{{ post.user.name }}</h6>
           <small class="text-muted">
-            {{ post.date }} <i class="fas fa-globe"></i
-          ></small>
+            {{ post.date }} <i class="fas fa-globe"></i>
+          </small>
         </div>
         <!-- Dropdown button -->
         <div class="dropdown ms-auto text-muted">
@@ -48,28 +51,46 @@
 
       <!-- Post content -->
       <div class="post-body mb-3">
-        <p>{{ post.content }}</p>
-        <a href="#" class="text-primary">Xem thêm</a>
+        <!-- Kiểm tra xem bài viết có ảnh hay không -->
+        <p v-if="post.content">{{ post.content }}</p>
+        <span v-if="post.content" href="#" class="text-primary">Xem thêm</span>
+        <img
+          v-if="post.image"
+          :src="post.image"
+          class="img-content"
+          alt="Post Image"
+        />
       </div>
 
       <!-- Actions -->
       <div
         class="post-actions d-flex justify-content-between text-muted border-top pt-2"
       >
+        <!-- Like Button -->
         <button
           class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
+          @click="toggleLike(post)"
         >
-          <i class="far fa-thumbs-up me-2"></i> Like
+          <i :class="post.liked ? 'fas fa-thumbs-up' : 'far fa-thumbs-up'"></i>
+          Like
+          <span class="ms-2">{{ post.likes }}</span>
         </button>
+
+        <!-- Comment Button -->
         <button
           class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
         >
           <i class="far fa-comment me-2"></i> Comment
+          <span class="ms-2">{{ post.comments.length }}</span>
         </button>
+
+        <!-- Share Button -->
         <button
           class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
+          @click="toggleShare(post)"
         >
           <i class="fas fa-share me-2"></i> Share
+          <span class="ms-2">{{ post.shares }}</span>
         </button>
       </div>
 
@@ -106,33 +127,15 @@
             placeholder="Viết bình luận..."
             @keyup.enter="submitComment"
           />
-          <button class="btn btn-link ms-2 text-muted" @click="toggleEmojiMenu">
-            <i class="fas fa-smile"></i>
+          <button class="btn btn-link ms-2 text-muted" @click="submitComment">
+            <i class="far fa-paper-plane"></i>
           </button>
-
-          <!-- Emoji Menu -->
-          <div
-            v-if="showEmojiMenu"
-            class="emoji-menu position-absolute bg-white border rounded p-2 mt-2 dropdown-menu"
-          >
-            <button class="btn btn-link text-muted" @click="addEmoji('😊')">
-              😊
-            </button>
-            <button class="btn btn-link text-muted" @click="addEmoji('😂')">
-              😂
-            </button>
-            <button class="btn btn-link text-muted" @click="addEmoji('❤️')">
-              ❤️
-            </button>
-            <button class="btn btn-link text-muted" @click="addEmoji('👍')">
-              👍
-            </button>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import { mapState } from "vuex";
 export default {
@@ -140,55 +143,76 @@ export default {
   data() {
     return {
       newComment: "",
-      showEmojiMenu: false,
-      post: {
-        user: {
-          name: "User",
-          avatar:
-            "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
+      posts: [
+        {
+          id: 1,
+          user: {
+            name: "User",
+            avatar:
+              "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
+          },
+          date: "1 giờ trước",
+          content:
+            "Prefix v- đóng vai trò gợi ý trực quan để nhận ra các thuộc tính riêng của Vue trong template...",
+          image: [
+            "https://statics.vinwonders.com/gia-ve-vinwonders-nam-hoi-an-3_1688613112.jpg",
+            "https://statics.vinwonders.com/gia-ve-vinwonders-nam-hoi-an-3_1688613112.jpg",
+          ],
+          likes: 10,
+          comments: [
+            {
+              id: 1,
+              user: {
+                name: "User2",
+                avatar:
+                  "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
+              },
+              date: "5 phút trước",
+              content: "Phát biểu hay quá chị ơi, đồng ý lắm luôn!",
+            },
+            {
+              id: 2,
+              user: {
+                name: "User3",
+                avatar:
+                  "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
+              },
+              date: "10 phút trước",
+              content: "Cảm ơn chị đã chia sẻ thông tin hữu ích!",
+            },
+          ],
         },
-        date: "1 giờ trước",
-        content:
-          "Prefix v- đóng vai trò gợi ý trực quan để nhận ra các thuộc tính riêng của Vue trong template...",
-        likes: 10,
-        comments: [
-          {
-            id: 1,
-            user: {
-              name: "User2",
-              avatar:
-                "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
-            },
-            date: "5 phút trước",
-            content: "Phát biểu hay quá chị ơi, đồng ý lắm luôn!",
+        {
+          id: 2,
+          user: {
+            name: "User4",
+            avatar:
+              "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
           },
-          {
-            id: 2,
-            user: {
-              name: "User3",
-              avatar:
-                "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
+          date: "2 giờ trước",
+          content:
+            "Vue.js là một framework mạnh mẽ cho việc phát triển giao diện người dùng, hỗ trợ reactive programming.",
+          likes: 5,
+          comments: [
+            {
+              id: 1,
+              user: {
+                name: "User5",
+                avatar:
+                  "https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png",
+              },
+              date: "2 phút trước",
+              content: "Đúng rồi, Vue rất dễ sử dụng và học!",
             },
-            date: "10 phút trước",
-            content: "Cảm ơn chị đã chia sẻ thông tin hữu ích!",
-          },
-        ],
-      },
-      liked: false,
-      saved: false,
-      showOptions: false,
+          ],
+        },
+      ],
     };
   },
   computed: {
     ...mapState("mode", {
       isDarkMode: (state) => state.darkMode,
     }),
-    filteredComments() {
-      // Use computed property to filter comments if necessary
-      return this.post.comments.filter(
-        (comment) => comment.content.trim() !== ""
-      );
-    },
   },
   methods: {
     submitComment() {
@@ -197,15 +221,19 @@ export default {
         this.newComment = "";
       }
     },
-    toggleEmojiMenu() {
-      this.showEmojiMenu = !this.showEmojiMenu;
+    toggleOptions(index) {
+      this.posts[index].showOptions = !this.posts[index].showOptions;
     },
-    addEmoji(emoji) {
-      this.newComment += emoji;
-      this.showEmojiMenu = false;
+    toggleLike(post) {
+      post.liked = !post.liked;
+      if (post.liked) {
+        post.likes += 1;
+      } else {
+        post.likes -= 1;
+      }
     },
-    toggleOptions() {
-      this.post.showOptions = !this.post.showOptions;
+    toggleShare(post) {
+      post.shares += 1;
     },
   },
 };
@@ -214,23 +242,30 @@ export default {
 <style scoped>
 .post-container {
   max-width: 100%;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.img-content {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 .profile-img {
   width: 50px;
   height: 50px;
 }
 .profile-img-sm {
-  width: 40px;
-  height: 40px;
-}
-.post-actions button {
-  color: #6c757d;
+  width: 35px;
+  height: 35px;
 }
 .comment-body {
   max-width: 500px;
 }
-.emoji-menu button {
-  font-size: 20px;
+.post-actions button {
+  color: #6c757d;
 }
 .add-comment {
   position: relative;

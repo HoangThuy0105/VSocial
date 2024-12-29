@@ -1,18 +1,15 @@
  
 import axiosInstance from "./axios";
 
-export default {
-  async createArticle(formData) {
-    try {
-      const response = await axiosInstance.post('/v1/post', formData);
-      console.log("Response from API:", response);
-      return response.data;
-    } catch (error) {
-      console.error("Error in createArticle:", error);
-      throw error;
-    }
+export const createArticle = async (formData) => {
+  try {
+    const response = await axiosInstance.post('/v1/post', formData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error;
   }
 };
+
 
 
   // Phương thức gọi API để lấy danh sách bài viết
