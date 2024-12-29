@@ -1,51 +1,38 @@
-import axios from 'axios';
-
 const state = {
-  token: null,
-  user: null,
+    token: localStorage.getItem("token") || null,
+    accountId: null,
 };
 
 const getters = {
-  isLoggedIn: state => !!state.user,
-  userName: state => state.user ? state.user.name : '',
+    getToken: state => state.token,
+    getAccountId: state => state.accountId,
 };
 
 const actions = {
-  async login({ commit }, credentials) {
-    try {
-      const response = await axios.post('/api/ ', credentials);
-      commit('setToken', response.data.token);
-      commit('setUser', response.data.user);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  },
-  async logout({ commit }) {
-    try {
-      await axios.post('/ ');
-      commit('clearAuth');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  },
-};
+    login({ commit }, { token, accountId }) {
+        commit('setToken', token.token);
+        localStorage.setItem("token", token.token);
+        commit('setAccountId', accountId);
+    },
+    logout({ commit }) {
+        commit('clearAuth');
+        localStorage.removeItem('token');
+    },
+}
 
 const mutations = {
-  setToken(state, token) {
-    state.token = token;
-  },
-  setUser(state, user) {
-    state.user = user;
-  },
-  clearAuth(state) {
-    state.token = null;
-    state.user = null;
-  },
+    setToken(state, token) {
+        state.token = token;
+    },
+    clearAuth(state) {
+        state.token = null;
+    },
 };
 
 export default {
-  state,
-  getters,
-  actions,
-  mutations,
+    namespaced: true,
+    state,
+    getters,
+    actions,
+    mutations,
 };
