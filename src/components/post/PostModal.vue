@@ -100,9 +100,9 @@
 
 <script>
 import { mapState } from "vuex";
-import { createArticle } from "@/service/ArticleService"
-import { useToast } from 'vue-toastification'
-const toast = useToast()
+// import { createArticle } from "@/service/ArticleService"
+// import { useToast } from 'vue-toastification'
+// const toast = useToast()
 
 export default {
   props: {
@@ -145,7 +145,7 @@ export default {
       if (!this.content.trim() && !this.files.length) {
         return;
       }
-      try {
+     
         const formData = new FormData();
         formData.append("content", this.content);
         formData.append("audience", this.visibility);
@@ -154,14 +154,14 @@ export default {
         });
 
       console.log("Sending request to create article...");
-      const response = await createArticle(formData);
-      console.log(response.status)
-      if (response && response.status === 200) {
-        toast.success('Tạo bài viết thành công')
-        this.closeModal();
-      } else {
-        toast.error('Tạo bài viết thất bại')
-      }
+      // const response = await createArticle(formData);
+      // console.log(response.status)
+      // if (response && response.status === 200) {
+      //   toast.success('Tạo bài viết thành công')
+      //   this.closeModal();
+      // } else {
+      //   toast.error('Tạo bài viết thất bại')
+      // }
     },
     handleFileUpload(event) {
       const selectedFiles = Array.from(event.target.files);
