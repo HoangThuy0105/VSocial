@@ -79,6 +79,7 @@ export default {
         if (user) {
           const token = user.result.token
           const accountId = user.result.accountId
+
           this.login({ token, accountId });
           this.$router.push("/home");
         } else {

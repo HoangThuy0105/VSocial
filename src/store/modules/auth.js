@@ -1,6 +1,6 @@
 const state = {
     token: localStorage.getItem("token") || null,
-    accountId: null,
+    accountId: localStorage.getItem("idx") || null,
 };
 
 const getters = {
@@ -10,13 +10,15 @@ const getters = {
 
 const actions = {
     login({ commit }, { token, accountId }) {
-        commit('setToken', token.token);
-        localStorage.setItem("token", token.token);
+        commit('setToken', token);
+        localStorage.setItem("token", token);
         commit('setAccountId', accountId);
+        localStorage.setItem("idx", accountId);
     },
     logout({ commit }) {
         commit('clearAuth');
         localStorage.removeItem('token');
+        localStorage.removeItem("idx");
     },
 }
 

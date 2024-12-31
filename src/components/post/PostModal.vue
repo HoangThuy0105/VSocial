@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import { createArticle } from "@/service/ArticleService"
 import { useToast } from 'vue-toastification'
 const toast = useToast()
@@ -136,6 +136,7 @@ export default {
     displayedFiles() {
       return this.files.slice(0, 4);
     },
+    ...mapGetters('auth', ['getAccountId']),
   },
   methods: {
     closeModal() {
@@ -145,24 +146,26 @@ export default {
       if (!this.content.trim() && !this.files.length) {
         return;
       }
-      try {
-        const formData = new FormData();
-        formData.append("content", this.content);
-        formData.append("audience", this.visibility);
-        this.files.forEach((file, index) => {
-          formData.append(`images_${index}`, file);
-        });
+      const formData = new FormData();
+      formData.append("content", this.content);
+      formData.append("audience", this.visibility);
+      this.files.forEach((file,) => {
+        formData.append(`images`, file);
+      });
+      formData.append("accountId", this.getAccountId);
 
       console.log("Sending request to create article...");
       const response = await createArticle(formData);
       console.log(response.status)
       if (response && response.status === 200) {
+
         toast.success('Tạo bài viết thành công')
         this.closeModal();
       } else {
         toast.error('Tạo bài viết thất bại')
       }
     },
+
     handleFileUpload(event) {
       const selectedFiles = Array.from(event.target.files);
       selectedFiles.forEach((file) => {

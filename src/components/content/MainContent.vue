@@ -5,26 +5,33 @@
       'card mt-4 ms-5 mb-3',
     ]">
       <div class="card-header d-flex align-items-center">
-        <img :src="post.avatar" class="rounded-circle me-2" style="width: 50px; height: 50px; cursor: pointer"
-          alt="User Avatar" />
+        <div v-if="post.createdBy.avatar">
+          <img :src="post.createdBy.avatar" class="rounded-circle me-2"
+            style="width: 50px; height: 50px; cursor: pointer" alt="User Avatar" />
+        </div>
+        <div v-else>
+          <img
+            src="https://imgs.search.brave.com/3GmHUlPSDP6fn2U7zvGzo1tUNfh9iu1gqcowfbEdlUI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy81/LzU4L0lVX2F0X2hl/cl8xMHRoX2Fubml2/ZXJzYXJ5X2Zhbm1l/ZXRpbmclRTMlODAl/ODhJVSVFRiVCQyU4/QiVFMyU4MCU4OV9Q/YXJ0XzJfSW52aXRh/dDEwbixfMTVfU2Vw/dGVtYmVyXzIwMThf/MDEuanBn"
+            class="rounded-circle me-2" style="width: 50px; height: 50px; cursor: pointer" alt="User Avatar" />
+        </div>
         <div class="me-auto">
-          <h6 class="mb-0 cursor-pointer">{{ post.userName }}</h6>
-          <small class="text-muted">{{ post.time }} - </small>
-          <small class="text-muted location">{{ post.role }}</small>
+          <h6 class="mb-0 cursor-pointer">{{ post.createdBy.username }}</h6>
+          <small class="text-muted">{{ post.createdAt }} - </small>
+          <!-- <small class="text-muted location">{{ post.role }}</small> -->
         </div>
 
         <!-- Save Button -->
-        <button class="btn btn-link p-0 me-3" @click="toggleSave(index)"
+        <!-- <button class="btn btn-link p-0 me-3" @click="toggleSave(index)"
           :class="{ 'text-primary': post.saved, 'text-secondary': !post.saved }">
           <i class="fas fa-bookmark"></i>
-        </button>
+        </button> -->
 
         <!-- Menu dropdown -->
         <div class="dropdown">
           <button class="btn btn-link p-0" @click="toggleOptions(index)">
             <i class="fa-solid fa-ellipsis text-secondary"></i>
           </button>
-          <ul v-if="post.showOptions" ref="dropdownMenu" class="dropdown-menu" aria-labelledby="userDropdown">
+          <!-- <ul v-if="post.showOptions" ref="dropdownMenu" class="dropdown-menu" aria-labelledby="userDropdown">
             <li>
               <a class="dropdown-item" href="/ ">
                 <i class="fa-solid fa-flag me-2"></i> Report
@@ -35,7 +42,7 @@
                 <i class="fa-solid fa-circle-minus me-2"></i> Hide
               </a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
 
@@ -44,20 +51,20 @@
         <p class="card-text">{{ post.content }}</p>
 
         <!-- Image Display Logic -->
-        <div v-if="post.images.length === 1" class="image-container-single">
-          <img :src="post.images[0]" alt="Content Image" class="content-image" />
+        <div v-if="post.postImages.length === 1" class="image-container-single">
+          <img :src="post.postImages[0]" alt="Content Image" class="content-image" />
         </div>
 
-        <div v-else-if="post.images.length === 4" class="image-container-grid">
-          <img v-for="(image, imgIndex) in post.images" :key="imgIndex" :src="image" alt="Content Image"
+        <div v-else-if="post.postImages.length === 4" class="image-container-grid">
+          <img v-for="(image, imgIndex) in post.postImages" :key="imgIndex" :src="image" alt="Content Image"
             class="content-image" />
         </div>
 
         <div v-else class="image-container-gallery">
-          <img v-for="(image, imgIndex) in post.images.slice(0, 3)" :key="imgIndex" :src="image" alt="Content Image"
+          <img v-for="(image, imgIndex) in post.postImages.slice(0, 3)" :key="imgIndex" :src="image" alt="Content Image"
             class="content-image cursor-pointer" />
-          <div v-if="post.images.length > 3" class="more-images-overlay cursor-pointer">
-            +{{ post.images.length - 3 }}
+          <div v-if="post.postImages.length > 3" class="more-images-overlay cursor-pointer">
+            +{{ post.postImages.length - 3 }}
           </div>
         </div>
       </div>
@@ -68,17 +75,17 @@
           <button class="btn btn-link me-2 p-0 like-button" @click="toggleLike(post)" :class="{ liked: post.liked }">
             <i class="fas fa-thumbs-up me-1"></i>
           </button>
-          <small class="text-muted">{{ post.likes }}K</small>
+          <!-- <small class="text-muted">{{ post.likes }}K</small> -->
         </div>
         <div>
           <span class="me-3 cursor-pointer" @click="openCommentModal(post)">
             <i class="fas fa-comment"></i>
-            {{ post.comments.length }} Comment
+            <!-- {{ post.comments.length }} Comment -->
           </span>
 
           <span class="cursor-pointer" @click="openSharePost">
             <i class="fas fa-share"></i>
-            {{ post.shares }} Share
+            <!-- {{ post.shares }} Share -->
           </span>
 
           <!-- Share Post Component -->
@@ -106,129 +113,7 @@ export default {
   data() {
     return {
       isModalOpen: false,
-      posts: [
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-        {
-          avatar:
-            "https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg",
-          userName: "user",
-          time: "12 minutes ago",
-          role: "3D Stock Contributor",
-          content: "There is a big river running through my province...",
-          images: [
-            "https://cdn.prod.website-files.com/5e8de3e5c2e6e35dcbb511c2/66bdc366a69a240f26e63bfd_destination-forecasting-insight.jpeg",
-            "https://sb.tinhte.vn/2021/07/5557920_CV.jpg",
-            "https://phuongtanphuoc.gov.vn/wp/vietnam/anhdepvietnam%20(24).jpg",
-            "https://images.pexels.com/photos/235990/pexels-photo-235990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://via.placeholder.com/200x300",
-            "https://via.placeholder.com/200x300",
-          ],
-          likes: "1.7",
-          shares: 12,
-          comments: [
-            {
-              userName: "Aditya Cah Tegal",
-              text: "People getting this type of rejection for AI images...",
-              replies: 12,
-            },
-          ],
-          liked: false,
-          saved: false,
-          showOptions: false,
-        },
-      ],
+      posts: [],
       isSharePostVisible: false,
       isDropdownVisible: false,
     };
@@ -243,8 +128,7 @@ export default {
   methods: {
     async getPost() {
       const response = await getAllPort();
-      console.log(response.data)
-
+      this.posts = response.data.result
     },
     toggleOptions(index) {
       this.posts.forEach((post, i) => {
