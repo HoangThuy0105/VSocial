@@ -1,23 +1,15 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
     <!-- Lặp qua các bài viết -->
-    <div
-      v-for="(post, index) in posts"
-      :key="post.id"
-      :class="[
-        isDarkMode
-          ? 'bg-dark text-white border-0'
-          : 'bg-light text-dark border',
-        'post-container mt-2 mx-auto p-3 ms-4 border rounded',
-      ]"
-    >
+    <div v-for="(post, index) in posts" :key="post.id" :class="[
+      isDarkMode
+        ? 'bg-dark text-white border-0'
+        : 'bg-light text-dark border',
+      'post-container mt-2 mx-auto p-3 ms-4 border rounded',
+    ]">
       <!-- Header  -->
       <div class="post-header d-flex align-items-center mb-3">
-        <img
-          :src="post.user.avatar"
-          alt="Profile"
-          class="profile-img rounded-circle border"
-        />
+        <img :src="post.user.avatar" alt="Profile" class="profile-img rounded-circle border" />
         <div class="ms-2">
           <h6 class="mb-0">{{ post.user.name }}</h6>
           <small class="text-muted">
@@ -29,12 +21,7 @@
           <button class="btn btn-link p-0" @click="toggleOptions(index)">
             <i class="fa-solid fa-ellipsis text-secondary"></i>
           </button>
-          <ul
-            v-if="post.showOptions"
-            ref="dropdownMenu"
-            class="dropdown-menu"
-            aria-labelledby="userDropdown"
-          >
+          <ul v-if="post.showOptions" ref="dropdownMenu" class="dropdown-menu" aria-labelledby="userDropdown">
             <li>
               <a class="dropdown-item" href=" ">
                 <i class="fa-solid fa-flag me-2"></i> Pin the post
@@ -54,41 +41,28 @@
         <!-- Kiểm tra xem bài viết có ảnh hay không -->
         <p v-if="post.content">{{ post.content }}</p>
         <span v-if="post.content" href="#" class="text-primary">Xem thêm</span>
-        <img
-          v-if="post.image"
-          :src="post.image"
-          class="img-content"
-          alt="Post Image"
-        />
+        <img v-if="post.image" :src="post.image[0]" class="img-content" alt="Post Image" />
       </div>
 
       <!-- Actions -->
-      <div
-        class="post-actions d-flex justify-content-between text-muted border-top pt-2"
-      >
+      <div class="post-actions d-flex justify-content-between text-muted border-top pt-2">
         <!-- Like Button -->
-        <button
-          class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
-          @click="toggleLike(post)"
-        >
+        <button class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
+          @click="toggleLike(post)">
           <i :class="post.liked ? 'fas fa-thumbs-up' : 'far fa-thumbs-up'"></i>
           Like
           <span class="ms-2">{{ post.likes }}</span>
         </button>
 
         <!-- Comment Button -->
-        <button
-          class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
-        >
+        <button class="btn btn-light flex-fill d-flex align-items-center justify-content-center">
           <i class="far fa-comment me-2"></i> Comment
           <span class="ms-2">{{ post.comments.length }}</span>
         </button>
 
         <!-- Share Button -->
-        <button
-          class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
-          @click="toggleShare(post)"
-        >
+        <button class="btn btn-light flex-fill d-flex align-items-center justify-content-center"
+          @click="toggleShare(post)">
           <i class="fas fa-share me-2"></i> Share
           <span class="ms-2">{{ post.shares }}</span>
         </button>
@@ -96,16 +70,8 @@
 
       <!-- Comments -->
       <div class="comments mt-3">
-        <div
-          v-for="comment in post.comments"
-          :key="comment.id"
-          class="comment d-flex align-items-start mb-2"
-        >
-          <img
-            :src="comment.user.avatar"
-            alt="Avatar"
-            class="profile-img-sm rounded-circle"
-          />
+        <div v-for="comment in post.comments" :key="comment.id" class="comment d-flex align-items-start mb-2">
+          <img :src="comment.user.avatar" alt="Avatar" class="profile-img-sm rounded-circle" />
           <div class="comment-body ms-2 bg-light p-2 rounded">
             <h6 class="mb-1">{{ comment.user.name }}</h6>
             <p class="mb-1">{{ comment.content }}</p>
@@ -115,18 +81,10 @@
 
         <!-- Add Comment -->
         <div class="add-comment d-flex align-items-center mt-3">
-          <img
-            src="https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png"
-            alt="Profile"
-            class="profile-img-sm rounded-circle"
-          />
-          <input
-            type="text"
-            v-model="newComment"
-            class="form-control ms-2"
-            placeholder="Viết bình luận..."
-            @keyup.enter="submitComment"
-          />
+          <img src="https://img.lovepik.com/free-png/20211130/lovepik-cartoon-avatar-png-image_401205251_wh1200.png"
+            alt="Profile" class="profile-img-sm rounded-circle" />
+          <input type="text" v-model="newComment" class="form-control ms-2" placeholder="Viết bình luận..."
+            @keyup.enter="submitComment" />
           <button class="btn btn-link ms-2 text-muted" @click="submitComment">
             <i class="far fa-paper-plane"></i>
           </button>
@@ -155,7 +113,7 @@ export default {
           content:
             "Prefix v- đóng vai trò gợi ý trực quan để nhận ra các thuộc tính riêng của Vue trong template...",
           image: [
-            "https://statics.vinwonders.com/gia-ve-vinwonders-nam-hoi-an-3_1688613112.jpg",
+            "https://vuanem.com/blog/wp-content/uploads/2023/07/phan-loai-tai-nguyen-thien-nhien.jpg",
             "https://statics.vinwonders.com/gia-ve-vinwonders-nam-hoi-an-3_1688613112.jpg",
           ],
           likes: 10,
@@ -247,26 +205,32 @@ export default {
   padding: 15px;
   margin-bottom: 15px;
 }
+
 .img-content {
   width: 100%;
   height: auto;
   border-radius: 8px;
   margin-top: 10px;
 }
+
 .profile-img {
   width: 50px;
   height: 50px;
 }
+
 .profile-img-sm {
   width: 35px;
   height: 35px;
 }
+
 .comment-body {
   max-width: 500px;
 }
+
 .post-actions button {
   color: #6c757d;
 }
+
 .add-comment {
   position: relative;
 }

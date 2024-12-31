@@ -1,30 +1,18 @@
 <template>
-  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div
-      :class="[
-        isDarkMode
-          ? 'bg-dark text-white border-0'
-          : 'bg-light text-dark border',
-        'profile-container ms-4',
-      ]"
-    >
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']" style="background-color: #f8f9fa;">
+    <div :class="[
+      isDarkMode
+        ? 'bg-dark text-white border-0'
+        : 'bg-light text-dark border',
+      'profile-container ms-4',
+    ]">
       <!-- Cover Image -->
       <div class="cover-image position-relative  ">
-        <img
-          :src="coverImage"
-          alt="Cover"
-          class="cover-img w-100"
-        />
+        <img :src="coverImage" alt="Cover" class="cover-img w-100" />
         <!-- Profile Picture and Info -->
-        <div
-          class="profile-info position-absolute top-50 start-0 translate-middle-y ms-4 d-flex align-items-center"
-        >
-          <img
-            :src="profileImage"
-            alt="Profile"
-            class="rounded-circle border border-white"
-            style="width: 100px; height: 100px"
-          />
+        <div class="profile-info position-absolute top-50 start-0 translate-middle-y ms-4 d-flex align-items-center">
+          <img :src="profileImage" alt="Profile" class="rounded-circle border border-white"
+            style="width: 100px; height: 100px" />
           <div class="ms-3 text-white">
             <h5 class="mb-0">{{ userName }}</h5>
           </div>
@@ -32,9 +20,7 @@
       </div>
 
       <!-- Navigation Menu -->
-      <div
-        class="nav-menu bg-white p-2 d-flex justify-content-around rounded"
-      >
+      <div class="nav-menu bg-white p-2 d-flex justify-content-around rounded">
         <div class="menu-item text-center">
           <i class="bi bi-file-earmark-text cursor-pointer"></i>
           <p class="mb-0">Post</p>

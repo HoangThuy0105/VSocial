@@ -494,14 +494,13 @@ button:focus-visible,
   background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 500px;
+  width: 600px;
   z-index: 1001;
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(167, 151, 151, 0.2);
   position: relative;
 }
 
-/* Các style cho phần modal */
 .modal-header {
   display: flex;
   align-items: center;
@@ -568,6 +567,11 @@ textarea {
   background-color: #f0f0f0;
 }
 
+.comment-warn {
+  font-size: 16px;
+  color: red;
+}
+
 /* Các style cho nút footer */
 .modal-footer {
   display: flex;
@@ -598,14 +602,15 @@ textarea {
 
 /* postcomment */
 
-.modal-container {
-  width: 700px;
-  height: 971px;
-  margin: 20px auto;
-  background-color: var(--bs-light);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+.modal-comment {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 750px;
+  z-index: 100;
+  max-width: 100%;
+  box-shadow: 0 4px 8px rgba(167, 151, 151, 0.2);
+  position: relative;
 }
 
 .modal-content {
@@ -614,7 +619,7 @@ textarea {
   border-radius: 8px;
 }
 
-.modal-header {
+*/ .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -633,25 +638,30 @@ textarea {
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
 .post-author {
-  font-weight: bold;
+  font-weight: 500;
   margin-right: 5px;
 }
 
+.post-time {
+  font-size: 14px;
+  color: gray;
+}
+
 .post-caption {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .post-image {
   width: 100%;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .comments-section {
@@ -661,10 +671,17 @@ textarea {
   overflow-y: auto;
 }
 
+.no-comment {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .comment {
   display: flex;
   align-items: flex-start;
   margin-bottom: 15px;
+  margin-right: 15px;
 }
 
 .comment-avatar {
@@ -682,7 +699,7 @@ textarea {
 }
 
 .comment-author {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .comment-input {
@@ -758,6 +775,10 @@ textarea {
 .dark-mode .comment-author,
 .dark-mode .comment-text {
   color: #fff;
+}
+
+.comment-text {
+  margin: 0px;
 }
 
 .dark-mode .modal-footer {

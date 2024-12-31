@@ -149,16 +149,14 @@ export default {
       const formData = new FormData();
       formData.append("content", this.content);
       formData.append("audience", this.visibility);
-      this.files.forEach((file,) => {
+      this.files.forEach((file) => {
         formData.append(`images`, file);
       });
       formData.append("accountId", this.getAccountId);
 
       console.log("Sending request to create article...");
       const response = await createArticle(formData);
-      console.log(response.status)
       if (response && response.status === 200) {
-
         toast.success('Tạo bài viết thành công')
         this.closeModal();
       } else {

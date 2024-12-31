@@ -10,10 +10,7 @@
           <MainContent :isDarkMode="isDarkMode" />
         </div>
 
-        <div
-          class="d-flex flex-column justify-content-between p-4"
-          style="height: 100%"
-        >
+        <div class="d-flex flex-column justify-content-between p-4" style="height: 100%">
           <TrendingContent :isDarkMode="isDarkMode" />
           <FriendsList :isDarkMode="isDarkMode" />
         </div>
@@ -34,7 +31,7 @@ import PostItem from "../components/post/PostItem.vue";
 
 
 export default {
-  name: 'HomeView', 
+  name: 'HomeView',
   components: {
     AppHeader,
     AppSidebar,

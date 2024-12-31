@@ -5,7 +5,7 @@
     <div class="main-content">
       <div class="p-5">
         <ProfileHeader :isDarkMode="isDarkMode" />
-        <ProfileContent :isDarkMode="isDarkMode" />
+        <MyPost :isDarkMode="isDarkMode" />
       </div>
     </div>
   </div>
@@ -16,7 +16,8 @@ import { mapState } from "vuex";
 import AppHeader from "@/components/layout/AppHeader.vue";
 import AppSidebar from "@/components/layout/AppSidebar.vue";
 import ProfileHeader from "@/components/profiles/ProfileHeader.vue";
-import ProfileContent from "@/components/profiles/ProfileContent.vue";
+// import ProfileContent from "@/components/profiles/ProfileContent.vue";
+import MyPost from "../components/content/MyPost.vue";
 
 export default {
   name: "ProfileView",
@@ -24,7 +25,7 @@ export default {
     AppHeader,
     AppSidebar,
     ProfileHeader,
-    ProfileContent,
+    MyPost,
   },
   computed: {
     ...mapState("mode", {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
+  <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']" style="background-color: #f8f9fa;">
     <div v-for="(post, index) in posts" :key="index" :class="[
       isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
       'card mt-4 ms-5 mb-3',
@@ -16,7 +16,7 @@
         </div>
         <div class="me-auto">
           <h6 class="mb-0 cursor-pointer">{{ post.createdBy.username }}</h6>
-          <small class="text-muted">{{ post.createdAt }} - </small>
+          <small class="text-muted">{{ formatDateTime(post.createdAt) }}</small>
           <!-- <small class="text-muted location">{{ post.role }}</small> -->
         </div>
 
@@ -98,10 +98,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import PostShare from "../post/PostShare.vue";
 import PostComment from "../post/PostComment.vue";
 import { getAllPort } from "@/service/ArticleService"
+import { formatDateTime } from '@/utils/index';
 
 
 export default {
@@ -126,8 +127,11 @@ export default {
   },
 
   methods: {
+    ...mapActions('post', ['selectedPost']),
+    formatDateTime,
     async getPost() {
       const response = await getAllPort();
+      console.log(response.data.result)
       this.posts = response.data.result
     },
     toggleOptions(index) {
@@ -171,7 +175,7 @@ export default {
       }
     },
     openCommentModal(post) {
-      this.selectedPost = post;
+      this.selectedPost(post);
       this.isModalOpen = true;
     },
     openSharePost() {
