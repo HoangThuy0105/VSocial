@@ -14,39 +14,39 @@
           isDarkMode
             ? 'bg-dark text-white border border-secondary'
             : 'bg-light border',
-        ]" placeholder="What's on your mind?" v-model="postContent" @focus="isModalOpen = true" @click.prevent />
+        ]" placeholder="Bạn đang nghĩ gì thế?" v-model="postContent" @focus="isModalOpen = true" @click.prevent />
       </div>
 
       <div class="d-flex justify-content-between align-items-center mt-2">
         <div class="d-flex gap-3">
           <button class="btn btn-link" @click="isModalOpen = true">
             <i :class="isDarkMode
-                ? 'fas fa-image text-white'
-                : 'fas fa-image text-dark'
+              ? 'fas fa-image text-white'
+              : 'fas fa-image text-dark'
               "></i>
           </button>
           <button class="btn btn-link" @click="isModalOpen = true">
             <i :class="isDarkMode
-                ? 'fas fa-paperclip text-white'
-                : 'fas fa-paperclip text-dark'
+              ? 'fas fa-paperclip text-white'
+              : 'fas fa-paperclip text-dark'
               "></i>
           </button>
           <button class="btn btn-link" @click="isModalOpen = true">
             <i :class="isDarkMode
-                ? 'fas fa-map-marker-alt text-white'
-                : 'fas fa-map-marker-alt text-dark'
+              ? 'fas fa-map-marker-alt text-white'
+              : 'fas fa-map-marker-alt text-dark'
               "></i>
           </button>
           <button class="btn btn-link" @click="isModalOpen = true">
             <i :class="isDarkMode
-                ? 'fas fa-smile text-white'
-                : 'fas fa-smile text-dark'
+              ? 'fas fa-smile text-white'
+              : 'fas fa-smile text-dark'
               "></i>
           </button>
         </div>
         <div>
-          <button class="btn btn-outline-secondary me-2">Draft</button>
-          <button class="btn btn-primary">Post</button>
+          <button class="btn btn-outline-secondary me-2">Nháp</button>
+          <button class="btn" style="background-color: #009345; color: white; font-weight: 500;">Đăng</button>
         </div>
       </div>
 

@@ -1,41 +1,28 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div
-      class="header d-flex flex-wrap justify-content-between align-items-center p-3"
-      :class="isDarkMode ? 'header-dark' : 'header-light'"
-    >
+    <div class="header d-flex flex-wrap justify-content-between align-items-center p-3"
+      :class="isDarkMode ? 'header-dark' : 'header-light'">
       <div class="d-flex align-items-center mb-2 mb-lg-0">
         <li class="nav-item d-flex align-items-center ms-3 me-3">
           <router-link to="/home" class="nav-link fs-5 d-flex align-items-center">
             <i class="fa-solid fa-house me-2"></i>
-            Home
+            Trang chủ
           </router-link>
         </li>
 
         <div class="d-flex justify-content-center align-items-center p-2">
-          <div
-            class="d-flex align-items-center justify-content-around w-100 frame-bg"
-          >
-            <button
-              class="btn nav-link fs-5 me-2 button-frame ms-3"
-              :class="{ active: activeTab === 'explore' }"
-              @click="activeTab = 'explore'"
-            >
-              Explore
+          <div class="d-flex align-items-center justify-content-around w-100 frame-bg">
+            <button class="btn nav-link fs-5 me-2 button-frame ms-3" :class="{ active: activeTab === 'explore' }"
+              @click="activeTab = 'explore'">
+              Khám phá
             </button>
-            <button
-              class="btn nav-link fs-5 me-2 button-frame ms-3"
-              :class="{ active: activeTab === 'community' }"
-              @click="activeTab = 'community'"
-            >
-              Community Feed
+            <button class="btn nav-link fs-5 me-2 button-frame ms-3" :class="{ active: activeTab === 'community' }"
+              @click="activeTab = 'community'">
+              Bảng feed
             </button>
-            <button
-              class="btn nav-link fs-5 me-2 button-frame ms-3"
-              :class="{ active: activeTab === 'mutual' }"
-              @click="activeTab = 'mutual'"
-            >
-              Mutual friend
+            <button class="btn nav-link fs-5 me-2 button-frame ms-3" :class="{ active: activeTab === 'mutual' }"
+              @click="activeTab = 'mutual'">
+              Bạn bè
               <span class="badge bg-secondary">12</span>
             </button>
           </div>
@@ -50,11 +37,7 @@
         </div>
 
         <!-- chat -->
-        <router-link
-          to="/chat"
-          class="frame-border rounded-icon me-2"
-          style="text-decoration: none"
-        >
+        <router-link to="/chat" class="frame-border rounded-icon me-2" style="text-decoration: none">
           <i class="fa-solid fa-comment-dots btn"></i>
         </router-link>
 
@@ -66,21 +49,11 @@
         <!-- avatar -->
         <div class="dropdown" style="position: relative">
           <!-- Hình ảnh avatar -->
-          <img
-            :src="post.avatar"
-            class="rounded-circle me-2"
-            style="width: 50px; height: 50px; cursor: pointer"
-            alt="User Avatar"
-            @click="toggleDropdown"
-          />
+          <img :src="post.avatar" class="rounded-circle me-2" style="width: 50px; height: 50px; cursor: pointer"
+            alt="User Avatar" @click="toggleDropdown" />
 
           <!-- Dropdown menu -->
-          <ul
-            v-if="isDropdownVisible"
-            ref="dropdownMenu"
-            class="dropdown-menu"
-            aria-labelledby="userDropdown"
-          >
+          <ul v-if="isDropdownVisible" ref="dropdownMenu" class="dropdown-menu" aria-labelledby="userDropdown">
             <li>
               <a class="dropdown-item" href="/profile">
                 <i class="bi bi-person-circle me-2"></i> Profile

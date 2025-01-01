@@ -10,7 +10,7 @@
         <div class="modal-content">
           <!-- Header -->
           <div class="modal-header">
-            <h5 class="modal-title fs-4 ms-0">Create article</h5>
+            <h5 class="modal-title fs-4 ms-0">Tạo bài viết</h5>
             <button class="btn-close" @click="closeModal"></button>
           </div>
 
@@ -25,23 +25,23 @@
                 <div class="dropdown" ref="dropdown">
                   <button class="btn btn-light dropdown-toggle" type="button" @click="toggleDropdown"
                     aria-expanded="false">
-                    <i :class="visibilityIcon"></i> {{ visibility == 1 ? "Public" : visibility == 2 ? "Friends" :
-                      "Only me" }}
+                    <i :class="visibilityIcon"></i> {{ visibility == 1 ? "Công khai" : visibility == 2 ? "Bạn bè" :
+                      "Chỉ mình tôi" }}
                   </button>
                   <ul v-show="isDropdownVisible" class="dropdown-menu">
                     <li>
                       <a class="dropdown-item" href="#" @click="setVisibility(1)">
-                        <i class="fa-solid fa-globe"></i> Public
+                        <i class="fa-solid fa-globe"></i> Công khai
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="#" @click="setVisibility(2)">
-                        <i class="fa-solid fa-user-group"></i> Friends
+                        <i class="fa-solid fa-user-group"></i> Bạn bè
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="#" @click="setVisibility(0)">
-                        <i class="fa-solid fa-lock"></i> Only me
+                        <i class="fa-solid fa-lock"></i> Chỉ mình tôi
                       </a>
                     </li>
                   </ul>
@@ -51,7 +51,7 @@
 
             <!-- Content Input -->
             <textarea v-model="content" class="form-control my-3" style="border: none" rows="2"
-              placeholder="What's on your mind?"></textarea>
+              placeholder="Bạn đang nghĩ gì thế?"></textarea>
 
             <!-- Image Preview -->
             <div v-if="files.length" class="image-preview my-3">
@@ -89,7 +89,7 @@
           <!-- Footer -->
           <div class="modal-footer mt-0">
             <button class="btn btn-primary w-100" @click="postContent" :disabled="!content.trim() && !files.length">
-              To post
+              Đăng
             </button>
           </div>
         </div>

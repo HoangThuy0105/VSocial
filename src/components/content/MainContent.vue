@@ -131,7 +131,6 @@ export default {
     formatDateTime,
     async getPost() {
       const response = await getAllPort();
-      console.log(response.data.result)
       this.posts = response.data.result
     },
     toggleOptions(index) {

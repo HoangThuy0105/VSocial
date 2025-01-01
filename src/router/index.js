@@ -8,6 +8,7 @@ import ProfileView from "../views/ProfileView.vue";
 import CallView from "@/views/CallView.vue";
 import FriendView from "@/views/FriendView.vue";
 import FriendAll from "@/components/friends/FriendAll.vue";
+import SearchResultView from "@/views/SearchResultView.vue";
 //import store from "@/store"; // Import Vuex store
 
 const routes = [
@@ -15,7 +16,7 @@ const routes = [
     path: "/",
     name: "login",
     component: LoginPage,
-  },  
+  },
   {
     path: "/home",
     name: "Home",
@@ -55,6 +56,11 @@ const routes = [
     path: "/allfriend",
     name: "allfriend",
     component: FriendAll,
+  },
+  {
+    path: "/search-results",
+    name: "search-results",
+    component: SearchResultView,
   },
   // {
   //   path: "/admin",
