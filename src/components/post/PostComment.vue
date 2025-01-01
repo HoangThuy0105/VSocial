@@ -55,7 +55,7 @@
                 isDarkMode
                   ? 'bg-dark text-white border border-secondary'
                   : 'bg-light border',
-              ]" v-model="commentText" class="form-control" type="text" placeholder="Write a comment..."
+              ]" v-model="commentText" class="form-control" type="text" placeholder="Bình luận dưới tên của bạn..."
                 @keydown.enter="addComment" />
             </div>
             <p class="comment-warn">{{ message }}</p>

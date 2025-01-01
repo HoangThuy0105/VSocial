@@ -195,8 +195,9 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .success-message {
-  color: green;
+  color: #28a745;  
   font-size: 0.9rem;
 }
 
@@ -221,7 +222,7 @@ body {
 
 h2 {
   font-size: 1.8rem;
-  color: #007bff;
+  color: #009345;
   text-align: center;
 }
 
@@ -229,6 +230,12 @@ h2 {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #28a745;  
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
 
 .error {
@@ -250,11 +257,16 @@ h2 {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #009345;
   border: none;
   padding: 10px;
   font-size: 1.1rem;
   border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #28a745;  
 }
 
 .text-muted {
@@ -262,10 +274,16 @@ h2 {
 }
 
 .text-primary {
-  color: #007bff !important;
+  color: #009345 !important;
+}
+
+.text-center a {
+  color: #009345;
+  transition: color 0.3s ease-in-out;
 }
 
 .text-center a:hover {
+  color: #28a745;  
   text-decoration: underline;
 }
 

@@ -31,7 +31,8 @@
               </button>
             </div>
           </div>
-          <p v-if="loginError" class="error mt-2 text-danger">
+          <p v-if="loginError" class="error mt-2">
+            <i class="bi bi-exclamation-circle-fill me-2"></i>
             {{ loginError }}
           </p>
           <button type="submit" class="btn btn-primary w-100 py-2">
@@ -48,10 +49,10 @@
     </div>
   </div>
 </template>
-<script>
 
+<script>
 import { login } from "@/service/authService";
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   name: "AuthLogin",
@@ -64,7 +65,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('auth', ['login']),
+    ...mapActions("auth", ["login"]),
     async handleLogin() {
       this.loginError = "";
       if (!this.email || !this.password) {
@@ -77,8 +78,8 @@ export default {
           password: this.password,
         });
         if (user) {
-          const token = user.result.token
-          const accountId = user.result.accountId
+          const token = user.result.token;
+          const accountId = user.result.accountId;
 
           this.login({ token, accountId });
           this.$router.push("/home");
@@ -96,7 +97,8 @@ export default {
   },
 };
 </script>
-<style scoped>
+
+<style scoped> 
 html,
 body {
   height: 100%;
@@ -107,7 +109,7 @@ body {
 .container {
   max-width: 900px;
 }
-
+   
 .auth-container {
   display: flex;
   width: 100%;
@@ -128,8 +130,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
+} 
 .input-group button {
   background: transparent;
   border: none;
@@ -138,18 +139,22 @@ body {
 
 .input-group input {
   padding-right: 40px;
-}
-
+} 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #009345;
   border: none;
   padding: 10px;
   font-size: 1.1rem;
   border-radius: 5px;
 }
 
+.btn-primary:hover {
+  background-color: #007d39;
+  transition: background-color 0.3s ease;
+}
+
 .text-primary {
-  color: #007bff !important;
+  color: #009345 !important;
 }
 
 .text-muted {
@@ -160,10 +165,27 @@ body {
   text-decoration: underline;
 }
 
+ 
 .error {
-  color: red;
-  font-size: 0.9rem;
+  color: #ff4d4d;
+  font-size: 0.95rem;
+  animation: shake 0.3s ease;
 }
+/* Thêm hiệu ứng lắc (shake) cho thông báo lỗi. */
+@keyframes shake { 
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25%,
+  75% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
 
 @media (max-width: 768px) {
   .auth-image-section {

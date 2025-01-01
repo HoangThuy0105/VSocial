@@ -30,7 +30,7 @@
           <span class="badge bg-secondary ms-3">{{ item.time }}</span>
         </li>
         <div class="text-center">
-          <span class="text-primary cursor-pointer fw-bold">See All</span>
+          <span class="text-success cursor-pointer fw-bold">See All</span>
         </div>
       </ul>
     </div>
