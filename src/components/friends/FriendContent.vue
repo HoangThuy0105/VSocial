@@ -20,7 +20,9 @@
               <i class="fas fa-user-friends"></i>
               {{ friend.mutualFriends }} mutual friend
             </p>
-            <button class="btn btn-primary btn-sm me-2">Comfirm</button>
+            <button class="btn btn-success btn-sm me-2 text-white">
+              Comfirm
+            </button>
             <button class="btn btn-secondary btn-sm">Delete</button>
           </div>
         </div>
@@ -29,7 +31,7 @@
     <div class="text-center mt-3">
       <div class="text-center mt-3">
         <button
-          class="btn btn-link fs-5 text-decoration-none text-primary"
+          class="btn btn-link fs-5 text-decoration-none text-success"
           style=""
         >
           See more
@@ -38,10 +40,8 @@
       </div>
     </div>
   </div>
-  
+
   <hr class="custom-hr" />
-  
-    
 </template>
 
 <script>
@@ -78,7 +78,6 @@ export default {
           avatar:
             "https://cdn.mobilecity.vn/mobilecity-vn/images/2024/03/hinh-nen-hoa.jpg.webp",
         },
-        // Add more friend objects as needed
         {
           id: 5,
           name: "user",

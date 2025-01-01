@@ -2,9 +2,7 @@
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
     <div
       :class="[
-        isDarkMode
-          ? 'bg-dark text-white border-0'
-          : 'bg-light text-dark border',
+        isDarkMode ? 'bg-dark text-white border-0' : 'bg-light text-dark border',
         'modal-container',
       ]"
     >
@@ -45,29 +43,17 @@
                   </button>
                   <ul v-show="isDropdownVisible" class="dropdown-menu">
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility(1)"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(1)">
                         <i class="fa-solid fa-globe"></i> Công khai
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility(2)"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(2)">
                         <i class="fa-solid fa-user-group"></i> Bạn bè
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility(0)"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(0)">
                         <i class="fa-solid fa-lock"></i> Chỉ mình tôi
                       </a>
                     </li>
@@ -93,11 +79,7 @@
                   :key="index"
                   class="image-item"
                 >
-                  <img
-                    :src="file.preview"
-                    alt="Selected Image"
-                    class="img-fluid"
-                  />
+                  <img :src="file.preview" alt="Selected Image" class="img-fluid" />
                   <button
                     class="delete-btn"
                     @click="removeFile(index)"
@@ -125,22 +107,13 @@
               class="d-none"
               multiple
             />
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fas fa-paperclip icon"></i>
             </button>
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fas fa-map-marker-alt icon"></i>
             </button>
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fa fa-smile icon"></i>
             </button>
           </div>
