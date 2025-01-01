@@ -29,3 +29,30 @@ export const addFriend = async (request) => {
         console.error(error);
     }
 };
+
+export const unFriend = async (request) => {
+    try {
+        const response = await axiosInstance.post("v1/friend/unfriend", request, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const getFriends = async (accountId) => {
+    try {
+        const response = await axiosInstance.get("v1/friend/get-friends", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: { accountId },
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+};

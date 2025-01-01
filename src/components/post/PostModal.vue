@@ -1,13 +1,11 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div
-      :class="[
-        isDarkMode
-          ? 'bg-dark text-white border-0'
-          : 'bg-light text-dark border',
-        'modal-container',
-      ]"
-    >
+    <div :class="[
+      isDarkMode
+        ? 'bg-dark text-white border-0'
+        : 'bg-light text-dark border',
+      'modal-container',
+    ]">
       <div v-if="isVisible" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content">
           <!-- Header -->
@@ -19,55 +17,36 @@
           <!-- Post Content -->
           <div class="post-content">
             <div class="post-meta">
-              <img
-                src="https://www.chapter3d.com/wp-content/uploads/2020/06/anh-chan-dung-dep.jpg"
-                alt="Avatar"
-                class="avatar"
-              />
+              <img src="https://www.chapter3d.com/wp-content/uploads/2020/06/anh-chan-dung-dep.jpg" alt="Avatar"
+                class="avatar" />
               <div class="d-flex flex-column">
                 <span class="post-author fs-5">{{ post.username }}</span>
                 <!-- Dropdown for visibility (Private/Public) -->
                 <div class="dropdown" ref="dropdown">
-                  <button
-                    class="btn btn-light dropdown-toggle"
-                    type="button"
-                    @click="toggleDropdown"
-                    aria-expanded="false"
-                  >
+                  <button class="btn btn-light dropdown-toggle" type="button" @click="toggleDropdown"
+                    aria-expanded="false">
                     <i :class="visibilityIcon"></i>
                     {{
                       visibility == 1
                         ? "Công khai"
                         : visibility == 2
-                        ? "Bạn bè"
-                        : "Chỉ mình tôi"
+                          ? "Bạn bè"
+                          : "Chỉ mình tôi"
                     }}
                   </button>
                   <ul v-show="isDropdownVisible" class="dropdown-menu">
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility(1)"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(1)">
                         <i class="fa-solid fa-globe"></i> Công khai
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility(2)"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(2)">
                         <i class="fa-solid fa-user-group"></i> Bạn bè
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click="setVisibility(0)"
-                      >
+                      <a class="dropdown-item" href="#" @click="setVisibility(0)">
                         <i class="fa-solid fa-lock"></i> Chỉ mình tôi
                       </a>
                     </li>
@@ -77,32 +56,15 @@
             </div>
 
             <!-- Content Input -->
-            <textarea
-              v-model="content"
-              class="form-control my-3"
-              style="border: none"
-              rows="2"
-              placeholder="Bạn đang nghĩ gì thế?"
-            ></textarea>
+            <textarea v-model="content" class="form-control my-3" style="border: none" rows="2"
+              placeholder="Bạn đang nghĩ gì thế?"></textarea>
 
             <!-- Image Preview -->
             <div v-if="files.length" class="image-preview my-3">
               <div class="image-container">
-                <div
-                  v-for="(file, index) in displayedFiles"
-                  :key="index"
-                  class="image-item"
-                >
-                  <img
-                    :src="file.preview"
-                    alt="Selected Image"
-                    class="img-fluid"
-                  />
-                  <button
-                    class="delete-btn"
-                    @click="removeFile(index)"
-                    aria-label="Delete image"
-                  >
+                <div v-for="(file, index) in displayedFiles" :key="index" class="image-item">
+                  <img :src="file.preview" alt="Selected Image" class="img-fluid" />
+                  <button class="delete-btn" @click="removeFile(index)" aria-label="Delete image">
                     <i class="fa fa-times"></i>
                   </button>
                 </div>
@@ -118,40 +80,22 @@
             <label for="file-upload" class="btn btn-light action-button me-3">
               <i class="fa fa-image icon"></i>
             </label>
-            <input
-              type="file"
-              id="file-upload"
-              @change="handleFileUpload"
-              class="d-none"
-              multiple
-            />
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <input type="file" id="file-upload" @change="handleFileUpload" class="d-none" multiple />
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fas fa-paperclip icon"></i>
             </button>
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fas fa-map-marker-alt icon"></i>
             </button>
-            <button
-              @click="openModal('emoji')"
-              class="btn btn-light action-button me-3"
-            >
+            <button @click="openModal('emoji')" class="btn btn-light action-button me-3">
               <i class="fa fa-smile icon"></i>
             </button>
           </div>
 
           <!-- Footer -->
           <div class="modal-footer mt-0">
-            <button
-              class="btn btn-success text-white w-100"
-              @click="postContent"
-              :disabled="!content.trim() && !files.length"
-            >
+            <button class="btn btn-success text-white w-100" @click="postContent"
+              :disabled="!content.trim() && !files.length">
               Đăng
             </button>
           </div>

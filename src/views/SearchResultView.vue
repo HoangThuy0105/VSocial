@@ -16,11 +16,12 @@
                                 <span style="color: gray; font-size: 16px;">{{ item.email }}</span>
                             </div>
                             <div>
-                                <button @click="handleAddFriend(item.accountId)" :class="[
-                                    item.status == 'FRIEND'
-                                        ? 'disabled-button'
-                                        : 'add-button'
-                                ]" :disabled="item.status == 'FRIEND'">
+                                <button @click="handleAddFriend({ receiverId: item.accountId, status: item.status })"
+                                    :class="[
+                                        item.status == 'FRIEND'
+                                            ? 'disabled-button'
+                                            : item.status == 'REQUEST' ? 'delete-button' : 'add-button'
+                                    ]" :disabled="item.status == 'FRIEND'">
                                     {{ item.status == "NONE" ? 'Thêm bạn bè' : item.status == "REQUEST" ? "Hủy lời mời"
                                         :
                                         item.status == "FRIEND" ? "Bạn bè" : "Đã chặn" }}
@@ -37,7 +38,7 @@
 <script>
 import AppHeader from "../components/layout/AppHeader.vue";
 import AppSidebar from "../components/layout/AppSidebar.vue";
-import { searchUsers, addFriend } from "@/service/userService"
+import { searchUsers, addFriend, unFriend } from "@/service/userService"
 import { mapState, mapGetters } from "vuex";
 
 export default {
@@ -69,9 +70,14 @@ export default {
                 console.log('Thất bại, hãy thử lại')
             }
         },
-        async handleAddFriend(receiverId) {
+        async handleAddFriend({ receiverId, status }) {
             const senderId = this.getAccountId
-            const response = await addFriend({ senderId, receiverId })
+            let response = null;
+            if (status == "REQUEST") {
+                response = await unFriend({ senderId, receiverId })
+            } else {
+                response = await addFriend({ senderId, receiverId })
+            }
             if (response && response.status === 200) {
                 console.log(response.data.result)
                 this.handleSearch(this.keyword)
