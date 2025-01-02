@@ -47,6 +47,7 @@ body {
   color: white;
   font-weight: 500;
 }
+
 /* 
 .btn-outline-light {
   color: #fff;
@@ -810,7 +811,7 @@ textarea {
 }
 
 
-.btn-post-active{
+.btn-post-active {
   background-color: #009345;
   border: none;
   color: white;
@@ -818,8 +819,8 @@ textarea {
 
 .btn-post-disabled {
   background-color: #69b190;
-  color: #6c757d;  
-  cursor: not-allowed; 
+  color: #6c757d;
+  cursor: not-allowed;
 }
 
 .dark-mode .comment-author,

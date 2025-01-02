@@ -2,8 +2,8 @@
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode', 'd-flex']">
     <AppHeader :isDarkMode="isDarkMode" />
     <FriendSidebar :isDarkMode="isDarkMode" />
-    <div class="main-content">
-      <div class="d-flex p-5"> 
+    <div class="main-content" style="height: 100vh;">
+      <div class="d-flex p-5">
         <FriendContent v-if="isContentActive" :isDarkMode="isDarkMode" />
         <FriendAll v-else :isDarkMode="isDarkMode" />
       </div>
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      isContentActive: true,  
+      isContentActive: true,
     };
   },
   computed: {

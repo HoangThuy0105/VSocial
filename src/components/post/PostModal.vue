@@ -17,10 +17,16 @@
           <!-- Post Content -->
           <div class="post-content">
             <div class="post-meta">
-              <img src="https://www.chapter3d.com/wp-content/uploads/2020/06/anh-chan-dung-dep.jpg" alt="Avatar"
-                class="avatar" />
+              <div v-if="this.getUserData.avatar">
+                <img :src="this.getUserData.avatar" alt="Avatar" class="avatar" />
+              </div>
+              <div v-else>
+                <img
+                  src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s148x148&_nc_cat=1&ccb=1-7&_nc_sid=40e2b2&_nc_ohc=t7g1DMhtyCMQ7kNvgG88pcZ&_nc_oc=Adgst3fzzSYsDBya6g65p-yi7FLQlTw8OL6ByUrJVcE-WOhCJ23RJuXkGzy1t8bOpKY&_nc_zt=24&_nc_ht=scontent.fdad1-4.fna&_nc_gid=ANkKsSDetUu7rninnf3ogbA&oh=00_AYAB9OH5ey6qZtqFjUacugL-ibFufG5EV1bmudnpttrZEg&oe=679DA8FA"
+                  alt="Avatar default" class="avatar" />
+              </div>
               <div class="d-flex flex-column">
-                <span class="post-author fs-5">{{ post.username }}</span>
+                <span class="post-author fs-5">{{ this.getUserData.username }}</span>
                 <!-- Dropdown for visibility (Private/Public) -->
                 <div class="dropdown" ref="dropdown">
                   <button class="btn btn-light dropdown-toggle" type="button" @click="toggleDropdown"
@@ -28,20 +34,18 @@
                     <i :class="visibilityIcon"></i>
                     {{
                       visibility == 1
-                        ? "Công khai"
-                        : visibility == 2
-                          ? "Bạn bè"
-                          : "Chỉ mình tôi"
+                        ? "Bạn bè"
+                        : "Chỉ mình tôi"
                     }}
                   </button>
                   <ul v-show="isDropdownVisible" class="dropdown-menu">
-                    <li>
+                    <!-- <li>
                       <a class="dropdown-item" href="#" @click="setVisibility(1)">
                         <i class="fa-solid fa-globe"></i> Công khai
                       </a>
-                    </li>
+                    </li> -->
                     <li>
-                      <a class="dropdown-item" href="#" @click="setVisibility(2)">
+                      <a class="dropdown-item" href="#" @click="setVisibility(1)">
                         <i class="fa-solid fa-user-group"></i> Bạn bè
                       </a>
                     </li>
@@ -144,6 +148,7 @@ export default {
       return this.files.slice(0, 4);
     },
     ...mapGetters("auth", ["getAccountId"]),
+    ...mapGetters("auth", ["getUserData"]),
   },
   methods: {
     closeModal() {
@@ -166,6 +171,7 @@ export default {
       if (response && response.status === 200) {
         toast.success("Tạo bài viết thành công");
         this.closeModal();
+        this.$router.push('/profile');
       } else {
         toast.error("Tạo bài viết thất bại");
       }

@@ -60,9 +60,9 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/" @click="logout">
+              <button class="dropdown-item" @click="handleLogout">
                 <i class="bi bi-box-arrow-right me-2"></i> Log out
-              </a>
+              </button>
             </li>
           </ul>
         </div>
@@ -100,8 +100,9 @@ export default {
       event.stopPropagation();
       this.isDropdownVisible = !this.isDropdownVisible;
     },
-    logout() {
-      console.log("log out");
+    handleLogout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
     },
     closeDropdown(event) {
       if (

@@ -52,6 +52,7 @@
 
 <script>
 import { login } from "@/service/authService";
+import { getMyInfo } from "@/service/userService";
 import { mapActions } from "vuex";
 
 export default {
@@ -80,15 +81,25 @@ export default {
         if (user) {
           const token = user.result.token;
           const accountId = user.result.accountId;
-
-          this.login({ token, accountId });
+          this.$store.dispatch('auth/login', { token, accountId });
+          // this.login({ token, accountId });
           this.$router.push("/home");
+          this.getMyInfo()
         } else {
           this.loginError = "Incorrect username or password.";
         }
       } catch (error) {
         this.loginError = "Incorrect username or password.";
         console.error("Login failed:", error.message);
+      }
+    },
+    async getMyInfo() {
+      const response = await getMyInfo();
+      if (response && response.status === 200) {
+        const userData = response.data.result
+        this.$store.dispatch('auth/setUserData', userData);
+      } else {
+        console.log("Error");
       }
     },
     togglePasswordVisibility() {
@@ -98,7 +109,7 @@ export default {
 };
 </script>
 
-<style scoped> 
+<style scoped>
 html,
 body {
   height: 100%;
@@ -109,7 +120,7 @@ body {
 .container {
   max-width: 900px;
 }
-   
+
 .auth-container {
   display: flex;
   width: 100%;
@@ -130,7 +141,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-} 
+}
+
 .input-group button {
   background: transparent;
   border: none;
@@ -139,7 +151,8 @@ body {
 
 .input-group input {
   padding-right: 40px;
-} 
+}
+
 .btn-primary {
   background-color: #009345;
   border: none;
@@ -165,22 +178,26 @@ body {
   text-decoration: underline;
 }
 
- 
+
 .error {
   color: #ff4d4d;
   font-size: 0.95rem;
   animation: shake 0.3s ease;
 }
+
 /* Thêm hiệu ứng lắc (shake) cho thông báo lỗi. */
-@keyframes shake { 
+@keyframes shake {
+
   0%,
   100% {
     transform: translateX(0);
   }
+
   25%,
   75% {
     transform: translateX(-5px);
   }
+
   50% {
     transform: translateX(5px);
   }

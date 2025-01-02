@@ -10,7 +10,7 @@
                         style="width: 50px; height: 50px; cursor: pointer" alt="User Avatar" />
                 </div>
                 <div v-else>
-                    <img src="https://imgs.search.brave.com/3GmHUlPSDP6fn2U7zvGzo1tUNfh9iu1gqcowfbEdlUI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy81/LzU4L0lVX2F0X2hl/cl8xMHRoX2Fubml2/ZXJzYXJ5X2Zhbm1l/ZXRpbmclRTMlODAl/ODhJVSVFRiVCQyU4/QiVFMyU4MCU4OV9Q/YXJ0XzJfSW52aXRh/dDEwbixfMTVfU2Vw/dGVtYmVyXzIwMThf/MDEuanBn"
+                    <img src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s148x148&_nc_cat=1&ccb=1-7&_nc_sid=40e2b2&_nc_ohc=t7g1DMhtyCMQ7kNvgG88pcZ&_nc_oc=Adgst3fzzSYsDBya6g65p-yi7FLQlTw8OL6ByUrJVcE-WOhCJ23RJuXkGzy1t8bOpKY&_nc_zt=24&_nc_ht=scontent.fdad1-4.fna&_nc_gid=ANkKsSDetUu7rninnf3ogbA&oh=00_AYAB9OH5ey6qZtqFjUacugL-ibFufG5EV1bmudnpttrZEg&oe=679DA8FA"
                         class="rounded-circle me-2" style="width: 50px; height: 50px; cursor: pointer"
                         alt="User Avatar" />
                 </div>
@@ -80,10 +80,10 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import PostShare from "../post/PostShare.vue";
 import PostComment from "../post/PostComment.vue";
-import { getAllPort } from "@/service/ArticleService"
+import { getMyPost } from "@/service/ArticleService"
 import { formatDateTime } from '@/utils/index';
 
 
@@ -106,14 +106,15 @@ export default {
         ...mapState("mode", {
             isDarkMode: (state) => state.darkMode,
         }),
+        ...mapGetters("auth", ["getAccountId"]),
     },
 
     methods: {
         ...mapActions('post', ['selectedPost']),
         formatDateTime,
         async getPost() {
-            const response = await getAllPort();
-            console.log(response.data.result)
+            const accountId = this.getAccountId
+            const response = await getMyPost(accountId);
             this.posts = response.data.result
         },
         toggleOptions(index) {

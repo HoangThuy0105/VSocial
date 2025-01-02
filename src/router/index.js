@@ -75,22 +75,12 @@ const router = createRouter({
   routes,
 });
 
-// Navigation Guard để kiểm tra quyền truy cập
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = store.state.auth.token; // Kiểm tra người dùng đã đăng nhập chưa
-//   const userRole = store.state.auth.role; // Lấy vai trò người dùng
-//   const publicPages = ["/", "/login"]; // Các route không yêu cầu đăng nhập
-//   const authRequired = !publicPages.includes(to.path); // Kiểm tra nếu route yêu cầu đăng nhập
-
-//   if (authRequired && !isAuthenticated) {
-//     return next("/"); // Chuyển hướng về trang đăng nhập nếu chưa đăng nhập
-//   }
-
-//   if (to.meta.requiresAdmin && userRole !== "Admin") {
-//     return next("/home"); // Chuyển hướng về trang chính nếu không phải Admin
-//   }
-
-//   next(); // Tiếp tục với route nếu không có vấn đề gì
-// });
-
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  if (!token && to.name !== 'login') {
+    next({ name: 'login' });
+  } else {
+    next();
+  }
+});
 export default router;

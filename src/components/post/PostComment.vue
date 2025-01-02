@@ -1,11 +1,9 @@
 <template>
   <div :class="[isDarkMode ? 'dark-mode' : 'light-mode']">
-    <div
-      :class="[
-        isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
-        'modal-container',
-      ]"
-    >
+    <div :class="[
+      isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
+      'modal-container',
+    ]">
       <div v-if="isVisible" class="modal-overlay" @click.self="closeModal">
         <div class="modal-comment">
           <!-- Header -->
@@ -22,10 +20,8 @@
           <div class="post-content">
             <div class="post-meta d-flex align-items-center position-relative">
               <img
-                :src="this.getPost.postImages[0]"
-                alt="Avatar"
-                class="avatar"
-              />
+                src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s148x148&_nc_cat=1&ccb=1-7&_nc_sid=40e2b2&_nc_ohc=t7g1DMhtyCMQ7kNvgG88pcZ&_nc_oc=Adgst3fzzSYsDBya6g65p-yi7FLQlTw8OL6ByUrJVcE-WOhCJ23RJuXkGzy1t8bOpKY&_nc_zt=24&_nc_ht=scontent.fdad1-4.fna&_nc_gid=ANkKsSDetUu7rninnf3ogbA&oh=00_AYAB9OH5ey6qZtqFjUacugL-ibFufG5EV1bmudnpttrZEg&oe=679DA8FA"
+                alt="Avatar" class="avatar" />
 
               <div class="d-flex flex-column ms-2">
                 <span class="post-author">{{
@@ -35,34 +31,21 @@
                   formatDateTime(this.getPost.createdAt)
                 }}</span>
               </div>
-              <button
-                class="btn-close position-absolute top-0 end-0"
-                @click="closeModal"
-              ></button>
+              <button class="btn-close position-absolute top-0 end-0" @click="closeModal"></button>
             </div>
             <p class="post-caption">
               {{ this.getPost.content }}
             </p>
-            <img
-              :src="this.getPost.postImages[0]"
-              alt="Post Image"
-              class="post-image"
-            />
+            <img :src="this.getPost.postImages[0]" alt="Post Image" class="post-image" />
           </div>
 
           <!-- Comments Section -->
           <div class="comments-section mb-3">
             <h6>Bình luận</h6>
-            <div
-              v-for="(comment, index) in comments"
-              :key="index"
-              class="comment"
-            >
+            <div v-for="(comment, index) in comments" :key="index" class="comment">
               <img
-                src="https://m.yodycdn.com/blog/anh-chan-dung-dep-yodyvn3.jpg"
-                alt="Avatar"
-                class="comment-avatar"
-              />
+                src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s148x148&_nc_cat=1&ccb=1-7&_nc_sid=40e2b2&_nc_ohc=t7g1DMhtyCMQ7kNvgG88pcZ&_nc_oc=Adgst3fzzSYsDBya6g65p-yi7FLQlTw8OL6ByUrJVcE-WOhCJ23RJuXkGzy1t8bOpKY&_nc_zt=24&_nc_ht=scontent.fdad1-4.fna&_nc_gid=ANkKsSDetUu7rninnf3ogbA&oh=00_AYAB9OH5ey6qZtqFjUacugL-ibFufG5EV1bmudnpttrZEg&oe=679DA8FA"
+                alt="Avatar" class="comment-avatar" />
               <div class="comment-content">
                 <span class="comment-author">{{
                   comment.createdBy.username
@@ -79,24 +62,15 @@
           <div>
             <div class="comment-input">
               <img
-                src="https://m.yodycdn.com/blog/anh-chan-dung-dep-yodyvn2.jpg"
-                alt="Avatar"
-                class="comment-avatar"
-              />
-              <input
-                ref="commentInput"
-                :class="[
-                  'form-control',
-                  isDarkMode
-                    ? 'bg-dark text-white border border-secondary'
-                    : 'bg-light border',
-                ]"
-                v-model="commentText"
-                class="form-control"
-                type="text"
-                placeholder="Bình luận dưới tên của bạn..."
-                @keydown.enter="addComment"
-              />
+                src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s148x148&_nc_cat=1&ccb=1-7&_nc_sid=40e2b2&_nc_ohc=t7g1DMhtyCMQ7kNvgG88pcZ&_nc_oc=Adgst3fzzSYsDBya6g65p-yi7FLQlTw8OL6ByUrJVcE-WOhCJ23RJuXkGzy1t8bOpKY&_nc_zt=24&_nc_ht=scontent.fdad1-4.fna&_nc_gid=ANkKsSDetUu7rninnf3ogbA&oh=00_AYAB9OH5ey6qZtqFjUacugL-ibFufG5EV1bmudnpttrZEg&oe=679DA8FA"
+                alt="Avatar" class="comment-avatar" />
+              <input ref="commentInput" :class="[
+                'form-control',
+                isDarkMode
+                  ? 'bg-dark text-white border border-secondary'
+                  : 'bg-light border',
+              ]" v-model="commentText" class="form-control" type="text" placeholder="Bình luận dưới tên của bạn..."
+                @keydown.enter="addComment" />
             </div>
             <p class="comment-warn">{{ message }}</p>
           </div>
@@ -105,17 +79,10 @@
             <button class="btn btn-secondary" @click="closeModal">
               Cancel
             </button>
-            <button
-              class="btn ms-2"
-              :class="commentText.trim() ? 'btn-success text-white' : ''"
-              :style="
-                !commentText.trim()
-                  ? 'background-color: #69b190; color: white; border:none'
-                  : ''
-              "
-              @click="addComment"
-              :disabled="!commentText.trim()"
-            >
+            <button class="btn ms-2" :class="commentText.trim() ? 'btn-success text-white' : ''" :style="!commentText.trim()
+              ? 'background-color: #69b190; color: white; border:none'
+              : ''
+              " @click="addComment" :disabled="!commentText.trim()">
               Post
             </button>
           </div>

@@ -43,9 +43,22 @@ export const unFriend = async (request) => {
     }
 };
 
-export const getFriends = async (accountId) => {
+export const acceptFriend = async (request) => {
     try {
-        const response = await axiosInstance.get("v1/friend/get-friends", {
+        const response = await axiosInstance.put("v1/friend/accept", request, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const getFriendRequest = async (accountId) => {
+    try {
+        const response = await axiosInstance.get("v1/friend/get-friends-request", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -56,3 +69,17 @@ export const getFriends = async (accountId) => {
         console.error(error);
     }
 };
+
+export const getMyInfo = async () => {
+    try {
+        const response = await axiosInstance.get("v1/users/my-info", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
