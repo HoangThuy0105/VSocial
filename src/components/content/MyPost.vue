@@ -36,7 +36,7 @@
                     <img :src="post.postImages[0]" alt="Content Image" class="content-image" />
                 </div>
 
-                <div v-else-if="post.postImages.length === 4" class="image-container-grid">
+                <div v-else-if="post.postImages.length === 2" class="image-container-grid">
                     <img v-for="(image, imgIndex) in post.postImages" :key="imgIndex" :src="image" alt="Content Image"
                         class="content-image" />
                 </div>

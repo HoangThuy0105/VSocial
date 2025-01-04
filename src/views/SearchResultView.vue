@@ -9,7 +9,7 @@
                     <h5>Mọi người</h5>
                     <div v-for="(item, index) in data" :key="index" style="margin-top: 20px;">
                         <div class="result-item">
-                            <img src="https://imgs.search.brave.com/jHvPz8xR7Ye_p7tUm3dobzOBj00escWN8ThPrmigRnA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dm50cmlwLnZuL2Nh/bS1uYW5nL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIwLzAzL3Zh/bi1sb25nLW5pbmgt/YmluaC5qcGc"
+                            <img src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s148x148&_nc_cat=1&ccb=1-7&_nc_sid=40e2b2&_nc_ohc=t7g1DMhtyCMQ7kNvgG88pcZ&_nc_oc=Adgst3fzzSYsDBya6g65p-yi7FLQlTw8OL6ByUrJVcE-WOhCJ23RJuXkGzy1t8bOpKY&_nc_zt=24&_nc_ht=scontent.fdad1-4.fna&_nc_gid=ANkKsSDetUu7rninnf3ogbA&oh=00_AYAB9OH5ey6qZtqFjUacugL-ibFufG5EV1bmudnpttrZEg&oe=679DA8FA"
                                 alt="avatar" class="avatar">
                             <div class="result-info">
                                 <p style="margin: 0px; font-weight: 500;">{{ item.username }}</p>

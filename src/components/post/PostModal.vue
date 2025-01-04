@@ -100,7 +100,8 @@
           <div class="modal-footer mt-0">
             <button class="btn btn-success text-white w-100" @click="postContent"
               :disabled="!content.trim() && !files.length">
-              Đăng
+              {{ this.isLoading ? "Đang tải..." : "Đăng" }}
+
             </button>
           </div>
         </div>
@@ -127,6 +128,7 @@ export default {
       post: {
         username: "Thuy",
       },
+      isLoading: false,
       visibility: 1,
       isDropdownVisible: false,
     };
@@ -167,6 +169,7 @@ export default {
       formData.append("accountId", this.getAccountId);
 
       console.log("Sending request to create article...");
+      this.isLoading = true;
       const response = await createArticle(formData);
       if (response && response.status === 200) {
         toast.success("Tạo bài viết thành công");

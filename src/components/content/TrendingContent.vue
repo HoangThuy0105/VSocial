@@ -1,36 +1,30 @@
 <template>
-  <div
-    :class="[
-      isDarkMode
-        ? 'trending bg-dark text-white border border-dark'
-        : 'trending bg-light text-dark ',
-      'trending bg-light text-dark border ',
-      'p-4 mt-4 mb-4 content-border',
-    ]"
-  >
+  <div :class="[
+    isDarkMode
+      ? 'trending bg-dark text-white border border-dark'
+      : 'trending bg-light text-dark ',
+    'trending bg-light text-dark border ',
+    'p-4 mt-4 mb-4 content-border',
+  ]">
     <div class="d-flex justify-content-between align-items-center">
-      <h6 class="fs-5 mb-0">Today Trending</h6>
+      <h6 class="fs-5 mb-0">Nổi bật</h6>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="d-flex mb-2">
       <ul class="list-group w-100">
-        <li
-          v-for="(item, index) in trendingItems"
-          :key="index"
-          :class="[
-            'list-group-item',
-            isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
-            'd-flex justify-content-between align-items-start border-0',
-          ]"
-        >
+        <li v-for="(item, index) in trendingItems" :key="index" :class="[
+          'list-group-item',
+          isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark',
+          'd-flex justify-content-between align-items-start border-0',
+        ]">
           <div>
             <h6 class="mb-1">{{ item.title }}</h6>
-            <small class="custom-muted">{{ item.posts }} posts today</small>
+            <small class="custom-muted">{{ item.posts }} bài đăng</small>
           </div>
           <span class="badge bg-secondary ms-3">{{ item.time }}</span>
         </li>
         <div class="text-center">
-          <span class="text-success cursor-pointer fw-bold">See All</span>
+          <span class="text-success cursor-pointer fw-bold">Xem thêm</span>
         </div>
       </ul>
     </div>
@@ -56,7 +50,7 @@ export default {
     this.fetchTrendingData();
   },
   methods: {
-    
+
     fetchTrendingData() {
       this.trendingItems = [
         { title: "Figma maintenance", posts: 125, time: "6:10 PM" },
